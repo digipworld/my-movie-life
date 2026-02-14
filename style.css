@@ -1,0 +1,111 @@
+/* الأساسيات */
+body, html {
+    margin: 0; padding: 0;
+    height: 100%; width: 100%;
+    background-color: #050505;
+    color: #fff;
+    font-family: 'Cairo', sans-serif;
+    overflow: hidden;
+}
+
+:root {
+    --red-scope: #E84222;
+    --gold-amber: #FFBF00;
+    --curtain-dark: #2a0000;
+    --curtain-light: #600000;
+}
+
+/* الستارة */
+.curtain-container {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 9999;
+    display: flex;
+    transition: transform 1s;
+}
+
+.curtain-left, .curtain-right {
+    position: relative;
+    width: 50%; height: 100%;
+    background: repeating-linear-gradient(90deg, var(--curtain-dark), var(--curtain-light) 40px, var(--curtain-dark) 80px);
+    box-shadow: inset 0 0 50px #000;
+    transition: transform 2s cubic-bezier(0.7, 0, 0.3, 1);
+}
+
+.curtain-open .curtain-left { transform: translateX(-100%); }
+.curtain-open .curtain-right { transform: translateX(100%); }
+.curtain-open .pre-show-content { opacity: 0; transition: 0.5s; pointer-events: none; }
+
+/* محتوى ما قبل العرض */
+.pre-show-content {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    z-index: 10000;
+}
+.glowing-logo { filter: drop-shadow(0 0 15px var(--red-scope)); animation: pulse 3s infinite; }
+.scope-spin { transform-origin: center; animation: spin 15s linear infinite; }
+.timer { font-size: 3rem; color: var(--gold-amber); font-family: monospace; text-shadow: 0 0 10px var(--gold-amber); margin-top: 20px; }
+.timer-label { font-size: 0.8rem; letter-spacing: 2px; opacity: 0.7; }
+
+/* المراحل */
+.app-container { opacity: 0; transition: opacity 1s 1s; width: 100%; height: 100%; }
+.app-container.visible { opacity: 1; }
+
+.phase-section {
+    display: none;
+    width: 100%; height: 100%;
+    flex-direction: column;
+    justify-content: center; align-items: center;
+    text-align: center;
+    position: absolute; top: 0; left: 0;
+    padding: 20px; box-sizing: border-box;
+}
+.phase-section.active { display: flex; animation: fadeIn 1s ease-out; }
+
+/* تنسيقات خاصة */
+.highlight { color: var(--gold-amber); font-size: 2rem; margin: 30px 0; font-weight: 900; }
+.action-btn {
+    background: transparent; border: 2px solid var(--red-scope);
+    color: var(--red-scope); padding: 15px 40px; font-size: 1.2rem;
+    cursor: pointer; transition: 0.3s; font-family: 'Cairo', sans-serif;
+}
+.action-btn:hover { background: var(--red-scope); color: #000; box-shadow: 0 0 20px var(--red-scope); }
+
+/* البطاقات والعدسات */
+.cards-container, .lenses-container { display: flex; gap: 20px; margin-top: 40px; flex-wrap: wrap; justify-content: center; }
+.card {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    padding: 30px; width: 220px; border-radius: 10px; cursor: pointer; transition: 0.3s;
+}
+.card:hover { border-color: var(--gold-amber); transform: translateY(-5px); }
+
+.lens {
+    width: 180px; height: 180px; border-radius: 50%;
+    border: 8px solid #333; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; cursor: pointer; transition: 0.4s;
+}
+.lens-muslim { border-color: var(--gold-amber); box-shadow: 0 0 15px rgba(255, 191, 0, 0.3); }
+.lens-muslim:hover { box-shadow: 0 0 50px var(--gold-amber); transform: scale(1.1); }
+
+/* الشاشة المنقسمة */
+.split-screen-container { flex-direction: row !important; padding: 0; }
+.split-side { flex: 1; height: 100%; display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.5s; position: relative; }
+.split-left { background: linear-gradient(135deg, #1a0500, #000); border-right: 1px solid #333; }
+.split-left:hover { flex: 1.5; background: linear-gradient(135deg, #400, #000); }
+.split-right { background: #e0e0e0; color: #000; }
+.split-right:hover { flex: 1.5; background: #fff; }
+
+/* أنيميشن */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in-text { opacity: 0; animation: fadeIn 1s forwards; }
+.delay-1 { animation-delay: 1s; }
+.delay-2 { animation-delay: 2.5s; }
+.delay-3 { animation-delay: 4s; }
+
+@media (max-width: 768px) {
+    .split-screen-container { flex-direction: column !important; }
+}
