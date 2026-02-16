@@ -18,6 +18,7 @@
             --card-bg: #111111;
             --text-white: #ffffff;
             --text-grey: #cccccc;
+            --wing-bg: rgba(255, 255, 255, 0.03);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -204,7 +205,13 @@
             .wing { border: none; border-bottom: 3px solid #333; min-width: auto; }
             .wing.right-wing { border-right: none; border-bottom: 3px solid var(--gold-amber); }
             .wing.left-wing { border-left: none; border-bottom: 3px solid var(--primary-orange); }
-            .top-nav { flex-direction: row; }
+            
+            /* توسيط القائمة العلوية للهاتف (التعديل الجديد) */
+            .top-nav { 
+                flex-direction: column; 
+                gap: 10px; 
+                justify-content: center;
+            }
         }
     </style>
 </head>
