@@ -88,7 +88,7 @@
         /* --- التطبيق الرئيسي --- */
         #app-container { 
             width: 100%; height: 100%; display: flex; flex-direction: column; 
-            opacity: 0; transition: opacity 0.5s; /* تم تسريع الانتقال وحذف التأخير */
+            opacity: 0; transition: opacity 0.5s;
             overflow-y: auto; 
         }
         .curtain-open #app-container { opacity: 1; }
@@ -218,7 +218,8 @@
     <!-- شاشة إدخال الاسم -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 <br> <span class="highlight">قنصك في الحياة</span></h1>
-        <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> <span class="highlight">is your Sniper Rifle</span></p>
+        <!-- تم تعديل لون النص الإنجليزي هنا ليعود للرمادي الأبيض #ccc -->
+        <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> is your Sniper Rifle</p>
         <div class="reg-form">
             <input type="text" id="hero-name" class="hero-input" placeholder="أدخل اسم البطل | ENTER HERO NAME">
             <button class="start-btn" onclick="registerHero()">إنشاء حساب البطل <span class="line-break"></span> CREATE HERO ACCOUNT</button>
