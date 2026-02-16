@@ -57,20 +57,22 @@
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             width: 100%;
-            align-items: flex-end; 
+            align-items: flex-start; /* التوازي من الأعلى لضمان تطابق الأسطر */
             margin-bottom: 30px;
         }
 
-        .title-block { display: flex; flex-direction: column; justify-content: center; }
+        .title-block { display: flex; flex-direction: column; }
 
-        .title-block.ar { text-align: left; padding-left: 15px; padding-top: 5px; }
-        .title-block.en { text-align: right; direction: ltr; padding-right: 15px; }
+        /* العربي يمين، يحاذي لليسار باتجاه المنتصف */
+        .title-block.ar { text-align: left; padding-left: 20px; border-left: 1px solid rgba(232, 66, 34, 0.2); }
+        /* الإنجليزي يسار، يحاذي لليمين باتجاه المنتصف */
+        .title-block.en { text-align: right; direction: ltr; padding-right: 20px; }
 
         .main-title { 
             color: var(--gold-amber); font-weight: 900; 
             font-size: clamp(1rem, 3vw, 1.8rem); 
             text-transform: uppercase; line-height: 1.2; 
-            margin-bottom: 5px;
+            margin-bottom: 8px;
         }
         
         .sub-title { 
@@ -78,10 +80,11 @@
             font-size: clamp(0.8rem, 2.2vw, 1.2rem); 
             font-weight: 700; font-family: sans-serif; 
             display: block;
+            line-height: 1.2;
         }
         .ar-font { font-family: 'Cairo', sans-serif; }
 
-        /* --- العداد (تمركز تام) --- */
+        /* --- العداد --- */
         .timer-grid { 
             display: flex; justify-content: center; gap: 15px; width: 100%;
         }
@@ -153,51 +156,51 @@
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
 
-        /* --- تحسينات الجوال الحاسمة (Mobile Pixel Perfect Alignment) --- */
+        /* --- تحسينات الجوال الحاسمة (Mobile Visual Balance & Symmetry) --- */
         @media (max-width: 768px) {
             .titles-container { 
-                display: grid;
-                grid-template-columns: 1fr 1fr; /* الحفاظ على الجانبين في الهاتف */
-                gap: 15px; /* فجوة أصغر تناسب الهاتف */
-                width: 100%;
-                padding: 0 10px; /* مساحة مريحة للعين يميناً ويساراً */
+                grid-template-columns: 1fr 1fr; /* الإصرار على التقابل الجانبي في الهاتف */
+                gap: 10px; /* فجوة ضيقة جداً للمنتصف */
+                padding: 0 12%; /* مساحة راحة واسعة يميناً ويساراً (12%) */
                 margin-bottom: 25px;
             }
             
             .title-block.ar { 
-                text-align: left !important; 
-                padding-left: 10px;
+                text-align: left !important; /* يحاذي لليسار باتجاه الخط الفاصل */
+                padding-left: 8px;
                 padding-right: 0;
+                border-left: 1.5px solid rgba(255, 191, 0, 0.4); /* خط فاصل خفيف جداً في المنتصف */
             }
             
             .title-block.en { 
-                text-align: right !important; 
-                padding-right: 10px;
+                text-align: right !important; /* يحاذي لليمين باتجاه الخط الفاصل */
+                padding-right: 8px;
                 padding-left: 0;
             }
             
             .main-title { 
-                font-size: 0.75rem; /* تصغير الخط لضمان سطر واحد */
-                margin-bottom: 3px;
-                white-space: nowrap; /* منع انكسار السطر */
+                font-size: 0.65rem; /* تصغير الخط لضمان عدم انكسار السطر */
+                margin-bottom: 4px;
+                white-space: nowrap; 
+                letter-spacing: -0.2px;
             }
             
             .sub-title { 
-                font-size: 0.6rem; /* تصغير خط التاريخ */
+                font-size: 0.52rem; /* تصغير التاريخ لضمان التوازن */
                 display: block;
-                white-space: nowrap; /* إجبار 2026 و AD على البقاء في سطر واحد */
+                white-space: nowrap; 
             }
 
-            .timer-unit { min-width: 60px; padding: 8px; }
-            .timer-val { font-size: 1.6rem; }
-            .timer-label { font-size: 0.5rem; }
-            .glowing-logo { width: 90px; margin-bottom: 20px; }
+            .timer-unit { min-width: 58px; padding: 8px; }
+            .timer-val { font-size: 1.5rem; }
+            .timer-label { font-size: 0.45rem; }
+            .glowing-logo { width: 85px; margin-bottom: 15px; }
             
-            /* شاشة ما بعد الاسم: اللوغو فوق اسم البطل */
+            /* شاشة ما بعد الاسم: اللوغو فوق اسم البطل عمودياً في الوسط */
             .top-nav { 
                 flex-direction: column; 
                 justify-content: center;
-                gap: 8px; 
+                gap: 5px; 
                 padding: 10px;
                 text-align: center;
             }
@@ -225,7 +228,7 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة (المحاذاة التامة) -->
+            <!-- العناوين المتناظرة (المحاذاة المجهرية) -->
             <div class="titles-container">
                 <!-- العمود الأيمن (العربي) -->
                 <div class="title-block ar">
@@ -274,7 +277,7 @@
                 هناك <strong>7 استقرارات</strong> لضمان توازن رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي + النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها+
             </p>
             <p style="font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-grey); margin-top: 10px; line-height: 1.5;">
-                There are <strong>7 Stabilities</strong> to ensure the Hero's journey balance, but <strong>Health Stability</strong> (Spiritual, Psychological, Physical) is the foundation for the flight's balance and continuity.
+                There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual, Psychological, Physical) is the foundation for the flight's balance and continuity.
             </p>
         </div>
 
