@@ -48,7 +48,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة (Desktop) --- */
+        /* --- العناوين المتناظرة --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
@@ -86,11 +86,7 @@
         .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
         /* --- التطبيق الرئيسي --- */
-        #app-container { 
-            width: 100%; height: 100%; display: flex; flex-direction: column; 
-            opacity: 0; transition: opacity 0.5s;
-            overflow-y: auto; 
-        }
+        #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 0.5s; overflow-y: auto; }
         .curtain-open #app-container { opacity: 1; }
         
         .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
@@ -108,12 +104,13 @@
         .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
         .wing.right-wing { border-right: 4px solid var(--gold-amber); }
         .wing.left-wing { border-left: 4px solid var(--primary-orange); }
+        
         .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
         
-        /* فرض ظهور العنوان في سطر واحد في نسخة الحاسوب */
+        /* ضبط العناوين للحاسوب */
         .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; white-space: nowrap; }
-        
         .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
+        
         .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
 
         .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; }
@@ -122,16 +119,13 @@
         .progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 10px; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber)); width: 0%; transition: width 1s; }
         
-        #registration-screen { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); 
-            z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; 
-            padding: 30px; text-align: center; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); 
-        }
+        /* شاشة التسجيل */
+        #registration-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); }
         .reg-form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
         .hero-input { background: rgba(255,255,255,0.05); border: 2px solid #333; border-radius: 12px; padding: 15px; color: white; font-family: 'Cairo'; font-size: 1.1rem; text-align: center; outline: none; }
         .start-btn { background: var(--primary-orange); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; line-height: 1.4; }
 
+        /* نافذة الروح */
         #soul-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; justify-content: center; align-items: flex-end; }
         .modal-content { background: #111; width: 100%; max-width: 600px; height: 85%; border-radius: 30px 30px 0 0; border-top: 4px solid var(--primary-orange); padding: 30px; animation: slideUp 0.4s; overflow-y: auto; }
         .close-btn { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; float: left; }
@@ -139,7 +133,7 @@
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
 
-        /* --- تحسينات الجوال المعتمدة (Visual Symmetry) --- */
+        /* --- تحسينات الجوال المعتمدة --- */
         @media (max-width: 768px) {
             .line-break { display: block; height: 0; } 
             
@@ -151,14 +145,7 @@
             .title-block.ar { text-align: left !important; padding-left: 8px; }
             .title-block.en { text-align: right !important; padding-right: 8px; }
             
-            /* السماح بالانكسار في الجوال فقط إذا ضاق العرض جداً */
-            .wing-header h2 { white-space: normal; }
-
-            .main-title { 
-                font-size: 0.65rem; margin-bottom: 5px; line-height: 1.3;
-                white-space: nowrap; 
-            }
-            
+            .main-title { font-size: 0.65rem; margin-bottom: 5px; line-height: 1.3; white-space: nowrap; }
             .sub-title { font-size: 0.55rem; line-height: 1.3; white-space: nowrap; }
 
             .timer-unit { min-width: 58px; padding: 8px; }
@@ -167,13 +154,17 @@
             .glowing-logo { width: 85px; margin-bottom: 20px; }
             
             #registration-screen h1 { font-size: 1.1rem !important; }
-            
             .top-nav { flex-direction: column; gap: 8px; text-align: center; padding: 15px; }
-            
             .wings-wrapper { flex-direction: column; gap: 20px; }
             .wing { border: none; border-bottom: 3px solid #333; min-width: auto; padding: 15px; }
             .wing.right-wing { border-bottom-color: var(--gold-amber); }
             .wing.left-wing { border-bottom-color: var(--primary-orange); }
+
+            /* تعديل خاص لعنوان الجناح في الهاتف */
+            .wing-header h2 {
+                font-size: 1rem; /* تصغير الخط للجوال */
+                white-space: nowrap; /* إجبار النص على البقاء في سطر واحد */
+            }
         }
     </style>
 </head>
@@ -183,6 +174,7 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
+            <!-- اللوغو (في الوسط تماماً) -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
