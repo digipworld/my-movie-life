@@ -84,7 +84,14 @@
 
         .event-tag {
             color: var(--gold-amber); font-weight: bold; margin-top: 20px;
-            letter-spacing: 2px; font-size: 1rem;
+            letter-spacing: 2px; font-size: 1rem; line-height: 1.6;
+        }
+
+        .date-sub {
+            display: block;
+            font-size: 0.9rem;
+            color: var(--primary-orange);
+            margin-top: 5px;
         }
 
         /* --- التطبيق الرئيسي --- */
@@ -183,7 +190,11 @@
                 </svg>
             </div>
             
-            <p class="event-tag">بداية العام الهجري الجديد 1448 هـ | Hijri 1448 Premiere</p>
+            <p class="event-tag">
+                بداية العام الهجري الجديد 1448 هـ
+                <span class="date-sub">الموافق: 16 يونيو 2026 م</span>
+                <span style="font-size: 0.8rem; opacity: 0.8; letter-spacing: 0;">Hijri 1448 Premiere | June 16, 2026</span>
+            </p>
             
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
