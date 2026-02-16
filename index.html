@@ -43,8 +43,7 @@
             box-shadow: inset 0 0 100px #000;
             transition: transform 1.8s cubic-bezier(0.7, 0, 0.3, 1);
             position: absolute; top: 0;
-            border: none;
-            outline: none;
+            border: none; outline: none;
         }
 
         .curtain.left { left: 0; transform: translateX(0); }
@@ -67,87 +66,64 @@
             cursor: pointer; transition: transform 0.3s ease;
             margin-bottom: 35px;
         }
-        .glowing-logo:hover { transform: scale(1.05); }
 
-        /* تنسيق العناوين المتقابلة (Perfect Visual Mass Symmetry) */
-        .event-container {
-            margin-top: 10px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hybrid-row {
-            display: flex;
-            width: 100%;
-            justify-content: center;
-            gap: 35px; 
-            margin-bottom: 12px;
-            align-items: flex-end; 
+        /* --- شاشة تسجيل البطل (مقولة القناص) --- */
+        #registration-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, #1a0500 0%, #050505 100%);
+            z-index: 500; display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            padding: 40px; text-align: center;
+            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
         }
 
-        .event-tag-ar {
-            flex: 1;
-            color: var(--gold-amber);
-            font-weight: 900;
-            font-size: 1.45rem; 
-            text-align: left; 
-            line-height: 1;
+        .registration-hidden { transform: translateY(-100%); }
+
+        .sniper-motto {
+            max-width: 800px; margin-bottom: 50px;
         }
 
-        .event-tag-en {
-            flex: 1;
-            color: var(--gold-amber);
-            font-weight: 800;
-            font-size: 1.15rem; 
-            text-align: right; 
-            font-family: 'Cairo', sans-serif; 
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-            line-height: 1.1;
+        .sniper-motto h1 {
+            font-size: 2.2rem; font-weight: 900; color: var(--gold-amber);
+            line-height: 1.4; text-shadow: 0 0 20px rgba(255, 191, 0, 0.4);
+            margin-bottom: 15px;
         }
 
-        .date-sub-ar {
-            flex: 1;
-            color: var(--primary-orange);
-            font-size: 1.05rem;
-            text-align: left;
-            line-height: 1;
+        .sniper-motto p {
+            font-size: 1.2rem; color: var(--text-white); opacity: 0.9;
+            font-weight: bold; letter-spacing: 1px;
         }
 
-        .date-sub-en {
-            flex: 1;
-            color: var(--primary-orange);
-            font-size: 0.9rem; 
-            text-align: right;
-            line-height: 1.1;
+        .reg-form {
+            width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 20px;
         }
 
-        /* العداد المدمج */
-        .timer-grid {
-            display: flex; justify-content: center; gap: 12px; margin-top: 30px;
+        .hero-input {
+            background: rgba(255,255,255,0.05); border: 2px solid #333;
+            border-radius: 12px; padding: 15px; color: white; font-family: 'Cairo';
+            font-size: 1.1rem; text-align: center; outline: none; transition: 0.3s;
         }
-        .timer-unit {
-            background: rgba(232, 66, 34, 0.05);
-            border: 1px solid rgba(232, 66, 34, 0.3);
-            padding: 15px; border-radius: 12px; min-width: 95px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        .hero-input:focus { border-color: var(--primary-orange); box-shadow: 0 0 15px rgba(232, 66, 34, 0.3); }
+
+        .start-btn {
+            background: var(--primary-orange); color: white; border: none;
+            padding: 18px; border-radius: 12px; font-weight: 900; font-size: 1.2rem;
+            cursor: pointer; transition: 0.3s; box-shadow: 0 5px 20px rgba(232, 66, 34, 0.4);
+            animation: pulse-orange 2s infinite;
         }
-        .timer-val {
-            font-size: 2.7rem; color: var(--gold-amber);
-            font-family: monospace; font-weight: bold; display: block;
+        @keyframes pulse-orange { 
+            0% { transform: scale(1); } 
+            50% { transform: scale(1.03); box-shadow: 0 5px 30px rgba(232, 66, 34, 0.6); } 
+            100% { transform: scale(1); } 
         }
-        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; }
 
         /* --- التطبيق الرئيسي --- */
         #app-container {
             width: 100%; height: 100%;
             display: flex; flex-direction: column;
-            opacity: 0; transition: opacity 1s 1.2s;
+            opacity: 0; transition: opacity 1s 0.5s;
             overflow-y: auto;
         }
-        .curtain-open #app-container { opacity: 1; }
 
         .top-nav {
             padding: 15px 25px; display: flex; justify-content: space-between;
@@ -157,21 +133,10 @@
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
 
-        .sniper-banner {
-            background: linear-gradient(180deg, #1a0500 0%, #000 100%);
-            border-bottom: 2px solid var(--primary-orange);
-            padding: 25px; text-align: center;
-        }
-
-        /* لافتة طائرة الحياة */
         .flight-status-banner {
-            background: rgba(255, 191, 0, 0.05);
-            padding: 15px 25px;
-            text-align: center;
-            border-bottom: 1px solid #333;
+            background: rgba(255, 191, 0, 0.05); padding: 15px 25px;
+            text-align: center; border-bottom: 1px solid #333;
         }
-        .flight-status-banner p { font-size: 0.9rem; color: var(--text-white); font-weight: bold; }
-        .flight-status-banner span { color: var(--gold-amber); }
 
         .dashboard-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -195,6 +160,16 @@
             width: 0%; transition: width 0.8s ease-out;
         }
 
+        /* العداد المدمج للستارة */
+        .timer-grid { display: flex; justify-content: center; gap: 12px; margin-top: 30px; }
+        .timer-unit { background: rgba(232, 66, 34, 0.05); border: 1px solid rgba(232, 66, 34, 0.3); padding: 15px; border-radius: 12px; min-width: 95px; }
+        .timer-val { font-size: 2.7rem; color: var(--gold-amber); font-family: monospace; font-weight: bold; display: block; }
+        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; }
+
+        .hybrid-row { display: flex; width: 100%; justify-content: center; gap: 35px; margin-bottom: 12px; align-items: flex-end; }
+        .event-tag-ar { flex: 1; color: var(--gold-amber); font-weight: 900; font-size: 1.45rem; text-align: left; line-height: 1; }
+        .event-tag-en { flex: 1; color: var(--gold-amber); font-weight: 800; font-size: 1.15rem; text-align: right; font-family: 'Cairo'; letter-spacing: 0.5px; text-transform: uppercase; line-height: 1.1; }
+
         /* نافذة محرك الروح */
         #soul-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -208,36 +183,25 @@
         }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         .close-btn { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; float: left; }
-        
-        .task-item {
-            background: #1a1a1a; padding: 18px; border-radius: 15px;
-            margin-bottom: 12px; display: flex; align-items: center;
-            cursor: pointer; border: 1px solid #333; transition: 0.2s;
-        }
+        .stat-value { font-size: 4.5rem; font-weight: 900; color: var(--gold-amber); text-align: center; display: block; margin: 15px 0; }
+        .task-item { background: #1a1a1a; padding: 18px; border-radius: 15px; margin-bottom: 12px; display: flex; align-items: center; cursor: pointer; border: 1px solid #333; }
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 24px; height: 24px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; flex-shrink: 0; }
         .task-item.done .checkbox { background: var(--gold-amber); border-color: var(--gold-amber); }
-        .task-text { flex-grow: 1; font-weight: bold; color: var(--text-white); }
-        .task-item.done .task-text { text-decoration: line-through; opacity: 0.7; color: var(--gold-amber); }
-        
-        .stat-value { font-size: 4.5rem; font-weight: 900; color: var(--gold-amber); text-align: center; display: block; margin: 15px 0; }
 
         @media (max-width: 600px) {
             .timer-val { font-size: 2.1rem; }
-            .timer-unit { min-width: 80px; padding: 10px; }
-            .hybrid-row { gap: 15px; }
             .event-tag-ar { font-size: 1.1rem; }
-            .event-tag-en { font-size: 0.85rem; }
+            .sniper-motto h1 { font-size: 1.6rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- الستارة -->
+    <!-- الستارة (المرحلة 1) -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
-        
         <div id="pre-show-content">
             <div class="glowing-logo" onclick="openShow()">
                 <svg width="180" height="180" viewBox="0 0 200 200">
@@ -246,127 +210,61 @@
                     <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round"/>
                 </svg>
             </div>
-            
             <div class="event-container">
                 <div class="hybrid-row">
                     <div class="event-tag-ar">بداية العام الهجري الجديد 1448 هـ</div>
                     <div class="event-tag-en">The Grand Premiere of Hijri 1448</div>
                 </div>
-                <div class="hybrid-row">
-                    <div class="date-sub-ar">الموافق: 16 يونيو 2026 م</div>
-                    <div class="date-sub-en">Tuesday, June 16, 2026 | AD</div>
-                </div>
             </div>
-            
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
                 <div class="timer-unit"><span id="minutes" class="timer-val">00</span><span class="timer-label">دقيقة | Mins</span></div>
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
-            
             <p style="color: var(--text-white); font-size: 0.8rem; margin-top: 35px; letter-spacing: 2px; font-weight: bold; opacity: 0.9;">اضغط على الشعار | CLICK LOGO</p>
         </div>
     </div>
 
-    <!-- لوحة القيادة -->
+    <!-- شاشة تسجيل البطل (المرحلة 2) -->
+    <section id="registration-screen">
+        <div class="sniper-motto">
+            <h1>"علاقتك بالله، بوالديك وبصحتك هي بندقية قنصك في الحياة"</h1>
+            <p>Faith, Parents & Health is your Sniper Rifle</p>
+        </div>
+        
+        <div class="reg-form">
+            <input type="text" id="hero-name" class="hero-input" placeholder="أدخل اسم البطل | ENTER HERO NAME">
+            <button class="start-btn" onclick="registerHero()">إنشاء حساب البطل | CREATE HERO ACCOUNT</button>
+        </div>
+        
+        <p style="margin-top: 30px; color: #666; font-size: 0.8rem;">سجل الآن لتفعيل المحركات السبعة</p>
+    </section>
+
+    <!-- لوحة القيادة (المرحلة 3) -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
-            <div style="color: var(--gold-amber); font-weight: 800; font-size: 0.8rem;">HERO: ALBARAE | البطل: البراء 👤</div>
+            <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.8rem;">البطل: جاري التسجيل 👤</div>
         </nav>
-
-        <div class="sniper-banner">
-            <p>"علاقتك بالله، بوالديك وبصحتك هي <span style="color:var(--gold-amber)">بندقية قنصك</span> في الحياة"</p>
-            <p style="font-size: 0.8rem; color: var(--text-white); margin-top: 5px; font-weight: bold; opacity: 0.9;">Faith, Parents & Health is your Sniper Rifle</p>
-        </div>
 
         <div class="flight-status-banner">
             <p>✈️ طائرة حياتك تعتمد على توازن <span>المحركات السبعة</span>. تعطل محرك واحد يهدد استقرار الرحلة بالكامل.</p>
-            <p style="font-size: 0.75rem; color: var(--text-white); margin-top: 3px; opacity: 0.8;">Your Life Plane depends on the balance of the 7 Engines. One engine failure affects the whole flight.</p>
         </div>
 
         <div class="dashboard-grid">
-            <!-- 1. محرك الروح -->
-            <div class="engine-card active" onclick="openSoul()">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <i data-lucide="heart" style="color: var(--primary-orange);"></i>
-                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">SOUL ENGINE | محرك الروح</span>
-                </div>
-                <h3>محرك الروح</h3>
-                <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
-                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;"><span id="main-soul-percent">0</span>%</div>
-            </div>
-            
-            <!-- 2. محرك الباءة -->
-            <div class="engine-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <i data-lucide="coins" style="color: var(--text-white);"></i>
-                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">FINANCIAL | محرك الباءة</span>
-                </div>
-                <h3>محرك الباءة</h3>
-                <div class="progress-track"><div class="progress-fill" style="width:30%"></div></div>
-                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">30%</div>
-            </div>
-
-            <!-- 3. محرك الصحة -->
-            <div class="engine-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <i data-lucide="activity" style="color: var(--text-white);"></i>
-                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">HEALTH | محرك الصحة</span>
-                </div>
-                <h3>محرك الصحة</h3>
-                <div class="progress-track"><div class="progress-fill" style="width:55%"></div></div>
-                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">55%</div>
-            </div>
-
-            <!-- 4. محرك العقل -->
-            <div class="engine-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <i data-lucide="book-open" style="color: var(--text-white);"></i>
-                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">INTELLECTUAL | محرك العقل</span>
-                </div>
-                <h3>محرك العقل</h3>
-                <div class="progress-track"><div class="progress-fill" style="width:15%"></div></div>
-                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">15%</div>
-            </div>
-
-            <!-- 5. المحرك الاجتماعي -->
-            <div class="engine-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <i data-lucide="users" style="color: var(--text-white);"></i>
-                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">SOCIAL | المحرك الاجتماعي</span>
-                </div>
-                <h3>المحرك الاجتماعي</h3>
-                <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
-                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">80%</div>
-            </div>
-
-            <!-- 6. المحرك المهني -->
-            <div class="engine-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <i data-lucide="briefcase" style="color: var(--text-white);"></i>
-                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">PROFESSIONAL | المحرك المهني</span>
-                </div>
-                <h3>المحرك المهني</h3>
-                <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
-                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">40%</div>
-            </div>
-
-            <!-- 7. المحرك الرسالي -->
-            <div class="engine-card">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <i data-lucide="globe" style="color: var(--text-white);"></i>
-                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">MISSION | المحرك الرسالي</span>
-                </div>
-                <h3>المحرك الرسالي</h3>
-                <div class="progress-track"><div class="progress-fill" style="width:10%"></div></div>
-                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">10%</div>
-            </div>
+            <!-- المحركات السبعة -->
+            <div class="engine-card active" onclick="openSoul()"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="heart" style="color:var(--primary-orange);"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">SOUL ENGINE | محرك الروح</span></div><h3>محرك الروح</h3><div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;"><span id="main-soul-percent">0</span>%</div></div>
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="coins"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">FINANCIAL | محرك الباءة</span></div><h3>محرك الباءة</h3><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">30%</div></div>
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="activity"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">HEALTH | محرك الصحة</span></div><h3>محرك الصحة</h3><div class="progress-track"><div class="progress-fill" style="width:55%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">55%</div></div>
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="book-open"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">INTELLECTUAL | محرك العقل</span></div><h3>محرك العقل</h3><div class="progress-track"><div class="progress-fill" style="width:15%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">15%</div></div>
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="users"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">SOCIAL | المحرك الاجتماعي</span></div><h3>المحرك الاجتماعي</h3><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">80%</div></div>
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="briefcase"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">PROFESSIONAL | المحرك المهني</span></div><h3>المحرك المهني</h3><div class="progress-track"><div class="progress-fill" style="width:40%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">40%</div></div>
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="globe"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">MISSION | المحرك الرسالي</span></div><h3>المحرك الرسالي</h3><div class="progress-track"><div class="progress-fill" style="width:10%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">10%</div></div>
         </div>
     </main>
 
-    <!-- نافذة محرك الروح -->
+    <!-- واجهة محرك الروح -->
     <div id="soul-modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeSoul()">✕</button>
@@ -382,25 +280,16 @@
     </div>
 
     <script>
+        // العداد التنازلي
         const targetDate = new Date("June 16, 2026 00:00:00").getTime();
-
         function updateCountdown() {
             const now = new Date().getTime();
             const diff = targetDate - now;
-
-            if (diff <= 0) {
-                document.getElementById('days').innerText = "00";
-                document.getElementById('hours').innerText = "00";
-                document.getElementById('minutes').innerText = "00";
-                document.getElementById('seconds').innerText = "00";
-                return;
-            }
-
+            if (diff <= 0) { document.getElementById('seconds').innerText = "00"; return; }
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             const s = Math.floor((diff % (1000 * 60)) / 1000);
-
             document.getElementById('days').innerText = d < 10 ? "0"+d : d;
             document.getElementById('hours').innerText = h < 10 ? "0"+h : h;
             document.getElementById('minutes').innerText = m < 10 ? "0"+m : m;
@@ -408,12 +297,29 @@
         }
         setInterval(updateCountdown, 1000);
 
+        // فتح الستارة -> الانتقال لشاشة التسجيل
         function openShow() {
             document.body.classList.add('curtain-open');
             setTimeout(() => { 
                 document.getElementById('curtain-wrapper').style.pointerEvents = "none"; 
-                document.body.style.overflow = "auto";
             }, 1800);
+        }
+
+        // إنشاء الحساب -> الانتقال للمحركات
+        function registerHero() {
+            const name = document.getElementById('hero-name').value;
+            if (!name) { 
+                document.getElementById('hero-name').style.borderColor = "red";
+                return; 
+            }
+            
+            // تحديث واجهة المستخدم بالاسم
+            document.getElementById('display-hero-name').innerText = `البطل: ${name} | HERO: ${name} 👤`;
+            
+            // إخفاء شاشة التسجيل وإظهار لوحة التحكم
+            document.getElementById('registration-screen').classList.add('registration-hidden');
+            document.getElementById('app-container').style.opacity = "1";
+            document.body.style.overflow = "auto";
         }
 
         function openSoul() { document.getElementById('soul-modal').style.display = "flex"; }
