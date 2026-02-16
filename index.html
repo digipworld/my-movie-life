@@ -18,6 +18,7 @@
             --card-bg: #111111;
             --text-white: #ffffff;
             --text-grey: #cccccc;
+            --wing-bg: rgba(255, 255, 255, 0.03);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -31,7 +32,7 @@
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
-        /* --- محتوى ما قبل العرض (المركز) --- */
+        /* --- محتوى ما قبل العرض --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             z-index: 1002; width: 95%; max-width: 1200px;
@@ -50,28 +51,23 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة (Fixed Alignment) --- */
+        /* --- العناوين المتناظرة (العنوان وتحته التاريخ) --- */
         .titles-container {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* تقسيم متساوي */
-            gap: 30px; /* الفجوة في المنتصف */
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
             width: 100%;
-            align-items: flex-start; /* محاذاة من الأعلى لضمان توازي السطور */
+            align-items: start;
             margin-bottom: 40px;
         }
 
-        /* العمود العربي (يمين) -> يجب أن يحاذي لليسار */
-        .title-block.ar {
-            text-align: left !important; 
-        }
+        .title-block { display: flex; flex-direction: column; justify-content: center; }
 
-        /* العمود الإنجليزي (يسار) -> يجب أن يحاذي لليمين */
-        .title-block.en {
-            text-align: right !important; 
-            direction: ltr; 
-        }
+        /* العربي (يمين) - محاذاة لليسار */
+        .title-block.ar { text-align: left; border-left: 2px solid rgba(255, 191, 0, 0.3); padding-left: 15px; }
+        /* الإنجليزي (يسار) - محاذاة لليمين */
+        .title-block.en { text-align: right; direction: ltr; padding-right: 15px; }
 
-        /* النصوص */
         .main-title { 
             color: var(--gold-amber); font-weight: 900; 
             font-size: clamp(1rem, 3vw, 1.8rem); 
@@ -83,6 +79,7 @@
             color: var(--primary-orange); 
             font-size: clamp(0.85rem, 2.2vw, 1.2rem); 
             font-weight: 700; font-family: sans-serif; 
+            display: block;
         }
         .ar-font { font-family: 'Cairo', sans-serif; }
 
@@ -106,14 +103,39 @@
         .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 30px; }
-        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; }
-        .engine-card.active { border-left-color: var(--primary-orange); }
+
+        .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
+        .highlight { color: var(--gold-amber); font-weight: bold; }
+
+        .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 20px 30px; border-bottom: 1px solid #333; font-size: 0.9rem; text-align: center; }
+        .alert-text { color: var(--primary-orange); font-weight: bold; }
+
+        /* --- شبكة الطائرة (Plane Grid Layout) --- */
+        .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+        
+        .tail-section { display: flex; justify-content: center; }
+        .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
+
+        .wings-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
+        
+        /* تصميم الأجنحة */
+        .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
+        
+        .wing.right-wing { border-right: 4px solid var(--gold-amber); }
+        .wing.left-wing { border-left: 4px solid var(--primary-orange); }
+
+        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
+        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
+        .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; }
+
+        .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
+
+        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; }
+        .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); background: #161616; }
+        .engine-card.active { border-color: var(--gold-amber); box-shadow: 0 0 20px rgba(255, 191, 0, 0.1); }
+        
         .progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 10px; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber)); width: 0%; transition: width 1s; }
-        .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
-        .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 15px; text-align: center; border-bottom: 1px solid #333; font-size: 0.9rem; }
-        .alert-text { color: var(--primary-orange); font-weight: bold; }
 
         /* شاشة التسجيل */
         #registration-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; transition: transform 1s; }
@@ -132,15 +154,18 @@
 
         @media (max-width: 768px) {
             .titles-container { flex-direction: column; gap: 20px; text-align: center; }
-            .title-block.ar, .title-block.en { text-align: center !important; width: 100%; }
+            .title-block.ar { text-align: center; border-left: none; padding-left: 0; }
+            .title-block.en { text-align: center; padding-right: 0; }
             .timer-unit { min-width: 70px; padding: 10px; }
             .timer-val { font-size: 1.8rem; }
             .glowing-logo { width: 100px; margin-bottom: 20px; }
+            .wings-wrapper { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
+    <!-- المرحلة 1: الستارة -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
@@ -154,12 +179,11 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة (Grid System) -->
+            <!-- العناوين المتناظرة (العنوان وتحته التاريخ) -->
             <div class="titles-container">
                 <!-- العمود الأيمن (العربي) -->
                 <div class="title-block ar">
                     <span class="main-title ar-font">بداية العام الهجري الجديد 1448 هـ</span>
-                    <!-- تمت إضافة الثلاثاء هنا -->
                     <span class="sub-title ar-font">الثلاثاء، 16 يونيو 2026 م</span>
                 </div>
                 <!-- العمود الأيسر (الإنجليزي) -->
@@ -169,7 +193,7 @@
                 </div>
             </div>
 
-            <!-- العداد (في الوسط تماماً) -->
+            <!-- العداد -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -208,7 +232,7 @@
         </div>
 
         <div class="plane-layout">
-            <!-- الذيل -->
+            <!-- الذيل: الاستقرار الروحي -->
             <div class="tail-section">
                 <div class="engine-card tail-card active" onclick="openSoul()">
                     <div style="display:flex;justify-content:space-between;"><i data-lucide="compass" style="color:var(--primary-orange)"></i><span style="font-size:0.7rem; font-weight:bold; color:white;">TAIL / COMPASS | الموجه</span></div>
@@ -220,7 +244,7 @@
             </div>
             
             <div class="wings-wrapper">
-                <!-- الأجنحة -->
+                <!-- الجناح الأيمن: النفسي (فكري، أكاديمي، اجتماعي) -->
                 <div class="wing right-wing">
                     <div class="wing-header"><h2>الجناح الأيمن: الاستقرار النفسي</h2><span>Right Wing: Psychological Base</span></div>
                     <div class="wing-grid">
@@ -229,6 +253,7 @@
                         <div class="engine-card"><i data-lucide="users" style="color:white;"></i><h3 style="color:white; font-size:1rem;">3. الاستقرار الاجتماعي</h3><p style="font-size:0.7rem;color:#888;">Social Life</p><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div></div>
                     </div>
                 </div>
+                <!-- الجناح الأيسر: الجسدي (مهاراتي، مهني، مالي) -->
                 <div class="wing left-wing">
                     <div class="wing-header"><h2>الجناح الأيسر: الاستقرار الجسدي</h2><span>Left Wing: Physical Base</span></div>
                     <div class="wing-grid">
