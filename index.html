@@ -48,7 +48,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة --- */
+        /* --- العناوين المتناظرة (Desktop) --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
@@ -104,13 +104,9 @@
         .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
         .wing.right-wing { border-right: 4px solid var(--gold-amber); }
         .wing.left-wing { border-left: 4px solid var(--primary-orange); }
-        
         .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
-        
-        /* ضبط العناوين للحاسوب */
-        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; white-space: nowrap; }
+        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
         .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
-        
         .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
 
         .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; }
@@ -120,7 +116,7 @@
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber)); width: 0%; transition: width 1s; }
         
         /* شاشة التسجيل */
-        #registration-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; transition: transform 0.8s cubic-bezier(0.65, 0, 0.35, 1); }
+        #registration-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; transition: transform 1s; }
         .reg-form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
         .hero-input { background: rgba(255,255,255,0.05); border: 2px solid #333; border-radius: 12px; padding: 15px; color: white; font-family: 'Cairo'; font-size: 1.1rem; text-align: center; outline: none; }
         .start-btn { background: var(--primary-orange); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; line-height: 1.4; }
@@ -133,7 +129,6 @@
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
 
-        /* --- تحسينات الجوال المعتمدة --- */
         @media (max-width: 768px) {
             .line-break { display: block; height: 0; } 
             
@@ -145,7 +140,11 @@
             .title-block.ar { text-align: left !important; padding-left: 8px; }
             .title-block.en { text-align: right !important; padding-right: 8px; }
             
-            .main-title { font-size: 0.65rem; margin-bottom: 5px; line-height: 1.3; white-space: nowrap; }
+            .main-title { 
+                font-size: 0.65rem; margin-bottom: 5px; line-height: 1.3;
+                white-space: nowrap; 
+            }
+            
             .sub-title { font-size: 0.55rem; line-height: 1.3; white-space: nowrap; }
 
             .timer-unit { min-width: 58px; padding: 8px; }
@@ -154,16 +153,17 @@
             .glowing-logo { width: 85px; margin-bottom: 20px; }
             
             #registration-screen h1 { font-size: 1.1rem !important; }
+            
             .top-nav { flex-direction: column; gap: 8px; text-align: center; padding: 15px; }
+            
             .wings-wrapper { flex-direction: column; gap: 20px; }
             .wing { border: none; border-bottom: 3px solid #333; min-width: auto; padding: 15px; }
             .wing.right-wing { border-bottom-color: var(--gold-amber); }
             .wing.left-wing { border-bottom-color: var(--primary-orange); }
 
-            /* تعديل خاص لعنوان الجناح في الهاتف */
             .wing-header h2 {
-                font-size: 1rem; /* تصغير الخط للجوال */
-                white-space: nowrap; /* إجبار النص على البقاء في سطر واحد */
+                font-size: 1rem;
+                white-space: nowrap;
             }
         }
     </style>
@@ -183,10 +183,11 @@
                 </svg>
             </div>
             
+            <!-- العناوين المتناظرة (Clean Symmetry) -->
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">
-                        بداية العام الهجري <span class="line-break"></span> الجديد 1448 هـ
+                        افتتاح العام الهجري <span class="line-break"></span> الجديد 1448 هـ
                     </span>
                     <span class="sub-title ar-font">
                         الموافق: الثلاثاء، 16 <span class="line-break"></span> يونيو 2026 م
@@ -213,6 +214,7 @@
         </div>
     </div>
 
+    <!-- شاشة إدخال الاسم -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 <br> <span class="highlight">قنصك في الحياة</span></h1>
         <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> is your Sniper Rifle</p>
@@ -222,6 +224,7 @@
         </div>
     </section>
 
+    <!-- لوحة التحكم (هيكل الطائرة) -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
