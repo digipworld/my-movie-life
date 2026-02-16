@@ -24,100 +24,89 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body, html { height: 100%; width: 100%; background-color: var(--deep-black); color: var(--text-white); font-family: 'Cairo', sans-serif; overflow-x: hidden; }
 
-        /* --- نظام الستارة (Adaptive Curtain) --- */
+        /* --- نظام الستارة --- */
         #curtain-wrapper { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 1000; display: flex; overflow: hidden; }
         .curtain { width: 50.5vw; height: 100vh; background: repeating-linear-gradient(90deg, #2a0000 0%, #600000 40px, #2a0000 80px); box-shadow: inset 0 0 100px #000; transition: transform 1.8s cubic-bezier(0.7, 0, 0.3, 1); position: absolute; top: 0; border: none; outline: none; }
         .curtain.left { left: 0; } .curtain.right { right: 0; }
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
-        #pre-show-content { 
-            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 1001; text-align: center; transition: opacity 0.6s ease; 
-            width: 98%; max-width: 1200px; 
-        }
+        #pre-show-content { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1001; text-align: center; transition: opacity 0.6s ease; width: 95%; max-width: 1100px; }
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
 
-        /* اللوغو */
-        .glowing-logo { 
-            filter: drop-shadow(0 0 20px var(--primary-orange)); 
-            cursor: pointer; transition: transform 0.3s ease; 
-            margin-bottom: 25px; 
-            width: clamp(100px, 15vw, 160px);
-        }
+        /* اللوغو والعناوين */
+        .glowing-logo { filter: drop-shadow(0 0 20px var(--primary-orange)); cursor: pointer; transition: transform 0.3s ease; margin-bottom: 35px; }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة (Perfect Symmetry) --- */
-        .titles-wrapper { 
-            display: flex; width: 100%; justify-content: center; 
-            gap: clamp(10px, 3vw, 40px); margin-bottom: 15px; align-items: flex-end; 
-        }
-        
-        .title-block { flex: 1; display: flex; flex-direction: column; }
-        
-        /* العربية يمين وتنظر للمركز */
-        .title-block.right { text-align: left; direction: rtl; }
-        /* الإنجليزية يسار وتنظر للمركز */
-        .title-block.left { text-align: right; direction: ltr; }
+        .titles-wrapper { display: flex; width: 100%; justify-content: center; gap: 40px; margin-bottom: 12px; align-items: flex-end; }
+        .title-block.right { flex: 1; text-align: left; }
+        .title-block.left { flex: 1; text-align: right; direction: ltr; }
 
-        .main-title { 
-            color: var(--gold-amber); font-weight: 900; 
-            font-size: clamp(0.85rem, 2.5vw, 1.5rem); 
-            text-transform: uppercase; line-height: 1.2; margin-bottom: 5px; 
-        }
-        .sub-title { 
-            color: var(--primary-orange); 
-            font-size: clamp(0.7rem, 2vw, 1rem); 
-            font-weight: 600; font-family: sans-serif; 
-        }
-        .ar-font { font-family: 'Cairo', sans-serif; }
+        .main-title { color: var(--gold-amber); font-weight: 900; font-size: 1.5rem; text-transform: uppercase; line-height: 1.2; margin-bottom: 5px; }
+        .sub-title { color: var(--primary-orange); font-size: 1rem; font-weight: 600; font-family: sans-serif; }
+        .ar-font { font-family: 'Cairo', sans-serif; font-size: 1.3rem; }
 
         /* العداد */
-        .timer-grid { display: flex; justify-content: center; gap: clamp(8px, 2vw, 15px); margin-top: 30px; }
-        .timer-unit { 
-            background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); 
-            padding: clamp(8px, 2vw, 15px); border-radius: 12px; 
-            min-width: clamp(65px, 10vw, 90px); text-align: center; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); 
-        }
-        .timer-val { font-size: clamp(1.5rem, 4vw, 2.5rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; display: block; line-height: 1; }
-        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
+        .timer-grid { display: flex; justify-content: center; gap: 15px; margin-top: 30px; }
+        .timer-unit { background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); padding: 15px; border-radius: 12px; min-width: 90px; text-align: center; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        .timer-val { font-size: 2.5rem; color: var(--gold-amber); font-family: monospace; font-weight: bold; display: block; line-height: 1; }
+        .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
         /* --- التطبيق الرئيسي --- */
         #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s 1.2s; overflow-y: auto; }
         .curtain-open #app-container { opacity: 1; }
 
-        .top-nav { padding: 15px 25px; display: flex; justify-content: center; flex-direction: column; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; gap: 5px; }
-        @media (min-width: 768px) { .top-nav { flex-direction: row; justify-content: space-between; } }
-        
+        .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
 
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
         .highlight { color: var(--gold-amber); font-weight: bold; }
 
-        /* لافتة الطائرة الهجينة */
+        /* --- لافتة الطائرة الهجينة (تعديل هام) --- */
         .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 20px 30px; border-bottom: 1px solid #333; }
         .flight-row { display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; text-align: center; }
         .flight-ar { flex: 1; text-align: right; min-width: 280px; }
         .flight-en { flex: 1; text-align: left; direction: ltr; min-width: 280px; font-family: sans-serif; opacity: 0.9; }
+        
         .alert-text { color: var(--primary-orange); font-weight: 900; }
+        .flight-info p { margin: 5px 0; font-size: 0.95rem; line-height: 1.6; }
+        .flight-sub { font-size: 0.85rem; color: #ddd; margin-top: 8px; border-top: 1px solid #333; padding-top: 8px; }
 
-        /* شبكة الطائرة */
+        /* --- شبكة الطائرة (The Plane Grid) --- */
         .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+        
         .tail-section { display: flex; justify-content: center; }
         .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
+
         .wings-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
         .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
+        
         .wing.right-wing { border-right: 4px solid var(--gold-amber); }
         .wing.left-wing { border-left: 4px solid var(--primary-orange); }
-        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
-        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
+
+        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; }
+        .wing-header h2 { font-size: 1.4rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
+        .wing-header span { font-size: 0.9rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; text-transform: uppercase; }
+
         .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
+
         .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; }
         .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); background: #161616; }
+        .engine-card.active { border-color: var(--gold-amber); box-shadow: 0 0 20px rgba(255, 191, 0, 0.1); }
+
         .progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; margin-top: 15px; overflow: hidden; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber)); width: 0%; transition: width 1s ease-out; }
+
+        /* نافذة الروح */
+        #soul-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; justify-content: center; align-items: flex-end; }
+        .modal-content { background: #111; width: 100%; max-width: 600px; height: 85%; border-radius: 30px 30px 0 0; border-top: 4px solid var(--primary-orange); padding: 30px; animation: slideUp 0.4s; overflow-y: auto; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .close-btn { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; float: left; }
+        .task-item { background: #1a1a1a; padding: 18px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; cursor: pointer; border: 1px solid #333; }
+        .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
+        .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
+        .task-item.done .checkbox { background: var(--gold-amber); border-color: var(--gold-amber); }
 
         /* شاشة التسجيل */
         #registration-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; transition: transform 1s; }
@@ -126,60 +115,50 @@
         .hero-input { background: rgba(255,255,255,0.05); border: 2px solid #333; border-radius: 12px; padding: 15px; color: white; font-family: 'Cairo'; font-size: 1.1rem; text-align: center; outline: none; }
         .start-btn { background: var(--primary-orange); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 900; font-size: 1.1rem; cursor: pointer; }
 
-        #soul-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; justify-content: center; align-items: flex-end; }
-        .modal-content { background: #111; width: 100%; max-width: 600px; height: 85%; border-radius: 30px 30px 0 0; border-top: 4px solid var(--primary-orange); padding: 30px; animation: slideUp 0.4s; overflow-y: auto; }
-        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        .close-btn { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; float: left; }
-        .task-item { background: #1a1a1a; padding: 18px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center; cursor: pointer; border: 1px solid #333; }
-        .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
-        .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
-
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
+            .titles-wrapper { flex-direction: column; text-align: center; }
+            .title-block.right, .title-block.left { text-align: center; }
             .wings-wrapper { flex-direction: column; }
-            .titles-wrapper { gap: 10px; }
+            .wing { border: none; border-bottom: 3px solid #333; }
+            .flight-ar, .flight-en { text-align: center; }
         }
     </style>
 </head>
 <body>
 
-    <!-- المرحلة 1: الستارة -->
+    <!-- الستارة -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
             <div class="glowing-logo" onclick="openShow()">
-                <svg viewBox="0 0 200 200">
+                <svg viewBox="0 0 200 200" style="width:160px; height:160px;">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
                     <path d="M40 160 V 40 L 100 100 L 160 40 V 160" stroke="#E84222" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                     <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round" fill="none"/>
                 </svg>
             </div>
-            
             <div class="titles-wrapper">
-                <!-- الكتلة اليمنى (العربية) -->
                 <div class="title-block right">
                     <div class="main-title ar-font">بداية العام الهجري الجديد 1448 هـ</div>
                     <div class="sub-title ar-font">الموافق: 16 يونيو 2026 م</div>
                 </div>
-
-                <!-- الكتلة اليسرى (الإنجليزية) -->
                 <div class="title-block left">
-                    <div class="main-title">THE GRAND PREMIERE OF HIJRI 1448</div>
-                    <div class="sub-title">Tuesday, June 16, 2026 | AD</div>
+                    <div class="main-title">HIJRI 1448 PREMIERE</div>
+                    <div class="sub-title">June 16, 2026</div>
                 </div>
             </div>
-
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
                 <div class="timer-unit"><span id="minutes" class="timer-val">00</span><span class="timer-label">دقيقة | Mins</span></div>
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
-            <p style="color: var(--text-white); font-size: 0.8rem; margin-top: 35px; letter-spacing: 2px; font-weight: bold; opacity: 0.9;">اضغط على الشعار | CLICK LOGO</p>
+            <p class="click-hint">اضغط على الشعار | CLICK LOGO</p>
         </div>
     </div>
 
-    <!-- المرحلة 2: ميثاق البطل -->
+    <!-- ميثاق البطل -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: 2rem; margin-bottom: 10px;">"علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 قنصك في الحياة"</h1>
         <p style="color: #ccc;">Faith, Parents & Health is your Sniper Rifle</p>
@@ -189,7 +168,7 @@
         </div>
     </section>
 
-    <!-- المرحلة 3: لوحة التحكم -->
+    <!-- لوحة التحكم -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
@@ -200,19 +179,21 @@
             <p style="font-size: 1.1rem; color: white;">"علاقتك بالله، بوالديك وبصحتك هي <span class="highlight" style="color: var(--gold-amber);">بندقية ︻╦╤─ قنصك</span> في الحياة"</p>
         </div>
 
+        <!-- لافتة الطائرة (الهجينة) -->
         <div class="flight-status-banner">
             <div class="flight-info">
                 <div class="flight-row">
                     <p class="flight-ar"><span class="alert-text">تذكير هام :</span> توازن الطائرة ✈️ يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي) وتوجيه <strong>الروح</strong>.</p>
                     <p class="flight-en"><span class="alert-text">IMPORTANT REMINDER :</span> Plane ✈️ Balance depends on <strong>Health Stability</strong> (Mental + Physical) & <strong>Soul Guidance</strong>.</p>
                 </div>
-                <div class="flight-sub flight-row" style="margin-top: 10px; border-top: 1px solid #333; padding-top: 10px;">
+                <div class="flight-sub flight-row">
                     <p class="flight-ar">هناك <strong>7 استقرارات</strong> لضمان توازن الرحلة، ويبقى <strong>الاستقرار الصحي</strong> هو الأساس.</p>
-                    <p class="flight-en">There are <strong>7 Stabilities</strong> for a balanced flight, but <strong>Health Stability</strong> is the foundation.</p>
+                    <p class="flight-en">There are <strong>7 Stabilities</strong> to ensure flight balance, but <strong>Health Stability</strong> is the Foundation.</p>
                 </div>
             </div>
         </div>
 
+        <!-- شبكة الطائرة -->
         <div class="plane-layout">
             <div class="tail-section">
                 <div class="engine-card tail-card active" onclick="openSoul()">
@@ -226,7 +207,7 @@
             
             <div class="wings-wrapper">
                 <div class="wing right-wing">
-                    <div class="wing-header"><h2>الجناح الأيمن: الاستقرار النفسي</h2><span>Right Wing: Psychological Base</span></div>
+                    <div class="wing-header"><h2 style="margin:0;">الجناح الأيمن: الاستقرار النفسي</h2><span>Right Wing: Psychological Base</span></div>
                     <div class="wing-grid">
                         <div class="engine-card"><i data-lucide="book-open" style="color:white;"></i><h3 style="color:white; font-size:1rem;">1. الاستقرار الفكري</h3><p style="font-size:0.7rem;color:#888;">Intellectual</p><div class="progress-track"><div class="progress-fill" style="width:20%"></div></div></div>
                         <div class="engine-card"><i data-lucide="graduation-cap" style="color:white;"></i><h3 style="color:white; font-size:1rem;">2. الاستقرار الأكاديمي</h3><p style="font-size:0.7rem;color:#888;">Academic</p><div class="progress-track"><div class="progress-fill" style="width:45%"></div></div></div>
@@ -234,7 +215,7 @@
                     </div>
                 </div>
                 <div class="wing left-wing">
-                    <div class="wing-header"><h2>الجناح الأيسر: الاستقرار الجسدي</h2><span>Left Wing: Physical Base</span></div>
+                    <div class="wing-header"><h2 style="margin:0;">الجناح الأيسر: الاستقرار الجسدي</h2><span>Left Wing: Physical Base</span></div>
                     <div class="wing-grid">
                         <div class="engine-card"><i data-lucide="dumbbell" style="color:white;"></i><h3 style="color:white; font-size:1rem;">4. الاستقرار المهاراتي</h3><p style="font-size:0.7rem;color:#888;">Skills</p><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div>
                         <div class="engine-card"><i data-lucide="briefcase" style="color:white;"></i><h3 style="color:white; font-size:1rem;">5. الاستقرار المهني</h3><p style="font-size:0.7rem;color:#888;">Career</p><div class="progress-track"><div class="progress-fill" style="width:50%"></div></div></div>
@@ -245,11 +226,12 @@
         </div>
     </main>
 
+    <!-- نافذة الروح -->
     <div id="soul-modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeSoul()">✕</button>
-            <h2 style="color: var(--primary-orange); text-align: center; margin-bottom: 20px;">غرفة عمليات الروح</h2>
-            <div id="soul-val-display" style="font-size: 4rem; font-weight: 900; color: var(--gold-amber); text-align: center; margin-bottom: 20px;">0%</div>
+            <h2 style="color: var(--primary-orange); text-align: center;">غرفة عمليات الروح</h2>
+            <span id="soul-val-display" class="stat-value">0%</span>
             <div style="margin-top: 20px;">
                 <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">صلاة الفجر | Fajr</div></div>
                 <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">الصلوات الخمس | 5 Prayers</div></div>
