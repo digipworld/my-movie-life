@@ -55,7 +55,7 @@
         }
 
         .title-block { display: flex; flex-direction: column; }
-        .title-block.ar { text-align: left; padding-left: 20px; } /* تم حذف الخط الأحمر */
+        .title-block.ar { text-align: left; padding-left: 20px; } 
         .title-block.en { text-align: right; direction: ltr; padding-right: 20px; }
 
         .main-title { 
@@ -71,7 +71,6 @@
         }
         .ar-font { font-family: 'Cairo', sans-serif; }
 
-        /* التحكم في انكسار السطر */
         .line-break { display: none; }
 
         /* --- العداد --- */
@@ -97,7 +96,7 @@
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 30px 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
         .highlight { color: var(--gold-amber); font-weight: bold; }
 
-        /* --- شبكة الطائرة (Plane Layout) --- */
+        /* --- شبكة الطائرة --- */
         .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
         .tail-section { display: flex; justify-content: center; }
         .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
@@ -128,12 +127,12 @@
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
 
-        /* --- تحسينات الجوال الحاسمة (Mobile Visual Symmetry) --- */
+        /* --- تحسينات الجوال المعتمدة (Visual Symmetry) --- */
         @media (max-width: 768px) {
-            .line-break { display: block; height: 0; } /* تفعيل انكسار السطر في الجوال */
+            .line-break { display: block; height: 0; } 
             
             .titles-container { 
-                grid-template-columns: 1fr 1fr; /* الحفاظ على الانقسام الجانبي */
+                grid-template-columns: 1fr 1fr; 
                 gap: 12px; padding: 0 12%; margin-bottom: 25px;
             }
             
@@ -151,7 +150,6 @@
             .timer-label { font-size: 0.45rem; }
             .glowing-logo { width: 85px; margin-bottom: 20px; }
             
-            /* لوحة التحكم: اللوغو فوق اسم البطل */
             .top-nav { flex-direction: column; gap: 8px; text-align: center; padding: 15px; }
             
             .wings-wrapper { flex-direction: column; gap: 20px; }
@@ -167,7 +165,6 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
-            <!-- اللوغو (في الوسط) -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
@@ -176,9 +173,7 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتقابلة -->
             <div class="titles-container">
-                <!-- اليمين (العربي) -->
                 <div class="title-block ar">
                     <span class="main-title ar-font">
                         بداية العام الهجري <span class="line-break"></span> الجديد 1448 هـ
@@ -187,7 +182,6 @@
                         الموافق: الثلاثاء، 16 <span class="line-break"></span> يونيو 2026 م
                     </span>
                 </div>
-                <!-- اليسار (الإنجليزي) -->
                 <div class="title-block en">
                     <span class="main-title">
                         THE GRAND PREMIERE <span class="line-break"></span> OF HIJRI 1448
@@ -198,7 +192,6 @@
                 </div>
             </div>
 
-            <!-- العداد -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -210,7 +203,6 @@
         </div>
     </div>
 
-    <!-- تسجيل البطل -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 قنصك في الحياة</h1>
         <p style="color: #ccc; letter-spacing: 1px;">Faith, Parents & Health is your Sniper Rifle</p>
@@ -220,19 +212,19 @@
         </div>
     </section>
 
-    <!-- لوحة التحكم -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
+        <!-- المانشيت الرئيسي المحدث -->
         <div class="sniper-banner main-banner">
             <p style="font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: white; line-height: 1.6;">
-                هناك <strong>7 استقرارات</strong> لضمان توازن رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي + النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها+
+                هناك <strong>7 استقرارات</strong> لضمان توازن رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
             </p>
             <p style="font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-grey); margin-top: 10px; line-height: 1.5;">
-                There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual, Psychological, Physical) is the foundation for the flight's balance and continuity.
+                There are 7 Stabilities to ensure the Hero's journey balance, and Health Stability (Spiritual + Psychological + Physical) is the foundation for the journey's balance and continuity.
             </p>
         </div>
 
