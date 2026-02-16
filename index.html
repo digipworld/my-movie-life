@@ -115,21 +115,22 @@
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 30px 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
         .highlight { color: var(--gold-amber); font-weight: bold; }
 
-        /* --- شبكة الطائرة --- */
+        /* --- شبكة الطائرة (Plane Grid Layout) --- */
         .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 60px; }
         
-        .health-master-section { text-align: center; margin-bottom: 20px; }
-        .health-main-title { 
-            color: var(--gold-amber); font-weight: 900; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 20px; text-shadow: 0 0 10px rgba(255, 191, 0, 0.3); 
-        }
-        .master-card-container { max-width: 500px; margin: 0 auto; }
-
+        /* 1. مجموعة الاستقرار الصحي (The Core) */
         .health-stability-container {
             border: 2px solid var(--primary-orange);
             border-radius: 25px;
             padding: 30px;
             background: rgba(232, 66, 34, 0.02);
             position: relative;
+        }
+
+        .health-main-title {
+            text-align: center; color: var(--gold-amber); font-weight: 900; font-size: 1.5rem; text-transform: uppercase;
+            margin-bottom: 30px; text-shadow: 0 0 10px rgba(255, 191, 0, 0.3); border-bottom: 1px solid rgba(255, 191, 0, 0.2); padding-bottom: 15px;
+            width: fit-content; margin-left: auto; margin-right: auto;
         }
 
         .health-grid {
@@ -149,9 +150,7 @@
         .wing-section-header {
             text-align: center; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        /* تعديل العنوان ليكون باللون الأبيض */
         .wing-section-header span { font-size: 0.85rem; color: var(--text-white); letter-spacing: 1px; font-family: 'Cairo', sans-serif; margin-top: 5px; display: block; font-weight: 900; }
-        /* أيقونة الجناح بالبرتقالي */
         .wing-section-header i.orange-wing { color: var(--primary-orange); }
 
 
@@ -261,6 +260,7 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
+            <!-- اللوغو -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
@@ -269,6 +269,7 @@
                 </svg>
             </div>
             
+            <!-- العناوين المتناظرة -->
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">
@@ -339,7 +340,7 @@
 
         <div class="plane-layout">
             
-            <!-- 1. مجموعة الاستقرار الصحي (The Core Triad) -->
+            <!-- مجموعة الاستقرار الصحي (Core) -->
             <div class="health-stability-container">
                 <h2 class="health-main-title">
                     1. الاستقرار الصحي
@@ -348,48 +349,60 @@
                 
                 <div class="health-grid">
                     
-                    <!-- الذيل (الروحي) - المركز -->
+                    <!-- الذيل / البوصلة -->
                     <div class="tail-wrapper">
                         <div class="tail-header">
                             <i data-lucide="compass" style="color:var(--primary-orange)"></i>
-                            <span>الذيل / البوصلة <br> TAIL / COMPASS</span>
+                            <span>الذيل / البوصلة | TAIL / COMPASS</span>
                         </div>
                         <div class="engine-card tail-card active" onclick="openSoul()">
-                            <h3 style="color:white; margin:0 0 5px;">الاستقرار الروحي</h3>
-                            <p style="font-size:0.8rem; color:white; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px;">Spiritual Stability</p>
+                            <div style="display:flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
+                                <h3 style="color:white; margin:0; font-size:1.1rem;">الاستقرار الروحي</h3>
+                                <span style="font-size:0.8rem; color:white;">Spiritual Stability</span>
+                            </div>
                             <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
                             <div style="text-align:left; margin-top:5px; color:var(--gold-amber); font-weight:bold;"><span id="main-soul-percent">0</span>%</div>
                         </div>
                     </div>
 
-                    <!-- النفسي والجسدي (تحت الروحي) -->
+                    <!-- النفسي والجسدي -->
                     <div class="body-mind-grid">
-                        <!-- النفسي (الجناح الأيمن) -->
+                        <!-- الاستقرار النفسي -->
                         <div class="engine-wrapper">
                             <div class="wing-section-header">
-                                <!-- أيقونة الجناح الأيمن برتقالية -->
                                 <i data-lucide="wing" class="orange-wing" style="transform: scaleX(-1);"></i>
-                                <!-- العنوان باللون الأبيض -->
-                                <span>الجناح الأيمن <br> RIGHT WING</span>
+                                <span>الجناح الأيمن | RIGHT WING</span>
                             </div>
                             <div class="engine-card">
-                                <div style="display:flex;justify-content:space-between;"><i data-lucide="brain-circuit" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار النفسي</h3></div>
-                                <p style="font-size:0.7rem;color:#888; margin-top:5px; border-bottom: 1px solid #333; padding-bottom: 5px;">Psychological Stability</p>
+                                <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
+                                    <div style="display:flex; justify-content: space-between; align-items: center;">
+                                        <div style="display:flex; align-items: center; gap: 8px;">
+                                            <i data-lucide="brain-circuit" style="color:white; width:18px;"></i>
+                                            <h3 style="color:white; font-size:1rem; margin:0;">الاستقرار النفسي</h3>
+                                        </div>
+                                        <span style="font-size:0.75rem; color:var(--text-white);">Psychological Stability</span>
+                                    </div>
+                                </div>
                                 <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
                             </div>
                         </div>
                         
-                        <!-- الجسدي (الجناح الأيسر) -->
+                        <!-- الاستقرار الجسدي -->
                         <div class="engine-wrapper">
                             <div class="wing-section-header">
-                                <!-- أيقونة الجناح الأيسر برتقالية -->
                                 <i data-lucide="wing" class="orange-wing"></i>
-                                <!-- العنوان باللون الأبيض -->
-                                <span>الجناح الأيسر <br> LEFT WING</span>
+                                <span>الجناح الأيسر | LEFT WING</span>
                             </div>
                             <div class="engine-card">
-                                <div style="display:flex;justify-content:space-between;"><i data-lucide="dumbbell" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار الجسدي</h3></div>
-                                <p style="font-size:0.7rem;color:#888; margin-top:5px; border-bottom: 1px solid #333; padding-bottom: 5px;">Physical Stability</p>
+                                <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
+                                    <div style="display:flex; justify-content: space-between; align-items: center;">
+                                        <div style="display:flex; align-items: center; gap: 8px;">
+                                            <i data-lucide="dumbbell" style="color:white; width:18px;"></i>
+                                            <h3 style="color:white; font-size:1rem; margin:0;">الاستقرار الجسدي</h3>
+                                        </div>
+                                        <span style="font-size:0.75rem; color:var(--text-white);">Physical Stability</span>
+                                    </div>
+                                </div>
                                 <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
                             </div>
                         </div>
@@ -397,9 +410,9 @@
                 </div>
             </div>
 
-            <!-- 2. مجموعات المحركات -->
+            <!-- مجموعات المحركات -->
             <div class="engines-wrapper">
-                <!-- محركات الجناح الأيمن -->
+                <!-- اليمين -->
                 <div class="engine-group right">
                     <div class="group-header">
                         <h2>محركات الجناح الأيمن</h2>
@@ -412,7 +425,7 @@
                     </div>
                 </div>
 
-                <!-- محركات الجناح الأيسر -->
+                <!-- اليسار -->
                 <div class="engine-group left">
                     <div class="group-header">
                         <h2>محركات الجناح الأيسر</h2>
