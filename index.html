@@ -69,7 +69,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* تنسيق العناوين المتقابلة (Perfect Visual Mass Symmetry) */
+        /* تنسيق العناوين المتقابلة (Visual Mass Symmetry) */
         .event-container {
             margin-top: 10px;
             width: 100%;
@@ -82,22 +82,20 @@
             display: flex;
             width: 100%;
             justify-content: center;
-            gap: 35px; /* فجوة مركزية مدروسة */
+            gap: 35px; 
             margin-bottom: 12px;
             align-items: flex-end; 
         }
 
-        /* العربية (يمين الشاشة، محاذاة لليسار باتجاه المركز - تم زيادة الحجم للتوازن) */
         .event-tag-ar {
             flex: 1;
             color: var(--gold-amber);
             font-weight: 900;
-            font-size: 1.45rem; /* رفع الحجم لموازنة طول النص الإنجليزي */
+            font-size: 1.45rem; 
             text-align: left; 
             line-height: 1;
         }
 
-        /* الإنجليزية (يسار الشاشة، محاذاة لليمين باتجاه المركز) */
         .event-tag-en {
             flex: 1;
             color: var(--gold-amber);
@@ -113,7 +111,7 @@
         .date-sub-ar {
             flex: 1;
             color: var(--primary-orange);
-            font-size: 1.05rem; /* رفع طفيف للتوازن */
+            font-size: 1.05rem;
             text-align: left;
             line-height: 1;
         }
@@ -156,7 +154,7 @@
             align-items: center; background: rgba(0,0,0,0.9);
             border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100;
         }
-        .brand { font-weight: 900; font-size: 1.4rem; }
+        .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
 
         .sniper-banner {
@@ -239,7 +237,7 @@
                 </svg>
             </div>
             
-            <!-- العناوين الهجينة المتناظرة (تم تعديل الحجم العربي لموازنة الثقل البصري) -->
+            <!-- العناوين الهجينة المتناظرة -->
             <div class="event-container">
                 <div class="hybrid-row">
                     <div class="event-tag-ar">بداية العام الهجري الجديد 1448 هـ</div>
@@ -266,7 +264,8 @@
     <!-- لوحة القيادة -->
     <main id="app-container">
         <nav class="top-nav">
-            <div class="brand">MY MOVIE <span>LIVE!</span></div>
+            <!-- تم إزالة علامة التعجب بناءً على طلبك -->
+            <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div style="color: var(--gold-amber); font-weight: 800; font-size: 0.8rem;">HERO: ALBARAE | البطل: البراء 👤</div>
         </nav>
 
