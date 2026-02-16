@@ -69,7 +69,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* تنسيق العناوين المتقابلة (Visual Mass Symmetry) */
+        /* تنسيق العناوين المتقابلة (Perfect Visual Mass Symmetry) */
         .event-container {
             margin-top: 10px;
             width: 100%;
@@ -163,6 +163,16 @@
             padding: 25px; text-align: center;
         }
 
+        /* لافتة طائرة الحياة */
+        .flight-status-banner {
+            background: rgba(255, 191, 0, 0.05);
+            padding: 15px 25px;
+            text-align: center;
+            border-bottom: 1px solid #333;
+        }
+        .flight-status-banner p { font-size: 0.9rem; color: var(--text-white); font-weight: bold; }
+        .flight-status-banner span { color: var(--gold-amber); }
+
         .dashboard-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px; padding: 25px;
@@ -237,7 +247,6 @@
                 </svg>
             </div>
             
-            <!-- العناوين الهجينة المتناظرة -->
             <div class="event-container">
                 <div class="hybrid-row">
                     <div class="event-tag-ar">بداية العام الهجري الجديد 1448 هـ</div>
@@ -249,7 +258,6 @@
                 </div>
             </div>
             
-            <!-- العداد أسفل العناوين مباشرة -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -264,7 +272,6 @@
     <!-- لوحة القيادة -->
     <main id="app-container">
         <nav class="top-nav">
-            <!-- تم إزالة علامة التعجب بناءً على طلبك -->
             <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div style="color: var(--gold-amber); font-weight: 800; font-size: 0.8rem;">HERO: ALBARAE | البطل: البراء 👤</div>
         </nav>
@@ -274,7 +281,13 @@
             <p style="font-size: 0.8rem; color: var(--text-white); margin-top: 5px; font-weight: bold; opacity: 0.9;">Faith, Parents & Health is your Sniper Rifle</p>
         </div>
 
+        <div class="flight-status-banner">
+            <p>✈️ طائرة حياتك تعتمد على توازن <span>المحركات السبعة</span>. تعطل محرك واحد يهدد استقرار الرحلة بالكامل.</p>
+            <p style="font-size: 0.75rem; color: var(--text-white); margin-top: 3px; opacity: 0.8;">Your Life Plane depends on the balance of the 7 Engines. One engine failure affects the whole flight.</p>
+        </div>
+
         <div class="dashboard-grid">
+            <!-- 1. محرك الروح -->
             <div class="engine-card active" onclick="openSoul()">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <i data-lucide="heart" style="color: var(--primary-orange);"></i>
@@ -285,20 +298,70 @@
                 <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;"><span id="main-soul-percent">0</span>%</div>
             </div>
             
+            <!-- 2. محرك الباءة -->
             <div class="engine-card">
-                <i data-lucide="coins"></i>
-                <h3 style="font-size: 1rem; margin-top: 10px;">محرك الباءة | Financial</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <i data-lucide="coins" style="color: var(--text-white);"></i>
+                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">FINANCIAL | محرك الباءة</span>
+                </div>
+                <h3>محرك الباءة</h3>
                 <div class="progress-track"><div class="progress-fill" style="width:30%"></div></div>
+                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">30%</div>
             </div>
+
+            <!-- 3. محرك الصحة -->
             <div class="engine-card">
-                <i data-lucide="activity"></i>
-                <h3 style="font-size: 1rem; margin-top: 10px;">محرك الصحة | Health</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <i data-lucide="activity" style="color: var(--text-white);"></i>
+                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">HEALTH | محرك الصحة</span>
+                </div>
+                <h3>محرك الصحة</h3>
                 <div class="progress-track"><div class="progress-fill" style="width:55%"></div></div>
+                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">55%</div>
             </div>
+
+            <!-- 4. محرك العقل -->
             <div class="engine-card">
-                <i data-lucide="book"></i>
-                <h3 style="font-size: 1rem; margin-top: 10px;">محرك العقل | Intellectual</h3>
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <i data-lucide="book-open" style="color: var(--text-white);"></i>
+                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">INTELLECTUAL | محرك العقل</span>
+                </div>
+                <h3>محرك العقل</h3>
                 <div class="progress-track"><div class="progress-fill" style="width:15%"></div></div>
+                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">15%</div>
+            </div>
+
+            <!-- 5. المحرك الاجتماعي -->
+            <div class="engine-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <i data-lucide="users" style="color: var(--text-white);"></i>
+                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">SOCIAL | المحرك الاجتماعي</span>
+                </div>
+                <h3>المحرك الاجتماعي</h3>
+                <div class="progress-track"><div class="progress-fill" style="width:80%"></div></div>
+                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">80%</div>
+            </div>
+
+            <!-- 6. المحرك المهني -->
+            <div class="engine-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <i data-lucide="briefcase" style="color: var(--text-white);"></i>
+                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">PROFESSIONAL | المحرك المهني</span>
+                </div>
+                <h3>المحرك المهني</h3>
+                <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">40%</div>
+            </div>
+
+            <!-- 7. المحرك الرسالي -->
+            <div class="engine-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <i data-lucide="globe" style="color: var(--text-white);"></i>
+                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">MISSION | المحرك الرسالي</span>
+                </div>
+                <h3>المحرك الرسالي</h3>
+                <div class="progress-track"><div class="progress-fill" style="width:10%"></div></div>
+                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;">10%</div>
             </div>
         </div>
     </main>
