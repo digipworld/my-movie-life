@@ -35,7 +35,7 @@
         /* --- محتوى ما قبل العرض (المركز) --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 1002; width: 100%;
+            z-index: 1002; width: 100%; max-width: 1200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.5s;
         }
@@ -83,7 +83,41 @@
         .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
         .timer-label { font-size: 0.6rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
-        .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+        /* --- التلميح (Click Hint) المتناظر بدقة --- */
+        .click-hint-container {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr; /* تقسيم ثلاثي: يمين، وسط، يسار */
+            align-items: center;
+            gap: 15px;
+            width: 100%;
+            max-width: 600px; /* لضمان عدم تباعدها كثيراً */
+            margin-top: 40px;
+            color: var(--text-grey);
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .hint-text.ar {
+            text-align: left; /* يحاذي لليسار باتجاه المركز */
+            padding-left: 10px;
+        }
+
+        .hint-text.en {
+            text-align: right; /* يحاذي لليمين باتجاه المركز */
+            direction: ltr;
+            padding-right: 10px;
+            font-family: sans-serif;
+        }
+
+        .hint-divider {
+            color: var(--text-white);
+            opacity: 0.5;
+            font-weight: 100;
+            font-size: 1.2rem;
+            margin-top: -3px; /* ضبط دقيق للارتفاع */
+        }
 
         /* --- التطبيق الرئيسي --- */
         #app-container { 
@@ -115,7 +149,6 @@
             display: flex; flex-direction: column; justify-content: center; 
         }
         
-        /* التعديل الهام: فرض سطر واحد لعناوين الأجنحة في الحاسوب */
         .wing-header h2 { 
             font-size: clamp(1rem, 2vw, 1.3rem); /* حجم متكيف */
             color: var(--text-white); 
@@ -182,6 +215,8 @@
 
             /* السماح بالانكسار في الجوال فقط إذا لزم الأمر */
             .wing-header h2 { font-size: 1rem; white-space: normal; }
+            
+            .click-hint-container { gap: 10px; margin-top: 30px; font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -227,10 +262,16 @@
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
             
-            <p class="click-hint">اضغط على الشعار | CLICK LOGO</p>
+            <!-- التلميح المتناظر (الجديد) -->
+            <div class="click-hint-container">
+                <div class="hint-text ar">اضغط على الشعار</div>
+                <div class="hint-divider">|</div>
+                <div class="hint-text en">CLICK LOGO</div>
+            </div>
         </div>
     </div>
 
+    <!-- شاشة إدخال الاسم -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 <br> <span class="highlight">قنصك في الحياة</span></h1>
         <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> is your Sniper Rifle</p>
@@ -240,6 +281,7 @@
         </div>
     </section>
 
+    <!-- لوحة التحكم (هيكل الطائرة) -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
