@@ -8,7 +8,7 @@
     <!-- Favicon (M+Y Logo) -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='85' stroke='%23E84222' stroke-width='4' fill='none' opacity='0.6'/><path d='M40 160 V 40 L 100 100 L 160 40 V 160' stroke='%23E84222' stroke-width='20' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M100 100 V 190' stroke='%23FFBF00' stroke-width='20' stroke-linecap='round' fill='none'/></svg>">
 
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;800;900&display=swap" rel="stylesheet">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -18,7 +18,6 @@
             --deep-black: #050505;
             --card-bg: #111111;
             --text-white: #ffffff;
-            --text-grey: #ffffff; /* تم تحويل الرمادي إلى أبيض بناءً على طلبك لزيادة الوضوح */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,7 +57,7 @@
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1001; text-align: center;
-            transition: opacity 0.6s ease; width: 95%; max-width: 900px;
+            transition: opacity 0.6s ease; width: 95%; max-width: 1000px;
         }
 
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
@@ -66,11 +65,11 @@
         .glowing-logo {
             filter: drop-shadow(0 0 20px var(--primary-orange));
             cursor: pointer; transition: transform 0.3s ease;
-            margin-bottom: 25px;
+            margin-bottom: 35px;
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* تنسيق العناوين المتقابلة (Symmetrical Hybrid Alignment) */
+        /* تنسيق العناوين المتقابلة (Balanced Symmetrical Alignment) */
         .event-container {
             margin-top: 10px;
             width: 100%;
@@ -83,31 +82,32 @@
             display: flex;
             width: 100%;
             justify-content: center;
-            gap: 40px; 
-            margin-bottom: 12px;
-            align-items: center; 
+            gap: 30px; /* مسافة مركزية دقيقة */
+            margin-bottom: 10px;
+            align-items: flex-end; /* لضمان وقوف النصين على نفس السطر الأفقي */
         }
 
+        /* العربية (يمين الشاشة، محاذاة لليسار باتجاه المركز) */
         .event-tag-ar {
             flex: 1;
             color: var(--gold-amber);
-            font-weight: 900;
-            font-size: 1.25rem;
+            font-weight: 800;
+            font-size: 1.2rem;
             text-align: left; 
-            line-height: 1.1;
+            line-height: 1;
         }
 
+        /* الإنجليزية (يسار الشاشة، محاذاة لليمين باتجاه المركز) */
         .event-tag-en {
             flex: 1;
             color: var(--gold-amber);
-            font-weight: 900;
-            font-size: 1.05rem;
+            font-weight: 800;
+            font-size: 1.15rem; /* تم تكبيره قليلاً لموازنة العربية */
             text-align: right; 
-            font-family: sans-serif;
+            font-family: 'Cairo', sans-serif; /* توحيد الخط لضمان تساوى الوزن البصري */
             letter-spacing: 1px;
             text-transform: uppercase;
-            line-height: 1.1;
-            padding-top: 4px; 
+            line-height: 1;
         }
 
         .date-sub-ar {
@@ -115,17 +115,15 @@
             color: var(--primary-orange);
             font-size: 0.95rem;
             text-align: left;
-            line-height: 1.1;
+            line-height: 1;
         }
 
         .date-sub-en {
             flex: 1;
             color: var(--primary-orange);
-            font-size: 0.85rem;
+            font-size: 0.9rem; /* تم رفعه قليلاً للموازنة */
             text-align: right;
-            font-family: sans-serif;
-            line-height: 1.1;
-            padding-top: 2px; 
+            line-height: 1;
         }
 
         /* العداد المدمج */
@@ -134,17 +132,17 @@
         }
         .timer-unit {
             background: rgba(232, 66, 34, 0.05);
-            border: 1px solid rgba(232, 66, 34, 0.2);
-            padding: 15px; border-radius: 12px; min-width: 85px;
+            border: 1px solid rgba(232, 66, 34, 0.3);
+            padding: 15px; border-radius: 12px; min-width: 90px;
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
         .timer-val {
-            font-size: 2.4rem; color: var(--gold-amber);
+            font-size: 2.6rem; color: var(--gold-amber);
             font-family: monospace; font-weight: bold; display: block;
         }
-        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; opacity: 0.9; }
+        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; opacity: 1; font-weight: bold; }
 
-        /* --- التطبيق الرئيسي --- */
+        /* --- التطبيق الرئيسي (لوحة التحكم) --- */
         #app-container {
             width: 100%; height: 100%;
             display: flex; flex-direction: column;
@@ -216,20 +214,18 @@
         
         .stat-value { font-size: 4.5rem; font-weight: 900; color: var(--gold-amber); text-align: center; display: block; margin: 15px 0; }
 
-        .hybrid-subtitle { color: var(--text-white); opacity: 0.8; font-size: 0.8rem; margin-top: 5px; }
-
         @media (max-width: 600px) {
-            .timer-val { font-size: 1.8rem; }
-            .timer-unit { min-width: 70px; padding: 10px; }
-            .hybrid-row { gap: 20px; }
+            .timer-val { font-size: 2rem; }
+            .timer-unit { min-width: 75px; padding: 10px; }
+            .hybrid-row { gap: 15px; }
             .event-tag-ar { font-size: 0.95rem; }
-            .event-tag-en { font-size: 0.8rem; }
+            .event-tag-en { font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- الستارة -->
+    <!-- الستارة (تم تنظيف المركز) -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
@@ -237,15 +233,13 @@
         <div id="pre-show-content">
             <div class="glowing-logo" onclick="openShow()">
                 <svg width="180" height="180" viewBox="0 0 200 200">
-                    <!-- الدائرة في الخلف أولاً -->
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
-                    <!-- شعار M+Y في الواجهة (الأمام) -->
                     <path d="M40 160 V 40 L 100 100 L 160 40 V 160" stroke="#E84222" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round"/>
                 </svg>
             </div>
             
-            <!-- العناوين الهجينة المتناظرة -->
+            <!-- العناوين الهجينة المتناظرة (تم ضبط الوزن البصري) -->
             <div class="event-container">
                 <div class="hybrid-row">
                     <div class="event-tag-ar">بداية العام الهجري الجديد 1448 هـ</div>
@@ -265,7 +259,7 @@
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
             
-            <p style="color: var(--text-white); font-size: 0.75rem; margin-top: 25px; letter-spacing: 2px; opacity: 0.9;">اضغط على الشعار | CLICK LOGO</p>
+            <p style="color: var(--text-white); font-size: 0.75rem; margin-top: 30px; letter-spacing: 2px; font-weight: bold;">اضغط على الشعار | CLICK LOGO</p>
         </div>
     </div>
 
@@ -273,23 +267,23 @@
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE!</span></div>
-            <div style="color: var(--gold-amber); font-weight: bold; font-size: 0.8rem;">بطل | HERO: ALBARAE 👤</div>
+            <div style="color: var(--gold-amber); font-weight: 800; font-size: 0.8rem;">HERO: ALBARAE | البطل: البراء 👤</div>
         </nav>
 
         <div class="sniper-banner">
             <p>"علاقتك بالله، بوالديك وبصحتك هي <span style="color:var(--gold-amber)">بندقية قنصك</span> في الحياة"</p>
-            <p style="font-size: 0.8rem; color: var(--text-white); margin-top: 5px; opacity: 0.8;">Faith, Parents & Health is your Sniper Rifle</p>
+            <p style="font-size: 0.8rem; color: var(--text-white); margin-top: 5px; font-weight: bold;">Faith, Parents & Health is your Sniper Rifle</p>
         </div>
 
         <div class="dashboard-grid">
             <div class="engine-card active" onclick="openSoul()">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <i data-lucide="heart" style="color: var(--primary-orange);"></i>
-                    <span style="font-size: 0.6rem; color: var(--text-white); font-weight: bold; opacity: 0.8;">SOUL ENGINE | محرك الروح</span>
+                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">SOUL ENGINE | محرك الروح</span>
                 </div>
                 <h3>محرك الروح</h3>
                 <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
-                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: bold;"><span id="main-soul-percent">0</span>%</div>
+                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;"><span id="main-soul-percent">0</span>%</div>
             </div>
             
             <div class="engine-card">
@@ -314,7 +308,7 @@
     <div id="soul-modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeSoul()">✕</button>
-            <h2 style="color: var(--primary-orange); text-align: center; font-size: 1.2rem;">غرفة عمليات الروح | Soul Ops</h2>
+            <h2 style="color: var(--primary-orange); text-align: center; font-size: 1.3rem; font-weight: 800;">غرفة عمليات الروح | Soul Ops</h2>
             <span id="soul-val-display" class="stat-value">0%</span>
             <div style="margin-top: 20px;">
                 <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">صلاة الفجر | Fajr Prayer</div></div>
