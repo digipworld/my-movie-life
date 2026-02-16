@@ -3,128 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Movie Life | اصنع فيلم حياتك</title>
-    <meta name="description" content="إذا كانت علاقتك بالله، بوالديك وبصحتك جيدة.. فكأنك تحمل بندقية قنص بيدك تصوب بها على أهداف بدقة عالية.">
-    <link rel="stylesheet" href="style.css">
+    <title>My Movie Life | انطلاقة 1448 هـ</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='none' stroke='%23E84222' stroke-width='10'/><line x1='50' y1='10' x2='50' y2='90' stroke='%23E84222' stroke-width='6'/><line x1='10' y1='50' x2='90' y2='50' stroke='%23E84222' stroke-width='6'/><circle cx='50' cy='50' r='5' fill='%23E84222'/></svg>">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --primary-orange: #E84222;
+            --gold-amber: #FFBF00;
+            --deep-black: #050505;
+            --card-bg: #111111;
+            --text-white: #ffffff;
+            --text-grey: #888888;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        body, html {
+            height: 100%; width: 100%;
+            background-color: var(--deep-black);
+            color: var(--text-white);
+            font-family: 'Cairo', sans-serif;
+            overflow: hidden;
+        }
+
+        /* --- نظام الستارة (فتح للخارج 100%) --- */
+        #curtain-wrapper {
+            position: fixed; top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            z-index: 1000; display: flex; overflow: hidden;
+        }
+
+        .curtain {
+            width: 51vw; height: 100vh;
+            background: repeating-linear-gradient(90deg, #2a0000 0%, #600000 40px, #2a0000 80px);
+            box-shadow: inset 0 0 100px #000;
+            transition: transform 1.8s cubic-bezier(0.7, 0, 0.3, 1);
+            position: absolute; top: 0;
+        }
+
+        .curtain.left { left: 0; transform: translateX(0); border-right: 2px solid rgba(255, 191, 0, 0.2); }
+        .curtain.right { right: 0; transform: translateX(0); border-left: 2px solid rgba(255, 191, 0, 0.2); }
+
+        .curtain-open .curtain.left { transform: translateX(-101%); }
+        .curtain-open .curtain.right { transform: translateX(101%); }
+
+        #pre-show-content {
+            position: absolute; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1001; text-align: center;
+            transition: opacity 0.6s ease; width: 100%;
+        }
+
+        .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
+
+        .glowing-logo {
+            filter: drop-shadow(0 0 20px var(--primary-orange));
+            cursor: pointer; transition: transform 0.3s ease;
+            margin-bottom: 20px;
+        }
+        .glowing-logo:hover { transform: scale(1.05); }
+
+        /* تصميم العداد المطول */
+        .timer-grid {
+            display: flex; justify-content: center; gap: 15px; margin-top: 20px;
+        }
+        .timer-unit {
+            background: rgba(232, 66, 34, 0.1);
+            border: 1px solid var(--primary-orange);
+            padding: 10px; border-radius: 10px; min-width: 80px;
+        }
+        .timer-val {
+            font-size: 2.5rem; color: var(--gold-amber);
+            font-family: monospace; font-weight: bold; display: block;
+        }
+        .timer-label { font-size: 0.7rem; color: var(--text-grey); text-transform: uppercase; }
+
+        .event-title {
+            color: var(--gold-amber); font-weight: bold; margin-top: 20px;
+            letter-spacing: 2px; font-size: 1.1rem;
+        }
+
+        /* --- التطبيق الرئيسي --- */
+        #app-container {
+            width: 100%; height: 100%;
+            display: flex; flex-direction: column;
+            opacity: 0; transition: opacity 1s 1.2s;
+            overflow-y: auto;
+        }
+        .curtain-open #app-container { opacity: 1; }
+
+        .top-nav {
+            padding: 20px 30px; display: flex; justify-content: space-between;
+            align-items: center; background: rgba(0,0,0,0.9);
+            border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100;
+        }
+        .brand { font-weight: 900; font-size: 1.5rem; }
+        .brand span { color: var(--primary-orange); }
+
+        .sniper-banner {
+            background: linear-gradient(180deg, #1a0500 0%, #000 100%);
+            border-bottom: 2px solid var(--primary-orange);
+            padding: 25px; text-align: center;
+        }
+
+        .dashboard-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px; padding: 30px;
+        }
+
+        .engine-card {
+            background: var(--card-bg); border: 1px solid #333;
+            border-radius: 18px; padding: 25px; cursor: pointer;
+            transition: 0.3s; border-left: 4px solid transparent;
+        }
+        .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); }
+        .engine-card.active { border-left-color: var(--primary-orange); }
+
+        .progress-track {
+            width: 100%; height: 8px; background: #222;
+            border-radius: 4px; margin-top: 15px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber));
+            width: 0%; transition: width 1s ease-in-out;
+        }
+
+        /* نافذة محرك الروح */
+        #soul-modal {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 2000;
+            display: none; justify-content: center; align-items: flex-end;
+        }
+        .modal-content {
+            background: #111; width: 100%; max-width: 600px; height: 85%;
+            border-radius: 30px 30px 0 0; border-top: 4px solid var(--primary-orange);
+            padding: 30px; animation: slideUp 0.4s ease-out; overflow-y: auto;
+        }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .close-btn { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; float: left; }
+        .task-item {
+            background: #1a1a1a; padding: 20px; border-radius: 15px;
+            margin-bottom: 12px; display: flex; align-items: center;
+            cursor: pointer; border: 1px solid #333;
+        }
+        .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
+        .checkbox { width: 24px; height: 24px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
+        .task-item.done .checkbox { background: var(--gold-amber); border-color: var(--gold-amber); }
+        .stat-value { font-size: 5rem; font-weight: 900; color: var(--gold-amber); text-align: center; display: block; margin: 20px 0; }
+    </style>
 </head>
 <body>
 
-    <div id="curtain-container" class="curtain-container">
-        <div class="curtain-left"></div>
-        <div class="curtain-right"></div>
+    <!-- الستارة -->
+    <div id="curtain-wrapper">
+        <div class="curtain left"></div>
+        <div class="curtain right"></div>
         
-        <div id="pre-show-content" class="pre-show-content">
-            <div class="logo-container">
-                <svg width="180" height="180" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg" class="glowing-logo">
+        <div id="pre-show-content">
+            <div class="glowing-logo" onclick="openShow()">
+                <svg width="150" height="150" viewBox="0 0 200 200">
                     <path d="M40 160 V 40 L 100 100 L 160 40 V 160" stroke="#E84222" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round"/>
-                    <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6" class="scope-spin"/>
+                    <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
                 </svg>
             </div>
-            <div class="countdown-container">
-                <div id="timer" class="timer">00:00:00</div>
-                <div class="timer-label">THE PREMIERE IS APPROACHING</div>
+            
+            <p class="event-title">بداية العام الهجري الجديد 1448 هـ</p>
+            
+            <div class="timer-grid">
+                <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام</span></div>
+                <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة</span></div>
+                <div class="timer-unit"><span id="minutes" class="timer-val">00</span><span class="timer-label">دقيقة</span></div>
+                <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية</span></div>
+            </div>
+            
+            <p style="color: var(--text-grey); font-size: 0.7rem; margin-top: 20px; letter-spacing: 2px;">اضغط على الشعار لفتح الستارة</p>
+        </div>
+    </div>
+
+    <!-- لوحة القيادة -->
+    <main id="app-container">
+        <nav class="top-nav">
+            <div class="brand">MY MOVIE <span>LIVE!</span></div>
+            <div style="color: var(--gold-amber);">بطل: البراء 👤</div>
+        </nav>
+
+        <div class="sniper-banner">
+            <p>"علاقتك بالله، بوالديك وبصحتك هي <span style="color:var(--gold-amber)">بندقية قنصك</span> في الحياة"</p>
+        </div>
+
+        <div class="dashboard-grid">
+            <div class="engine-card active" onclick="openSoul()">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                    <i data-lucide="heart" style="color: var(--primary-orange);"></i>
+                    <span style="font-size: 0.7rem; color: var(--text-grey);">SOUL ENGINE</span>
+                </div>
+                <h3>محرك الروح</h3>
+                <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
+                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: bold;"><span id="main-soul-percent">0</span>%</div>
+            </div>
+            <div class="engine-card"><i data-lucide="coins"></i><h3>محرك الباءة</h3><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div>
+            <div class="engine-card"><i data-lucide="activity"></i><h3>محرك الصحة</h3><div class="progress-track"><div class="progress-fill" style="width:50%"></div></div></div>
+            <div class="engine-card"><i data-lucide="book"></i><h3>محرك العقل</h3><div class="progress-track"><div class="progress-fill" style="width:10%"></div></div></div>
+        </div>
+    </main>
+
+    <!-- نافذة محرك الروح -->
+    <div id="soul-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeSoul()">✕</button>
+            <h2 style="color: var(--primary-orange); text-align: center;">غرفة عمليات الروح</h2>
+            <span id="soul-val-display" class="stat-value">0%</span>
+            <div style="margin-top: 20px;">
+                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">صلاة الفجر في وقتها</div></div>
+                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">الورد القرآني اليومي</div></div>
+                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">بر الوالدين</div></div>
+                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">أذكار الصباح والمساء</div></div>
             </div>
         </div>
     </div>
 
-    <main id="app-container" class="app-container hidden">
-        
-        <section id="phase-0" class="phase-section">
-            <div class="void-content">
-                <h1 class="fade-in-text">أنت في المكان المناسب..</h1>
-                <p class="fade-in-text delay-1">لدرجة أنك ستقول لنفسك بصوت مرتفع وحماسي في المستقبل القريب - الذي هو بمثابة الماضي بعد نهاية هذا الكون - والحاضر الذي تسعى لامتلاكه الآن:</p>
-                <h2 class="fade-in-text delay-2 highlight">ماذا فعلت لأستحق كل هذا العطاء!</h2>
-                <button class="action-btn fade-in-text delay-3" onclick="nextPhase(1)">ابدأ الرحلة ➔</button>
-            </div>
-        </section>
+    <script>
+        // --- العد التنازلي لـ 15 يونيو 2026 ---
+        const targetDate = new Date("June 15, 2026 00:00:00").getTime();
 
-        <section id="phase-1" class="phase-section">
-            <h2 class="section-title">أيها البطل، من يقود هذه الرحلة اليوم؟</h2>
-            <div class="cards-container">
-                <div class="card" onclick="selectIdentity('individual')">
-                    <div class="card-icon">🛡️</div>
-                    <h3>بطل فردي</h3>
-                    <p>إدارة حياة، زواج، دراسة، وروح</p>
-                </div>
-                <div class="card" onclick="selectIdentity('company')">
-                    <div class="card-icon">🏢</div>
-                    <h3>شركة / مؤسسة</h3>
-                    <p>إدارة موظفين، تدقيق مالي، وبركة مؤسسية</p>
-                </div>
-                <div class="card" onclick="selectIdentity('ngo')">
-                    <div class="card-icon">🤝</div>
-                    <h3>جمعية / منظمة</h3>
-                    <p>إدارة أثر اجتماعي، ورسالة إنسانية</p>
-                </div>
-            </div>
-        </section>
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
 
-        <section id="phase-2" class="phase-section">
-            <h2 class="section-title">أي عدسة تختار لترى بها فيلم حياتك؟</h2>
-            <div class="lenses-container">
-                <div class="lens lens-muslim" onclick="selectLens('muslim')">
-                    <div class="lens-glass"></div>
-                    <h3>بطل مسلم</h3>
-                    <p>بروتوكول المراقبة الإلهية</p>
-                </div>
-                <div class="lens lens-seeker" onclick="selectLens('seeker')">
-                    <div class="lens-glass"></div>
-                    <h3>باحث عن الحقيقة</h3>
-                    <p>بروتوكول سقاية البذرة</p>
-                </div>
-                <div class="lens lens-warrior" onclick="selectLens('warrior')">
-                    <div class="lens-glass"></div>
-                    <h3>محارب الحاضر</h3>
-                    <p>بروتوكول النجاح والإنتاجية</p>
-                </div>
-            </div>
-        </section>
+            if (diff <= 0) {
+                document.getElementById('seconds').innerText = "00";
+                return;
+            }
 
-        <section id="phase-3" class="phase-section">
-            <div class="awakening-content">
-                <p class="small-text">تخيل عائلتك تشاهد فيلم حياتك...</p>
-                <h1 id="awakening-question" class="glowing-text">فكيف بالله الذي يراك الآن؟</h1>
-                <button id="realize-btn" class="ghost-btn hidden-btn" onclick="nextPhase(4)">أدركت ذلك | I REALIZE</button>
-            </div>
-        </section>
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-        <section id="phase-4" class="phase-section split-screen-container">
-            <div class="split-side split-left" onclick="selectMode('cinematic')">
-                <div class="mode-content">
-                    <div class="sfx-badge">SFX: ON 🔊</div>
-                    <h2>النمط السينمائي</h2>
-                    <p>Visuals, Emotion & Drama</p>
-                </div>
-            </div>
-            <div class="split-side split-right" onclick="selectMode('practical')">
-                <div class="mode-content">
-                    <h2>النمط العملي</h2>
-                    <p>Data, Focus & Clarity</p>
-                </div>
-            </div>
-        </section>
+            document.getElementById('days').innerText = d < 10 ? "0"+d : d;
+            document.getElementById('hours').innerText = h < 10 ? "0"+h : h;
+            document.getElementById('minutes').innerText = m < 10 ? "0"+m : m;
+            document.getElementById('seconds').innerText = s < 10 ? "0"+s : s;
+        }
+        setInterval(updateCountdown, 1000);
 
-        <section id="dashboard" class="phase-section dashboard-view">
-            <nav class="top-nav">
-                <div class="nav-logo">MY MOVIE LIFE</div>
-                <div class="user-profile">👤 البطل</div>
-            </nav>
-            <div class="dashboard-content">
-                <h1 id="final-quote">"إذا كانت علاقتك بالله، بوالديك وبصحتك جيدة.. فكأنك تحمل بندقية قنص!"</h1>
-                <div class="engines-grid">
-                    <div class="engine-card">محرك الروح</div>
-                    <div class="engine-card">محرك الصحة</div>
-                    <div class="engine-card">محرك الباءة</div>
-                    <div class="engine-card">محرك العقل</div>
-                </div>
-            </div>
-        </section>
+        function openShow() {
+            document.body.classList.add('curtain-open');
+            setTimeout(() => { 
+                document.getElementById('curtain-wrapper').style.pointerEvents = "none"; 
+                document.body.style.overflow = "auto";
+            }, 1600);
+        }
 
-    </main>
+        function openSoul() { document.getElementById('soul-modal').style.display = "flex"; }
+        function closeSoul() { document.getElementById('soul-modal').style.display = "none"; }
 
-    <script src="script.js"></script>
+        function toggleTask(el) {
+            el.classList.toggle('done');
+            let total = document.querySelectorAll('.task-item').length;
+            let done = document.querySelectorAll('.task-item.done').length;
+            let percent = Math.round((done / total) * 100);
+            document.getElementById('soul-val-display').innerText = percent + '%';
+            document.getElementById('main-soul-percent').innerText = percent;
+            document.getElementById('main-soul-bar').style.width = percent + '%';
+        }
+
+        lucide.createIcons();
+    </script>
 </body>
 </html>
