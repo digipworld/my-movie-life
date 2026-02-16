@@ -54,7 +54,7 @@
         /* --- العناوين المتناظرة --- */
         .titles-container {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr; /* تقسيم متساوي للحاسوب */
             gap: 40px;
             width: 100%;
             align-items: flex-end; 
@@ -90,8 +90,8 @@
             box-shadow: 0 0 20px rgba(0,0,0,0.5); 
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .timer-val { font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; display: block; }
-        .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; font-weight: bold; text-transform: uppercase; }
+        .timer-val { font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
+        .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
         .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
@@ -103,11 +103,10 @@
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
 
-        /* البانر العلوي (تم التبديل) */
-        .main-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
+        .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
         .highlight { color: var(--gold-amber); font-weight: bold; }
 
-        /* لافتة حالة الطائرة */
+        /* لافتة الطائرة الهجينة */
         .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 20px 30px; border-bottom: 1px solid #333; font-size: 0.9rem; text-align: center; }
         .alert-text { color: var(--primary-orange); font-weight: bold; }
         .quote-text { color: var(--text-grey); font-style: italic; font-size: 0.85rem; }
@@ -124,21 +123,8 @@
         .wing.right-wing { border-right: 4px solid var(--gold-amber); }
         .wing.left-wing { border-left: 4px solid var(--primary-orange); }
 
-        .wing-header { 
-            text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; 
-            height: 80px; display: flex; flex-direction: column; justify-content: center; 
-        }
-        
-        /* تعديل العنوان ليكون في سطر واحد دائماً */
-        .wing-header h2 { 
-            font-size: clamp(1.1rem, 2.5vw, 1.3rem); /* حجم مرن */
-            color: var(--text-white); 
-            margin-bottom: 5px; 
-            font-weight: 800; 
-            white-space: nowrap; /* يجبر النص على البقاء في سطر واحد */
-            overflow: visible; /* يسمح بالظهور */
-        }
-        
+        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
+        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
         .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
 
         .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
@@ -165,13 +151,41 @@
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
 
+        /* --- تحسينات الجوال الحاسمة (Mobile Fixes) --- */
         @media (max-width: 768px) {
-            .titles-container { flex-direction: column; gap: 20px; text-align: center; }
-            .title-block.ar, .title-block.en { text-align: center !important; width: 100%; padding: 0; }
-            .timer-unit { min-width: 70px; padding: 10px; }
+            .titles-container { 
+                grid-template-columns: 1fr; /* تحويل الشبكة لعمود واحد */
+                gap: 20px; 
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
+            .title-block.ar, .title-block.en { 
+                text-align: center !important; /* إجبار التوسيط */
+                width: 100%; 
+                padding: 0; 
+                border: none;
+            }
+            
+            .main-title { 
+                font-size: 1.5rem; 
+                margin-bottom: 5px;
+            }
+            
+            .sub-title { 
+                font-size: 1rem; 
+            }
+
+            .timer-unit { min-width: 65px; padding: 10px; }
             .timer-val { font-size: 1.8rem; }
             .glowing-logo { width: 100px; margin-bottom: 20px; }
+            
+            /* تحسينات الطائرة للجوال */
             .wings-wrapper { flex-direction: column; }
+            .wing { border: none; border-bottom: 3px solid #333; min-width: auto; }
+            .wing.right-wing { border-right: none; border-bottom: 3px solid var(--gold-amber); }
+            .wing.left-wing { border-left: none; border-bottom: 3px solid var(--primary-orange); }
+            .top-nav { flex-direction: row; }
         }
     </style>
 </head>
@@ -181,7 +195,7 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
-            <!-- اللوغو (في الوسط تماماً) -->
+            <!-- اللوغو -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
@@ -190,7 +204,7 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة -->
+            <!-- العناوين -->
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">بداية العام الهجري الجديد 1448 هـ</span>
@@ -202,6 +216,7 @@
                 </div>
             </div>
 
+            <!-- العداد -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -223,14 +238,14 @@
         </div>
     </section>
 
-    <!-- لوحة التحكم (هيكل الطائرة) -->
+    <!-- لوحة التحكم -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
-        <!-- (1) المانشيت الرئيسي: 7 استقرارات -->
+        <!-- المانشيت الرئيسي: 7 استقرارات -->
         <div class="sniper-banner main-banner">
             <p style="font-size: 1.1rem; color: white;">
                 "هناك <strong>7 استقرارات</strong> لضمان توازن الرحلة، ويبقى <span class="highlight">الاستقرار الصحي</span> هو الأساس الذي لا وجود لباقي الاستقرارات بدونه"
@@ -238,14 +253,13 @@
             <p style="font-size: 0.8rem; color: var(--text-grey); margin-top: 5px;">There are <strong>7 Stabilities</strong> for a balanced flight, but <strong>Health Stability</strong> is the Foundation.</p>
         </div>
 
-        <!-- (2) شريط حالة الرحلة: تذكير الطائرة + مقولة القناص -->
+        <!-- شريط حالة الرحلة + مقولة القناص -->
         <div class="flight-status-banner">
             <div class="flight-row">
                 <p class="flight-ar"><span class="alert-text">تذكير هام :</span> توازن الطائرة ✈️ يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي) وتوجيه <strong>الروح</strong>.</p>
                 <p class="flight-en" style="direction: ltr;"><span class="alert-text">IMPORTANT REMINDER :</span> Plane ✈️ Balance depends on <strong>Health Stability</strong> & <strong>Soul Guidance</strong>.</p>
             </div>
             
-            <!-- تم نقل مقولة القناص هنا كأسلوب حياة -->
             <div class="flight-row" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 10px;">
                 <p class="quote-text">"علاقتك بالله، بوالديك وبصحتك هي بندقية ︻╦╤─ قنصك في الحياة"</p>
                 <p class="quote-text" style="direction: ltr;">"Faith, Parents & Health is your Sniper Rifle"</p>
@@ -253,7 +267,7 @@
         </div>
 
         <div class="plane-layout">
-            <!-- الذيل: الاستقرار الروحي -->
+            <!-- الذيل -->
             <div class="tail-section">
                 <div class="engine-card tail-card active" onclick="openSoul()">
                     <div style="display:flex;justify-content:space-between;"><i data-lucide="compass" style="color:var(--primary-orange)"></i><span style="font-size:0.7rem; font-weight:bold; color:white;">الذيل / البوصلة | TAIL / COMPASS</span></div>
@@ -265,7 +279,7 @@
             </div>
             
             <div class="wings-wrapper">
-                <!-- الجناح الأيمن: النفسي -->
+                <!-- الجناح الأيمن -->
                 <div class="wing right-wing">
                     <div class="wing-header">
                         <h2>الجناح الأيمن: الاستقرار النفسي</h2>
@@ -277,7 +291,7 @@
                         <div class="engine-card"><i data-lucide="users" style="color:white;"></i><h3 style="color:white; font-size:1rem;">3. الاستقرار الاجتماعي</h3><p style="font-size:0.7rem;color:#888;">Social Life</p><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div></div>
                     </div>
                 </div>
-                <!-- الجناح الأيسر: الجسدي -->
+                <!-- الجناح الأيسر -->
                 <div class="wing left-wing">
                     <div class="wing-header">
                         <h2>الجناح الأيسر: الاستقرار الجسدي</h2>
