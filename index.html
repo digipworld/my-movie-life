@@ -108,43 +108,14 @@
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 30px 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
         .highlight { color: var(--gold-amber); font-weight: bold; }
 
-        /* --- شبكة الطائرة (Plane Grid Layout) --- */
+        /* --- شبكة الطائرة --- */
         .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
-        
-        /* إطار الاستقرار الصحي الموحد */
-        .health-stability-container {
-            border: 2px solid var(--primary-orange);
-            border-radius: 25px;
-            padding: 20px;
-            background: rgba(232, 66, 34, 0.02);
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .health-main-title {
-            text-align: center;
-            color: var(--gold-amber);
-            font-weight: 900;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            margin-bottom: 30px;
-            text-shadow: 0 0 10px rgba(255, 191, 0, 0.3);
-            border-bottom: 1px solid rgba(255, 191, 0, 0.2);
-            padding-bottom: 15px;
-            width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .tail-section { display: flex; justify-content: center; margin-bottom: 30px; }
+        .tail-section { display: flex; justify-content: center; }
         .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
-
         .wings-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
-        
         .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
         .wing.right-wing { border-right: 4px solid var(--gold-amber); }
         .wing.left-wing { border-left: 4px solid var(--primary-orange); }
-        
         .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
         .wing-header h2 { 
             font-size: clamp(1rem, 2vw, 1.3rem); 
@@ -323,7 +294,8 @@
                             <i data-lucide="compass" style="color:var(--primary-orange)"></i>
                         </div>
                         <h3 style="color:white; margin:10px 0;">الاستقرار الروحي</h3>
-                        <p style="font-size:0.8rem; color:#888; margin-top:-5px; display:block;">Spiritual Stability</p>
+                        <!-- تم تعديل اللون للأبيض وإضافة الخط الفاصل -->
+                        <p style="font-size:0.8rem; color:white; margin-top:-5px; display:block; padding-bottom: 8px; border-bottom: 1px solid #333; margin-bottom: 10px;">Spiritual Stability</p>
                         <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
                         <div style="text-align:left; margin-top:5px; color:var(--gold-amber); font-weight:bold;"><span id="main-soul-percent">0</span>%</div>
                     </div>
