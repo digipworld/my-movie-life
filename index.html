@@ -27,7 +27,7 @@
             overflow: hidden;
         }
 
-        /* --- نظام الستارة (تم إزالة الخط الفاصل) --- */
+        /* --- نظام الستارة --- */
         #curtain-wrapper {
             position: fixed; top: 0; left: 0;
             width: 100vw; height: 100vh;
@@ -40,13 +40,12 @@
             box-shadow: inset 0 0 100px #000;
             transition: transform 1.8s cubic-bezier(0.7, 0, 0.3, 1);
             position: absolute; top: 0;
-            border: none; /* إزالة أي خطوط حمراء أو بيضاء بالمنتصف */
+            border: none;
         }
 
         .curtain.left { left: 0; transform: translateX(0); }
         .curtain.right { right: 0; transform: translateX(0); }
 
-        /* حالة الفتح: خروج كامل للخارج */
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
@@ -54,12 +53,11 @@
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1001; text-align: center;
-            transition: opacity 0.6s ease; width: 100%;
+            transition: opacity 0.6s ease; width: 90%; max-width: 800px;
         }
 
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
 
-        /* اللوغو مع وضع الدائرة في الخلف */
         .glowing-logo {
             filter: drop-shadow(0 0 20px var(--primary-orange));
             cursor: pointer; transition: transform 0.3s ease;
@@ -67,7 +65,51 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* العداد المدمج (Hybrid) */
+        /* تعديلات العناوين الهجينة (Hybrid Alignment) */
+        .event-container {
+            margin-top: 20px;
+            padding: 0 10px;
+        }
+
+        .hybrid-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+        .event-tag-ar {
+            color: var(--gold-amber);
+            font-weight: bold;
+            font-size: 1.1rem;
+            text-align: right;
+        }
+
+        .event-tag-en {
+            color: var(--gold-amber);
+            font-weight: bold;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-align: left;
+            font-family: sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .date-sub-ar {
+            color: var(--primary-orange);
+            font-size: 0.9rem;
+            text-align: right;
+        }
+
+        .date-sub-en {
+            color: var(--primary-orange);
+            font-size: 0.8rem;
+            text-align: left;
+            font-family: sans-serif;
+        }
+
+        /* العداد المدمج */
         .timer-grid {
             display: flex; justify-content: center; gap: 10px; margin-top: 25px;
         }
@@ -81,18 +123,6 @@
             font-family: monospace; font-weight: bold; display: block;
         }
         .timer-label { font-size: 0.6rem; color: var(--text-grey); margin-top: 5px; display: block; }
-
-        .event-tag {
-            color: var(--gold-amber); font-weight: bold; margin-top: 20px;
-            letter-spacing: 2px; font-size: 1rem; line-height: 1.6;
-        }
-
-        .date-sub {
-            display: block;
-            font-size: 0.9rem;
-            color: var(--primary-orange);
-            margin-top: 5px;
-        }
 
         /* --- التطبيق الرئيسي --- */
         #app-container {
@@ -169,12 +199,14 @@
         @media (max-width: 600px) {
             .timer-val { font-size: 1.8rem; }
             .timer-unit { min-width: 65px; padding: 8px; }
+            .event-tag-ar { font-size: 0.9rem; }
+            .event-tag-en { font-size: 0.75rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- الستارة (تم تنظيف الخط الفاصل) -->
+    <!-- الستارة -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
@@ -182,19 +214,22 @@
         <div id="pre-show-content">
             <div class="glowing-logo" onclick="openShow()">
                 <svg width="180" height="180" viewBox="0 0 200 200">
-                    <!-- الدائرة في الخلف أولاً -->
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
-                    <!-- شعار M+Y في الأمام -->
                     <path d="M40 160 V 40 L 100 100 L 160 40 V 160" stroke="#E84222" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round"/>
                 </svg>
             </div>
             
-            <p class="event-tag">
-                بداية العام الهجري الجديد 1448 هـ
-                <span class="date-sub">الموافق: 16 يونيو 2026 م</span>
-                <span style="font-size: 0.8rem; opacity: 0.8; letter-spacing: 0;">Hijri 1448 Premiere | June 16, 2026</span>
-            </p>
+            <div class="event-container">
+                <div class="hybrid-row">
+                    <div class="event-tag-ar">بداية العام الهجري الجديد 1448 هـ</div>
+                    <div class="event-tag-en">Hijri 1448 Premiere</div>
+                </div>
+                <div class="hybrid-row">
+                    <div class="date-sub-ar">الموافق: 16 يونيو 2026 م</div>
+                    <div class="date-sub-en">June 16, 2026</div>
+                </div>
+            </div>
             
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
@@ -207,7 +242,7 @@
         </div>
     </div>
 
-    <!-- لوحة القيادة (Hybrid UI) -->
+    <!-- لوحة القيادة -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE!</span></div>
@@ -264,7 +299,6 @@
     </div>
 
     <script>
-        // العداد التنازلي لـ 16 يونيو 2026 (إضافة يوم)
         const targetDate = new Date("June 16, 2026 00:00:00").getTime();
 
         function updateCountdown() {
@@ -272,6 +306,9 @@
             const diff = targetDate - now;
 
             if (diff <= 0) {
+                document.getElementById('days').innerText = "00";
+                document.getElementById('hours').innerText = "00";
+                document.getElementById('minutes').innerText = "00";
                 document.getElementById('seconds').innerText = "00";
                 return;
             }
