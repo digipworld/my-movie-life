@@ -115,25 +115,9 @@
 
         /* --- التطبيق الرئيسي (هيكل الطائرة) --- */
         #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s 0.5s; overflow-y: auto; }
-        
-        .top-nav { 
-            padding: 15px 25px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: rgba(0,0,0,0.95); 
-            border-bottom: 1px solid #222; 
-            position: sticky; 
-            top: 0; 
-            z-index: 100; 
-            flex-wrap: wrap; 
-            gap: 10px; 
-        }
-
+        .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 10px; }
         .brand { font-weight: 900; font-size: 1.3rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
-        .hero-label { color: var(--gold-amber); font-weight: 800; font-size: 0.9rem; }
-
         .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 20px; text-align: center; border-bottom: 1px solid #333; font-size: clamp(0.8rem, 2.5vw, 1rem); line-height: 1.6; }
         .flight-status-banner strong { color: var(--gold-amber); }
 
@@ -224,34 +208,8 @@
 
         @keyframes pulse-orange { 0% { transform: scale(1); } 50% { transform: scale(1.02); box-shadow: 0 5px 30px rgba(232, 66, 34, 0.6); } 100% { transform: scale(1); } }
 
-        /* --- تخصيصات الجوال (Mobile Centering) --- */
-        @media (max-width: 600px) {
-            .timer-val { font-size: 1.8rem; }
-            .timer-unit { min-width: 65px; padding: 8px; }
-            .event-tag-ar { font-size: 0.9rem; }
-            .event-tag-en { font-size: 0.75rem; }
-            
-            /* توسيط القائمة العلوية في الجوال */
-            .top-nav {
-                justify-content: center;
-                flex-direction: column;
-                gap: 5px;
-                padding: 10px;
-            }
-            .brand {
-                font-size: 1.5rem;
-                margin-bottom: 2px;
-            }
-            #display-hero-name {
-                text-align: center;
-                width: 100%;
-                font-size: 0.95rem !important; /* تكبير الاسم قليلاً */
-            }
-            
-            /* تعديل الأجنحة لتظهر بشكل جميل عمودياً */
+        @media (max-width: 900px) {
             .wings-wrapper { flex-direction: column; }
-            .wing.right-wing { border-right: none; border-bottom: 2px solid var(--gold-amber); }
-            .wing.left-wing { border-left: none; border-bottom: 2px solid var(--primary-orange); }
         }
     </style>
 </head>
@@ -308,7 +266,7 @@
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
-            <div id="display-hero-name" class="hero-label">البطل: جاري التسجيل 👤</div>
+            <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">البطل: جاري التسجيل 👤</div>
         </nav>
 
         <div class="flight-status-banner">
@@ -322,7 +280,7 @@
                 <div class="engine-card active" onclick="openSoul()">
                     <div style="display:flex;justify-content:space-between;align-items:center;">
                         <i data-lucide="compass" style="color:var(--primary-orange);"></i>
-                        <span style="font-size:0.65rem;font-weight:800;">TAIL / COMPASS | الموجه</span>
+                        <span style="font-size:0.65rem;font-weight:800;">الذيل / البوصلة | TAIL / COMPASS</span>
                     </div>
                     <h3 style="margin: 15px 0 5px;">الاستقرار الروحي</h3>
                     <p style="font-size:0.7rem; color:#888;">Spiritual Stability</p>
