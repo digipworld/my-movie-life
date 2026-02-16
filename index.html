@@ -30,7 +30,7 @@
             overflow: hidden;
         }
 
-        /* --- نظام الستارة (بدون خطوط فاصلة) --- */
+        /* --- نظام الستارة --- */
         #curtain-wrapper {
             position: fixed; top: 0; left: 0;
             width: 100vw; height: 100vh;
@@ -57,7 +57,7 @@
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1001; text-align: center;
-            transition: opacity 0.6s ease; width: 95%; max-width: 1000px;
+            transition: opacity 0.6s ease; width: 95%; max-width: 1100px;
         }
 
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
@@ -69,7 +69,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* تنسيق العناوين المتقابلة (Balanced Symmetrical Alignment) */
+        /* تنسيق العناوين المتقابلة (Perfect Visual Mass Symmetry) */
         .event-container {
             margin-top: 10px;
             width: 100%;
@@ -82,19 +82,19 @@
             display: flex;
             width: 100%;
             justify-content: center;
-            gap: 40px; /* مسافة مركزية دقيقة */
+            gap: 35px; /* فجوة مركزية مدروسة */
             margin-bottom: 12px;
             align-items: flex-end; 
         }
 
-        /* العربية (يمين الشاشة، محاذاة لليسار باتجاه المركز) */
+        /* العربية (يمين الشاشة، محاذاة لليسار باتجاه المركز - تم زيادة الحجم للتوازن) */
         .event-tag-ar {
             flex: 1;
             color: var(--gold-amber);
-            font-weight: 800;
-            font-size: 1.2rem;
+            font-weight: 900;
+            font-size: 1.45rem; /* رفع الحجم لموازنة طول النص الإنجليزي */
             text-align: left; 
-            line-height: 1.2;
+            line-height: 1;
         }
 
         /* الإنجليزية (يسار الشاشة، محاذاة لليمين باتجاه المركز) */
@@ -107,15 +107,15 @@
             font-family: 'Cairo', sans-serif; 
             letter-spacing: 0.5px;
             text-transform: uppercase;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         .date-sub-ar {
             flex: 1;
             color: var(--primary-orange);
-            font-size: 0.95rem;
+            font-size: 1.05rem; /* رفع طفيف للتوازن */
             text-align: left;
-            line-height: 1.2;
+            line-height: 1;
         }
 
         .date-sub-en {
@@ -123,7 +123,7 @@
             color: var(--primary-orange);
             font-size: 0.9rem; 
             text-align: right;
-            line-height: 1.2;
+            line-height: 1.1;
         }
 
         /* العداد المدمج */
@@ -133,16 +133,16 @@
         .timer-unit {
             background: rgba(232, 66, 34, 0.05);
             border: 1px solid rgba(232, 66, 34, 0.3);
-            padding: 15px; border-radius: 12px; min-width: 90px;
+            padding: 15px; border-radius: 12px; min-width: 95px;
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
         .timer-val {
-            font-size: 2.6rem; color: var(--gold-amber);
+            font-size: 2.7rem; color: var(--gold-amber);
             font-family: monospace; font-weight: bold; display: block;
         }
-        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; opacity: 1; font-weight: bold; }
+        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; }
 
-        /* --- التطبيق الرئيسي (لوحة التحكم) --- */
+        /* --- التطبيق الرئيسي --- */
         #app-container {
             width: 100%; height: 100%;
             display: flex; flex-direction: column;
@@ -215,17 +215,17 @@
         .stat-value { font-size: 4.5rem; font-weight: 900; color: var(--gold-amber); text-align: center; display: block; margin: 15px 0; }
 
         @media (max-width: 600px) {
-            .timer-val { font-size: 2rem; }
-            .timer-unit { min-width: 75px; padding: 10px; }
+            .timer-val { font-size: 2.1rem; }
+            .timer-unit { min-width: 80px; padding: 10px; }
             .hybrid-row { gap: 15px; }
-            .event-tag-ar { font-size: 0.95rem; }
+            .event-tag-ar { font-size: 1.1rem; }
             .event-tag-en { font-size: 0.85rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- الستارة (تم تنظيف المركز) -->
+    <!-- الستارة -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
@@ -239,7 +239,7 @@
                 </svg>
             </div>
             
-            <!-- العناوين الهجينة المتناظرة (تم إثراء النص الإنجليزي للتوازن) -->
+            <!-- العناوين الهجينة المتناظرة (تم تعديل الحجم العربي لموازنة الثقل البصري) -->
             <div class="event-container">
                 <div class="hybrid-row">
                     <div class="event-tag-ar">بداية العام الهجري الجديد 1448 هـ</div>
@@ -259,7 +259,7 @@
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
             
-            <p style="color: var(--text-white); font-size: 0.75rem; margin-top: 30px; letter-spacing: 2px; font-weight: bold;">اضغط على الشعار | CLICK LOGO</p>
+            <p style="color: var(--text-white); font-size: 0.8rem; margin-top: 35px; letter-spacing: 2px; font-weight: bold; opacity: 0.9;">اضغط على الشعار | CLICK LOGO</p>
         </div>
     </div>
 
@@ -272,7 +272,7 @@
 
         <div class="sniper-banner">
             <p>"علاقتك بالله، بوالديك وبصحتك هي <span style="color:var(--gold-amber)">بندقية قنصك</span> في الحياة"</p>
-            <p style="font-size: 0.8rem; color: var(--text-white); margin-top: 5px; font-weight: bold;">Faith, Parents & Health is your Sniper Rifle</p>
+            <p style="font-size: 0.8rem; color: var(--text-white); margin-top: 5px; font-weight: bold; opacity: 0.9;">Faith, Parents & Health is your Sniper Rifle</p>
         </div>
 
         <div class="dashboard-grid">
