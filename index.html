@@ -48,7 +48,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة --- */
+        /* --- العناوين المتناظرة (Desktop) --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
@@ -83,42 +83,26 @@
         .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
         .timer-label { font-size: 0.6rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
-        /* --- التلميح (Click Hint) المتناظر بدقة --- */
-        .click-hint-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px; /* المسافة حول الخط الفاصل */
-            margin-top: 40px;
-            width: 100%;
-            color: var(--text-grey);
-            font-size: 0.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .hint-side { flex: 1; }
-        
-        /* العربي يمين، يحاذي لليسار نحو المركز */
-        .hint-side.ar { text-align: left; }
-        
-        /* الإنجليزي يسار، يحاذي لليمين نحو المركز */
-        .hint-side.en { text-align: right; direction: ltr; font-family: sans-serif; }
-        
-        /* الخط الفاصل */
-        .hint-sep { color: var(--text-white); font-weight: 100; font-size: 1rem; opacity: 0.5; }
-
+        .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
         /* --- التطبيق الرئيسي --- */
-        #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s 1s; overflow-y: auto; }
+        #app-container { 
+            width: 100%; height: 100%; display: flex; flex-direction: column; 
+            opacity: 0; transition: opacity 0.5s;
+            overflow-y: auto; 
+        }
         .curtain-open #app-container { opacity: 1; }
         
         .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
 
-        .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 30px 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
+        .sniper-banner { 
+            background: linear-gradient(180deg, #1a0500 0%, #000 100%); 
+            padding: 30px 25px; 
+            text-align: center; 
+            border-bottom: 2px solid var(--primary-orange); 
+        }
         .highlight { color: var(--gold-amber); font-weight: bold; }
 
         /* --- شبكة الطائرة --- */
@@ -215,7 +199,7 @@
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">
-                        بداية العام الهجري <span class="line-break"></span> الجديد 1448 هـ
+                        افتتاح العام الهجري <span class="line-break"></span> الجديد 1448 هـ
                     </span>
                     <span class="sub-title ar-font">
                         الموافق: الثلاثاء، 16 <span class="line-break"></span> يونيو 2026 م
@@ -269,7 +253,7 @@
                 هناك <strong>7 استقرارات</strong> لضمان توازن رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
             </p>
             <p style="font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-grey); margin-top: 10px; line-height: 1.5;">
-                There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual, Psychological, Physical) is the foundation for the flight's balance and continuity
+                There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual + Psychological + Physical) is the foundation for the flight's balance and continuity
             </p>
         </div>
 
@@ -288,7 +272,7 @@
                 <div class="wing right-wing">
                     <div class="wing-header">
                         <h2>الجناح الأيمن: الاستقرار النفسي</h2>
-                        <span>Right Wing: Psychological Base</span>
+                        <span>Right Wing: Psychological Stability</span>
                     </div>
                     <div class="wing-grid">
                         <div class="engine-card"><i data-lucide="book-open" style="color:white;"></i><h3 style="color:white; font-size:1rem;">1. الاستقرار الفكري</h3><p style="font-size:0.7rem;color:#888;">Intellectual Stability</p><div class="progress-track"><div class="progress-fill" style="width:20%"></div></div></div>
@@ -299,7 +283,7 @@
                 <div class="wing left-wing">
                     <div class="wing-header">
                         <h2>الجناح الأيسر: الاستقرار الجسدي</h2>
-                        <span>Left Wing: Physical Base</span>
+                        <span>Left Wing: Physical Stability</span>
                     </div>
                     <div class="wing-grid">
                         <div class="engine-card"><i data-lucide="dumbbell" style="color:white;"></i><h3 style="color:white; font-size:1rem;">4. الاستقرار المهاراتي</h3><p style="font-size:0.7rem;color:#888;">Skills Stability</p><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div>
