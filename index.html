@@ -32,7 +32,7 @@
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
-        /* --- محتوى ما قبل العرض (المركز) --- */
+        /* --- محتوى ما قبل العرض --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             z-index: 1002; width: 100%; max-width: 1200px;
@@ -41,6 +41,7 @@
         }
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
 
+        /* اللوغو */
         .glowing-logo { 
             width: clamp(120px, 15vw, 180px); height: auto;
             filter: drop-shadow(0 0 30px rgba(232, 66, 34, 0.4)); 
@@ -101,74 +102,90 @@
         #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 0.5s; overflow-y: auto; }
         .curtain-open #app-container { opacity: 1; }
         
-        /* الشريط العلوي (تم استعادة الوضع الطبيعي للحاسوب) */
-        .top-nav { 
-            padding: 15px 25px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: rgba(0,0,0,0.95); 
-            border-bottom: 1px solid #222; 
-            position: sticky; top: 0; z-index: 100;
-        }
-        
+        .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
 
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 30px 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
         .highlight { color: var(--gold-amber); font-weight: bold; }
 
-        /* --- شبكة الطائرة (Plane Grid Layout) --- */
+        /* --- شبكة الطائرة (Plane Layout) --- */
         .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
         
-        /* القسم الصحي الرئيسي (خارج الإطار) */
-        .health-master-section {
-            text-align: center;
+        .health-master-section { text-align: center; margin-bottom: 20px; }
+        .health-main-title { 
+            color: var(--gold-amber); font-weight: 900; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 20px; text-shadow: 0 0 10px rgba(255, 191, 0, 0.3); 
+        }
+        .master-card-container { max-width: 500px; margin: 0 auto; }
+
+        /* إطار الاستقرار الصحي (Core Health Trinity) */
+        .core-health-frame {
+            border: 2px solid var(--primary-orange);
+            border-radius: 20px;
+            padding: 30px;
+            background: rgba(232, 66, 34, 0.03);
             margin-bottom: 20px;
+            position: relative;
         }
         
-        .health-main-title {
-            color: var(--gold-amber);
-            font-weight: 900;
-            font-size: 1.6rem;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            text-shadow: 0 0 10px rgba(255, 191, 0, 0.3);
+        /* علامة الإطار */
+        .core-label {
+            position: absolute;
+            top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--deep-black);
+            padding: 0 20px;
+            color: var(--primary-orange);
+            font-weight: bold;
+            font-size: 0.9rem;
+            border: 1px solid var(--primary-orange);
+            border-radius: 20px;
         }
 
-        .master-card-container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
-
-        .tail-section { display: flex; justify-content: center; margin-bottom: 10px; }
+        .tail-section { display: flex; justify-content: center; margin-bottom: 30px; }
         .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
         
-        .wings-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
-        .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
-        .wing.right-wing { border-right: 4px solid var(--gold-amber); }
-        .wing.left-wing { border-left: 4px solid var(--primary-orange); }
-        
-        .wing-header { text-align: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
-        .wing-header h2 { 
-            font-size: clamp(1rem, 2vw, 1.3rem); color: var(--text-white); 
-            margin-bottom: 5px; font-weight: 800; white-space: nowrap; 
+        .core-wings-wrapper {
+            display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; justify-content: center;
         }
-        .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
         
-        .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
+        .core-wing-block {
+            flex: 1;
+            min-width: 300px;
+            display: flex; flex-direction: column;
+            align-items: center;
+        }
 
-        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; }
+        .wing-title-group { text-align: center; margin-bottom: 15px; width: 100%; }
+        .wing-title-group h2 { font-size: 1.2rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; white-space: nowrap; }
+        .wing-title-group span { font-size: 0.8rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; display: block; margin-bottom: 15px; }
+        
+        .wing-divider {
+            width: 80%; height: 1px; background: #333; margin-top: 20px;
+        }
+
+        /* حاوية الأجنحة الفرعية (Sub-Wings) */
+        .sub-wings-container {
+            display: flex; gap: 40px; flex-wrap: wrap; align-items: flex-start;
+        }
+        
+        .wing-sub-col {
+            flex: 1;
+            background: var(--wing-bg);
+            border: 1px solid #222;
+            border-radius: 20px;
+            padding: 25px;
+            min-width: 320px;
+        }
+        .wing-sub-col.right { border-right: 4px solid var(--gold-amber); }
+        .wing-sub-col.left { border-left: 4px solid var(--primary-orange); }
+
+        .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+
+        /* البطاقات */
+        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; width: 100%; }
         .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); background: #161616; }
         .engine-card.active { border-color: var(--gold-amber); box-shadow: 0 0 20px rgba(255, 191, 0, 0.1); }
         
-        /* البطاقات الرئيسية الجديدة */
-        .wing-master-card {
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            background: rgba(0, 0, 0, 0.3);
-            margin-bottom: 20px;
-        }
-
         .progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 10px; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber)); width: 0%; transition: width 1s; }
         
@@ -216,16 +233,16 @@
             
             #registration-screen h1 { font-size: 1.1rem !important; }
             
-            /* شريط التنقل للجوال: عمودي */
             .top-nav { flex-direction: column; gap: 8px; text-align: center; padding: 15px; }
             
-            .wings-wrapper { flex-direction: column; gap: 20px; }
-            .wing { border: none; border-bottom: 3px solid #333; min-width: auto; padding: 15px; }
-            .wing.right-wing { border-bottom-color: var(--gold-amber); }
-            .wing.left-wing { border-bottom-color: var(--primary-orange); }
-
-            .wing-header h2 { font-size: 1rem; white-space: normal; }
+            /* تعديلات الطائرة للجوال */
+            .core-wings-wrapper, .sub-wings-container { flex-direction: column; gap: 30px; }
+            .wing-sub-col { border: none; border-bottom: 3px solid #333; min-width: auto; padding: 15px; }
+            .wing-sub-col.right { border-right: none; border-bottom-color: var(--gold-amber); }
+            .wing-sub-col.left { border-left: none; border-bottom-color: var(--primary-orange); }
+            
             .click-hint-container { gap: 10px; margin-top: 30px; font-size: 0.7rem; }
+            .wing-title-group h2 { white-space: normal; } /* السماح بالالتفاف في الجوال */
         }
     </style>
 </head>
@@ -235,6 +252,7 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
+            <!-- اللوغو (في الوسط تماماً) -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
@@ -297,7 +315,7 @@
     </section>
 
     <main id="app-container">
-        <!-- الشريط العلوي (تم إعادة اللوغو لليمين والبطل لليسار في الحاسوب) -->
+        <!-- الشريط العلوي (الحاسوب: لوغو يسار، بطل يمين) -->
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
@@ -333,55 +351,70 @@
                 </div>
             </div>
 
-            <!-- الذيل (الروحي) -->
-            <div class="tail-section">
-                <div class="engine-card tail-card active" onclick="openSoul()">
-                    <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                        <span style="font-size:0.7rem; font-weight:bold; color:white; display:block;">الذيل / البوصلة <br> TAIL / COMPASS</span>
-                        <i data-lucide="compass" style="color:var(--primary-orange)"></i>
+            <!-- إطار الاستقرار الصحي (Core Health Trinity) -->
+            <div class="core-health-frame">
+                <div class="core-label">ركائز الاستقرار الصحي | Health Pillars</div>
+                
+                <!-- الذيل (الروحي) -->
+                <div class="tail-section">
+                    <div class="engine-card tail-card active" onclick="openSoul()">
+                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
+                            <span style="font-size:0.7rem; font-weight:bold; color:white; display:block;">الذيل / البوصلة <br> TAIL / COMPASS</span>
+                            <i data-lucide="compass" style="color:var(--primary-orange)"></i>
+                        </div>
+                        <h3 style="color:white; margin:10px 0;">الاستقرار الروحي</h3>
+                        <p style="font-size:0.8rem; color:white; margin-top:-5px; display:block; padding-bottom: 8px; border-bottom: 1px solid #333; margin-bottom: 10px;">Spiritual Stability</p>
+                        <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
+                        <div style="text-align:left; margin-top:5px; color:var(--gold-amber); font-weight:bold;"><span id="main-soul-percent">0</span>%</div>
                     </div>
-                    <h3 style="color:white; margin:10px 0;">الاستقرار الروحي</h3>
-                    <p style="font-size:0.8rem; color:white; margin-top:-5px; display:block; padding-bottom: 8px; border-bottom: 1px solid #333; margin-bottom: 10px;">Spiritual Stability</p>
-                    <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
-                    <div style="text-align:left; margin-top:5px; color:var(--gold-amber); font-weight:bold;"><span id="main-soul-percent">0</span>%</div>
+                </div>
+
+                <!-- الأجنحة الرئيسية (النفسي والجسدي) -->
+                <div class="core-wings-wrapper">
+                    <!-- الجناح الأيمن (النفسي) -->
+                    <div class="core-wing-block">
+                        <div class="wing-title-group">
+                            <h2>الجناح الأيمن: الاستقرار النفسي</h2>
+                            <span>Right Wing: Psychological Stability</span>
+                        </div>
+                        <!-- بطاقة النفسي (في المنتصف) -->
+                        <div class="engine-card">
+                            <div style="display:flex;justify-content:space-between;"><i data-lucide="brain-circuit" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار النفسي</h3></div>
+                            <p style="font-size:0.7rem;color:#888;">Psychological Stability</p>
+                            <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+                        </div>
+                        <div class="wing-divider"></div>
+                    </div>
+
+                    <!-- الجناح الأيسر (الجسدي) -->
+                    <div class="core-wing-block">
+                        <div class="wing-title-group">
+                            <h2>الجناح الأيسر: الاستقرار الجسدي</h2>
+                            <span>Left Wing: Physical Stability</span>
+                        </div>
+                        <!-- بطاقة الجسدي (في المنتصف) -->
+                        <div class="engine-card">
+                            <div style="display:flex;justify-content:space-between;"><i data-lucide="dumbbell" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار الجسدي</h3></div>
+                            <p style="font-size:0.7rem;color:#888;">Physical Stability</p>
+                            <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+                        </div>
+                        <div class="wing-divider"></div>
+                    </div>
                 </div>
             </div>
 
-            <div class="wings-wrapper">
-                <!-- الجناح الأيمن -->
-                <div class="wing right-wing">
-                    <div class="wing-header">
-                        <h2>الجناح الأيمن: الاستقرار النفسي</h2>
-                        <span>Right Wing: Psychological Stability</span>
-                    </div>
-                    
-                    <!-- بطاقة الاستقرار النفسي -->
-                    <div class="engine-card wing-master-card">
-                        <div style="display:flex;justify-content:space-between;"><i data-lucide="brain-circuit" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار النفسي</h3></div>
-                        <p style="font-size:0.7rem;color:#888;">Psychological Stability</p>
-                        <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
-                    </div>
-
+            <!-- باقي الأجنحة (المحركات الفرعية) -->
+            <div class="sub-wings-container">
+                <!-- اليمين -->
+                <div class="wing-sub-col right">
                     <div class="wing-grid">
                         <div class="engine-card"><i data-lucide="book-open" style="color:white;"></i><h3 style="color:white; font-size:1rem;">2. الاستقرار الفكري</h3><p style="font-size:0.7rem;color:#888;">Intellectual Stability</p><div class="progress-track"><div class="progress-fill" style="width:20%"></div></div></div>
                         <div class="engine-card"><i data-lucide="graduation-cap" style="color:white;"></i><h3 style="color:white; font-size:1rem;">3. الاستقرار الأكاديمي</h3><p style="font-size:0.7rem;color:#888;">Academic Stability</p><div class="progress-track"><div class="progress-fill" style="width:45%"></div></div></div>
                         <div class="engine-card"><i data-lucide="users" style="color:white;"></i><h3 style="color:white; font-size:1rem;">4. الاستقرار الاجتماعي</h3><p style="font-size:0.7rem;color:#888;">Social Stability</p><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div></div>
                     </div>
                 </div>
-                <!-- الجناح الأيسر -->
-                <div class="wing left-wing">
-                    <div class="wing-header">
-                        <h2>الجناح الأيسر: الاستقرار الجسدي</h2>
-                        <span>Left Wing: Physical Stability</span>
-                    </div>
-                    
-                    <!-- بطاقة الاستقرار الجسدي -->
-                    <div class="engine-card wing-master-card">
-                        <div style="display:flex;justify-content:space-between;"><i data-lucide="dumbbell" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار الجسدي</h3></div>
-                        <p style="font-size:0.7rem;color:#888;">Physical Stability</p>
-                        <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
-                    </div>
-
+                <!-- اليسار -->
+                <div class="wing-sub-col left">
                     <div class="wing-grid">
                         <div class="engine-card"><i data-lucide="wrench" style="color:white;"></i><h3 style="color:white; font-size:1rem;">5. الاستقرار المهاراتي</h3><p style="font-size:0.7rem;color:#888;">Skills Stability</p><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div>
                         <div class="engine-card"><i data-lucide="briefcase" style="color:white;"></i><h3 style="color:white; font-size:1rem;">6. الاستقرار المهني</h3><p style="font-size:0.7rem;color:#888;">Professional Stability</p><div class="progress-track"><div class="progress-fill" style="width:50%"></div></div></div>
@@ -389,6 +422,7 @@
                     </div>
                 </div>
             </div>
+            
         </div>
     </main>
 
