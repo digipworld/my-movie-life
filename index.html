@@ -27,10 +27,10 @@
             background-color: var(--deep-black);
             color: var(--text-white);
             font-family: 'Cairo', sans-serif;
-            overflow: hidden;
+            overflow-x: hidden;
         }
 
-        /* --- نظام الستارة --- */
+        /* --- نظام الستارة الذكي (Adaptive Curtain) --- */
         #curtain-wrapper {
             position: fixed; top: 0; left: 0;
             width: 100vw; height: 100vh;
@@ -56,7 +56,8 @@
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1001; text-align: center;
-            transition: opacity 0.6s ease; width: 95%; max-width: 1100px;
+            transition: opacity 0.6s ease; width: 95%; max-width: 1200px;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
@@ -64,60 +65,130 @@
         .glowing-logo {
             filter: drop-shadow(0 0 20px var(--primary-orange));
             cursor: pointer; transition: transform 0.3s ease;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
+            width: clamp(120px, 20vw, 180px);
+        }
+        .glowing-logo:hover { transform: scale(1.05); }
+
+        /* --- العناوين الهجينة المتجاوبة (Responsive Hybrid Titles) --- */
+        .event-container {
+            width: 100%;
+            margin-top: 10px;
+            padding: 0 15px;
         }
 
-        /* --- شاشة تسجيل البطل (مقولة القناص) --- */
+        .hybrid-row {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 10px;
+            flex-direction: column; /* الوضع الافتراضي للجوال: فوق بعض */
+            align-items: center;
+        }
+
+        @media (min-width: 768px) {
+            .hybrid-row {
+                flex-direction: row; /* للشاشات الكبيرة: بجانب بعض */
+                gap: 40px;
+                align-items: flex-end;
+            }
+            .event-tag-ar { text-align: left !important; flex: 1; }
+            .event-tag-en { text-align: right !important; flex: 1; }
+            .date-sub-ar { text-align: left !important; flex: 1; }
+            .date-sub-en { text-align: right !important; flex: 1; }
+        }
+
+        .event-tag-ar {
+            color: var(--gold-amber);
+            font-weight: 900;
+            font-size: clamp(1.1rem, 4vw, 1.45rem);
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .event-tag-en {
+            color: var(--gold-amber);
+            font-weight: 800;
+            font-size: clamp(0.9rem, 3.5vw, 1.15rem);
+            line-height: 1.2;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: sans-serif;
+        }
+
+        .date-sub-ar {
+            color: var(--primary-orange);
+            font-size: clamp(0.85rem, 3vw, 1.05rem);
+            text-align: center;
+        }
+
+        .date-sub-en {
+            color: var(--primary-orange);
+            font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        /* --- العداد (Responsive Grid) --- */
+        .timer-grid {
+            display: flex;
+            justify-content: center;
+            gap: clamp(8px, 2vw, 15px);
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+        .timer-unit {
+            background: rgba(232, 66, 34, 0.05);
+            border: 1px solid rgba(232, 66, 34, 0.3);
+            padding: clamp(10px, 3vw, 18px);
+            border-radius: 12px;
+            min-width: clamp(75px, 20vw, 100px);
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
+        }
+        .timer-val {
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            color: var(--gold-amber);
+            font-family: monospace; font-weight: bold; display: block;
+        }
+        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
+
+        /* --- شاشة التسجيل --- */
         #registration-screen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: radial-gradient(circle at center, #1a0500 0%, #050505 100%);
             z-index: 500; display: flex; flex-direction: column;
             justify-content: center; align-items: center;
-            padding: 40px; text-align: center;
+            padding: 30px; text-align: center;
             transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
         }
-
         .registration-hidden { transform: translateY(-100%); }
 
-        .sniper-motto {
-            max-width: 800px; margin-bottom: 50px;
-        }
-
+        .sniper-motto { max-width: 900px; margin-bottom: 40px; }
         .sniper-motto h1 {
-            font-size: 2.2rem; font-weight: 900; color: var(--gold-amber);
+            font-size: clamp(1.4rem, 5vw, 2.4rem);
+            font-weight: 900; color: var(--gold-amber);
             line-height: 1.4; text-shadow: 0 0 20px rgba(255, 191, 0, 0.4);
             margin-bottom: 15px;
         }
+        .sniper-motto p { font-size: clamp(0.9rem, 3vw, 1.2rem); color: var(--text-white); opacity: 0.9; font-weight: bold; }
 
-        .sniper-motto p {
-            font-size: 1.2rem; color: var(--text-white); opacity: 0.9;
-            font-weight: bold; letter-spacing: 1px;
-        }
-
-        .reg-form {
-            width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 20px;
-        }
-
+        .reg-form { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 20px; }
         .hero-input {
             background: rgba(255,255,255,0.05); border: 2px solid #333;
-            border-radius: 12px; padding: 15px; color: white; font-family: 'Cairo';
+            border-radius: 12px; padding: 18px; color: white; font-family: 'Cairo';
             font-size: 1.1rem; text-align: center; outline: none; transition: 0.3s;
         }
         .hero-input:focus { border-color: var(--primary-orange); box-shadow: 0 0 15px rgba(232, 66, 34, 0.3); }
 
         .start-btn {
             background: var(--primary-orange); color: white; border: none;
-            padding: 18px; border-radius: 12px; font-weight: 900; font-size: 1.2rem;
+            padding: 20px; border-radius: 12px; font-weight: 900; font-size: 1.2rem;
             cursor: pointer; transition: 0.3s; box-shadow: 0 5px 20px rgba(232, 66, 34, 0.4);
             animation: pulse-orange 2s infinite;
         }
-        @keyframes pulse-orange { 
-            0% { transform: scale(1); } 
-            50% { transform: scale(1.03); box-shadow: 0 5px 30px rgba(232, 66, 34, 0.6); } 
-            100% { transform: scale(1); } 
-        }
 
-        /* --- التطبيق الرئيسي --- */
+        /* --- التطبيق الرئيسي ولوحة القيادة --- */
         #app-container {
             width: 100%; height: 100%;
             display: flex; flex-direction: column;
@@ -127,95 +198,106 @@
 
         .top-nav {
             padding: 15px 25px; display: flex; justify-content: space-between;
-            align-items: center; background: rgba(0,0,0,0.9);
+            align-items: center; background: rgba(0,0,0,0.95);
             border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100;
+            flex-wrap: wrap; gap: 10px;
         }
-        .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
+        .brand { font-weight: 900; font-size: 1.3rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
 
         .flight-status-banner {
-            background: rgba(255, 191, 0, 0.05); padding: 15px 25px;
+            background: rgba(255, 191, 0, 0.05); padding: 20px;
             text-align: center; border-bottom: 1px solid #333;
+            font-size: clamp(0.8rem, 2.5vw, 1rem);
         }
 
         .dashboard-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px; padding: 25px;
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(clamp(280px, 45%, 350px), 1fr));
+            gap: 20px; padding: clamp(15px, 4vw, 30px);
         }
 
+        /* --- تفاصيل المحركات --- */
         .engine-card {
             background: var(--card-bg); border: 1px solid #333;
-            border-radius: 18px; padding: 25px; cursor: pointer;
+            border-radius: 20px; padding: 25px; cursor: pointer;
             transition: 0.3s; border-left: 4px solid transparent;
+            display: flex; flex-direction: column; justify-content: space-between;
         }
-        .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); }
-        .engine-card.active { border-left-color: var(--primary-orange); }
+        .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); background: #161616; }
+        .engine-card.active { border-left-color: var(--primary-orange); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
         .progress-track {
-            width: 100%; height: 8px; background: #222;
-            border-radius: 4px; margin-top: 15px; overflow: hidden;
+            width: 100%; height: 10px; background: #222;
+            border-radius: 5px; margin-top: 15px; overflow: hidden;
         }
         .progress-fill {
             height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber));
-            width: 0%; transition: width 0.8s ease-out;
+            width: 0%; transition: width 1s ease-out;
         }
-
-        /* العداد المدمج للستارة */
-        .timer-grid { display: flex; justify-content: center; gap: 12px; margin-top: 30px; }
-        .timer-unit { background: rgba(232, 66, 34, 0.05); border: 1px solid rgba(232, 66, 34, 0.3); padding: 15px; border-radius: 12px; min-width: 95px; }
-        .timer-val { font-size: 2.7rem; color: var(--gold-amber); font-family: monospace; font-weight: bold; display: block; }
-        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; }
-
-        .hybrid-row { display: flex; width: 100%; justify-content: center; gap: 35px; margin-bottom: 12px; align-items: flex-end; }
-        .event-tag-ar { flex: 1; color: var(--gold-amber); font-weight: 900; font-size: 1.45rem; text-align: left; line-height: 1; }
-        .event-tag-en { flex: 1; color: var(--gold-amber); font-weight: 800; font-size: 1.15rem; text-align: right; font-family: 'Cairo'; letter-spacing: 0.5px; text-transform: uppercase; line-height: 1.1; }
 
         /* نافذة محرك الروح */
         #soul-modal {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 2000;
+            background: rgba(0,0,0,0.98); z-index: 2000;
             display: none; justify-content: center; align-items: flex-end;
         }
         .modal-content {
-            background: #111; width: 100%; max-width: 600px; height: 85%;
+            background: #111; width: 100%; max-width: 650px; height: 90%;
             border-radius: 30px 30px 0 0; border-top: 4px solid var(--primary-orange);
-            padding: 30px; animation: slideUp 0.4s ease-out; overflow-y: auto;
+            padding: clamp(20px, 5vw, 40px); animation: slideUp 0.4s ease-out; overflow-y: auto;
         }
         @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
-        .close-btn { background: none; border: none; color: white; font-size: 2rem; cursor: pointer; float: left; }
-        .stat-value { font-size: 4.5rem; font-weight: 900; color: var(--gold-amber); text-align: center; display: block; margin: 15px 0; }
-        .task-item { background: #1a1a1a; padding: 18px; border-radius: 15px; margin-bottom: 12px; display: flex; align-items: center; cursor: pointer; border: 1px solid #333; }
+        .close-btn { background: none; border: none; color: white; font-size: 2.5rem; cursor: pointer; float: left; }
+        .stat-value { font-size: clamp(3.5rem, 10vw, 5rem); font-weight: 900; color: var(--gold-amber); text-align: center; display: block; margin: 20px 0; }
+        .task-item { 
+            background: #1a1a1a; padding: 20px; border-radius: 15px; margin-bottom: 12px; 
+            display: flex; align-items: center; cursor: pointer; border: 1px solid #333; 
+            font-size: clamp(0.9rem, 3vw, 1.1rem);
+        }
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 24px; height: 24px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; flex-shrink: 0; }
         .task-item.done .checkbox { background: var(--gold-amber); border-color: var(--gold-amber); }
 
-        @media (max-width: 600px) {
-            .timer-val { font-size: 2.1rem; }
-            .event-tag-ar { font-size: 1.1rem; }
-            .sniper-motto h1 { font-size: 1.6rem; }
+        @keyframes pulse-orange { 
+            0% { transform: scale(1); } 
+            50% { transform: scale(1.02); box-shadow: 0 5px 30px rgba(232, 66, 34, 0.6); } 
+            100% { transform: scale(1); } 
+        }
+
+        /* تخصيصات الشاشات الكبيرة جداً (التلفاز) */
+        @media (min-width: 1800px) {
+            .dashboard-grid { grid-template-columns: repeat(4, 1fr); max-width: 1800px; margin: 0 auto; }
+            .sniper-motto h1 { font-size: 3.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- الستارة (المرحلة 1) -->
+    <!-- المرحلة 1: الستارة (مُحسّنة للموبايل) -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
             <div class="glowing-logo" onclick="openShow()">
-                <svg width="180" height="180" viewBox="0 0 200 200">
+                <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
-                    <path d="M40 160 V 40 L 100 100 L 160 40 V 160" stroke="#E84222" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round"/>
+                    <path d="M40 160 V 40 L 100 100 L 160 40 V 160" stroke="#E84222" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round" fill="none"/>
                 </svg>
             </div>
+            
             <div class="event-container">
                 <div class="hybrid-row">
                     <div class="event-tag-ar">بداية العام الهجري الجديد 1448 هـ</div>
                     <div class="event-tag-en">The Grand Premiere of Hijri 1448</div>
                 </div>
+                <div class="hybrid-row" style="margin-top: 5px; opacity: 0.9;">
+                    <div class="date-sub-ar">الموافق: 16 يونيو 2026 م</div>
+                    <div class="date-sub-en">Tuesday, June 16, 2026 | AD</div>
+                </div>
             </div>
+
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -226,7 +308,7 @@
         </div>
     </div>
 
-    <!-- شاشة تسجيل البطل (المرحلة 2) -->
+    <!-- المرحلة 2: ميثاق البطل (المقولة) -->
     <section id="registration-screen">
         <div class="sniper-motto">
             <h1>"علاقتك بالله، بوالديك وبصحتك هي بندقية قنصك في الحياة"</h1>
@@ -238,14 +320,14 @@
             <button class="start-btn" onclick="registerHero()">إنشاء حساب البطل | CREATE HERO ACCOUNT</button>
         </div>
         
-        <p style="margin-top: 30px; color: #666; font-size: 0.8rem;">سجل الآن لتفعيل المحركات السبعة</p>
+        <p style="margin-top: 30px; color: #888; font-size: 0.85rem; font-weight: bold;">سجل الآن لتفعيل المحركات السبعة</p>
     </section>
 
-    <!-- لوحة القيادة (المرحلة 3) -->
+    <!-- المرحلة 3: لوحة التحكم (الرحلة) -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
-            <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.8rem;">البطل: جاري التسجيل 👤</div>
+            <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">البطل: جاري التسجيل 👤</div>
         </nav>
 
         <div class="flight-status-banner">
@@ -253,34 +335,40 @@
         </div>
 
         <div class="dashboard-grid">
-            <!-- المحركات السبعة -->
-            <div class="engine-card active" onclick="openSoul()"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="heart" style="color:var(--primary-orange);"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">SOUL ENGINE | محرك الروح</span></div><h3>محرك الروح</h3><div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;"><span id="main-soul-percent">0</span>%</div></div>
-            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="coins"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">FINANCIAL | محرك الباءة</span></div><h3>محرك الباءة</h3><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">30%</div></div>
-            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="activity"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">HEALTH | محرك الصحة</span></div><h3>محرك الصحة</h3><div class="progress-track"><div class="progress-fill" style="width:55%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">55%</div></div>
-            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="book-open"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">INTELLECTUAL | محرك العقل</span></div><h3>محرك العقل</h3><div class="progress-track"><div class="progress-fill" style="width:15%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">15%</div></div>
-            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="users"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">SOCIAL | المحرك الاجتماعي</span></div><h3>المحرك الاجتماعي</h3><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">80%</div></div>
-            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="briefcase"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">PROFESSIONAL | المحرك المهني</span></div><h3>المحرك المهني</h3><div class="progress-track"><div class="progress-fill" style="width:40%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">40%</div></div>
-            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;"><i data-lucide="globe"></i><span style="font-size:0.65rem;color:var(--text-white);font-weight:800;">MISSION | المحرك الرسالي</span></div><h3>المحرك الرسالي</h3><div class="progress-track"><div class="progress-fill" style="width:10%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">10%</div></div>
+            <!-- المحركات السبعة بتنسيق متجاوب -->
+            <div class="engine-card active" onclick="openSoul()"><div style="display:flex;justify-content:space-between;align-items:center;"><i data-lucide="heart" style="color:var(--primary-orange);"></i><span style="font-size:0.65rem;font-weight:800;">SOUL | الروح</span></div><h3 style="margin: 15px 0 5px;">محرك الروح</h3><div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;"><span id="main-soul-percent">0</span>%</div></div>
+            
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;"><i data-lucide="coins"></i><span style="font-size:0.65rem;font-weight:800;">FINANCIAL | الباءة</span></div><h3 style="margin: 15px 0 5px;">محرك الباءة</h3><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">30%</div></div>
+            
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;"><i data-lucide="activity"></i><span style="font-size:0.65rem;font-weight:800;">HEALTH | الصحة</span></div><h3 style="margin: 15px 0 5px;">محرك الصحة</h3><div class="progress-track"><div class="progress-fill" style="width:55%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">55%</div></div>
+            
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;"><i data-lucide="book-open"></i><span style="font-size:0.65rem;font-weight:800;">MIND | العقل</span></div><h3 style="margin: 15px 0 5px;">محرك العقل</h3><div class="progress-track"><div class="progress-fill" style="width:15%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">15%</div></div>
+            
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;"><i data-lucide="users"></i><span style="font-size:0.65rem;font-weight:800;">SOCIAL | الاجتماعي</span></div><h3 style="margin: 15px 0 5px;">المحرك الاجتماعي</h3><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">80%</div></div>
+            
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;"><i data-lucide="briefcase"></i><span style="font-size:0.65rem;font-weight:800;">WORK | المهني</span></div><h3 style="margin: 15px 0 5px;">المحرك المهني</h3><div class="progress-track"><div class="progress-fill" style="width:40%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">40%</div></div>
+            
+            <div class="engine-card"><div style="display:flex;justify-content:space-between;align-items:center;"><i data-lucide="globe"></i><span style="font-size:0.65rem;font-weight:800;">MISSION | الرسالي</span></div><h3 style="margin: 15px 0 5px;">المحرك الرسالي</h3><div class="progress-track"><div class="progress-fill" style="width:10%"></div></div><div style="text-align:left;margin-top:8px;color:var(--gold-amber);font-weight:900;">10%</div></div>
         </div>
     </main>
 
-    <!-- واجهة محرك الروح -->
+    <!-- واجهة محرك الروح التفاعلية -->
     <div id="soul-modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeSoul()">✕</button>
-            <h2 style="color: var(--primary-orange); text-align: center; font-size: 1.3rem; font-weight: 800;">غرفة عمليات الروح | Soul Ops</h2>
+            <h2 style="color: var(--primary-orange); text-align: center; font-size: 1.5rem; font-weight: 900;">غرفة عمليات الروح | Soul Ops</h2>
             <span id="soul-val-display" class="stat-value">0%</span>
             <div style="margin-top: 20px;">
                 <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">صلاة الفجر | Fajr Prayer</div></div>
-                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">الصلوات الخمس | 5 Prayers</div></div>
-                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">الورد القرآني | Daily Quran</div></div>
-                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">بر الوالدين | Parents Kindness</div></div>
+                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">الصلوات الخمس جماعة | 5 Prayers</div></div>
+                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">الورد القرآني اليومي | Daily Quran</div></div>
+                <div class="task-item" onclick="toggleTask(this)"><div class="checkbox"></div><div class="task-text">بر الوالدين (إكرام) | Parents Kindness</div></div>
             </div>
         </div>
     </div>
 
     <script>
-        // العداد التنازلي
+        // العداد التنازلي الشامل
         const targetDate = new Date("June 16, 2026 00:00:00").getTime();
         function updateCountdown() {
             const now = new Date().getTime();
@@ -297,7 +385,7 @@
         }
         setInterval(updateCountdown, 1000);
 
-        // فتح الستارة -> الانتقال لشاشة التسجيل
+        // فتح الستارة -> الانتقال للمقولة
         function openShow() {
             document.body.classList.add('curtain-open');
             setTimeout(() => { 
@@ -305,18 +393,14 @@
             }, 1800);
         }
 
-        // إنشاء الحساب -> الانتقال للمحركات
+        // إنشاء الحساب -> دخول قمرة القيادة
         function registerHero() {
             const name = document.getElementById('hero-name').value;
             if (!name) { 
                 document.getElementById('hero-name').style.borderColor = "red";
                 return; 
             }
-            
-            // تحديث واجهة المستخدم بالاسم
-            document.getElementById('display-hero-name').innerText = `البطل: ${name} | HERO: ${name} 👤`;
-            
-            // إخفاء شاشة التسجيل وإظهار لوحة التحكم
+            document.getElementById('display-hero-name').innerText = `HERO: ${name} | البطل: ${name} 👤`;
             document.getElementById('registration-screen').classList.add('registration-hidden');
             document.getElementById('app-container').style.opacity = "1";
             document.body.style.overflow = "auto";
