@@ -31,7 +31,7 @@
             overflow: hidden;
         }
 
-        /* --- نظام الستارة --- */
+        /* --- نظام الستارة (بدون خطوط فاصلة) --- */
         #curtain-wrapper {
             position: fixed; top: 0; left: 0;
             width: 100vw; height: 100vh;
@@ -70,7 +70,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* تنسيق العناوين المتقابلة (Symmetrical Hybrid) */
+        /* تنسيق العناوين المتقابلة (Symmetrical Hybrid Alignment) */
         .event-container {
             margin-top: 10px;
             width: 100%;
@@ -83,27 +83,31 @@
             display: flex;
             width: 100%;
             justify-content: center;
-            gap: 60px;
-            margin-bottom: 8px;
+            gap: 40px; /* مسافة متناسقة */
+            margin-bottom: 12px;
+            align-items: center; /* محاذاة عمودية أساسية */
         }
 
         .event-tag-ar {
             flex: 1;
             color: var(--gold-amber);
             font-weight: 900;
-            font-size: 1.2rem;
-            text-align: left;
+            font-size: 1.25rem;
+            text-align: left; /* محاذاة للداخل */
+            line-height: 1.1;
         }
 
         .event-tag-en {
             flex: 1;
             color: var(--gold-amber);
             font-weight: 900;
-            font-size: 1rem;
-            text-align: right;
+            font-size: 1.05rem;
+            text-align: right; /* محاذاة للداخل */
             font-family: sans-serif;
             letter-spacing: 1px;
             text-transform: uppercase;
+            line-height: 1.1;
+            padding-top: 4px; /* تعديل بصري لينافس ارتفاع الخط العربي */
         }
 
         .date-sub-ar {
@@ -111,6 +115,7 @@
             color: var(--primary-orange);
             font-size: 0.95rem;
             text-align: left;
+            line-height: 1.1;
         }
 
         .date-sub-en {
@@ -119,6 +124,8 @@
             font-size: 0.85rem;
             text-align: right;
             font-family: sans-serif;
+            line-height: 1.1;
+            padding-top: 2px; /* تعديل بصري لينافس ارتفاع الخط العربي */
         }
 
         /* العداد المدمج */
@@ -213,8 +220,8 @@
             .timer-val { font-size: 1.8rem; }
             .timer-unit { min-width: 70px; padding: 10px; }
             .hybrid-row { gap: 20px; }
-            .event-tag-ar { font-size: 0.9rem; }
-            .event-tag-en { font-size: 0.75rem; }
+            .event-tag-ar { font-size: 0.95rem; }
+            .event-tag-en { font-size: 0.8rem; }
         }
     </style>
 </head>
@@ -228,12 +235,15 @@
         <div id="pre-show-content">
             <div class="glowing-logo" onclick="openShow()">
                 <svg width="180" height="180" viewBox="0 0 200 200">
+                    <!-- الدائرة في الخلف أولاً -->
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
+                    <!-- شعار M+Y في الواجهة (الأمام) -->
                     <path d="M40 160 V 40 L 100 100 L 160 40 V 160" stroke="#E84222" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
                     <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round"/>
                 </svg>
             </div>
             
+            <!-- العناوين الهجينة المتناظرة (تم ضبط المحاذاة الأفقية) -->
             <div class="event-container">
                 <div class="hybrid-row">
                     <div class="event-tag-ar">بداية العام الهجري الجديد 1448 هـ</div>
@@ -245,6 +255,7 @@
                 </div>
             </div>
             
+            <!-- العداد أسفل العناوين مباشرة -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
