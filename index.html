@@ -35,33 +35,44 @@
         /* --- محتوى ما قبل العرض --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 1002; width: 100%; max-width: 1200px;
+            z-index: 1002; width: 95%; max-width: 1200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.5s;
         }
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
 
+        /* اللوغو */
         .glowing-logo { 
-            width: clamp(140px, 18vw, 200px); height: auto;
+            width: clamp(140px, 18vw, 200px); 
+            height: auto;
             filter: drop-shadow(0 0 30px rgba(232, 66, 34, 0.4)); 
-            cursor: pointer; transition: transform 0.3s; margin-bottom: 40px;
+            cursor: pointer; transition: transform 0.3s; 
+            margin-bottom: 40px;
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
         /* --- العناوين المتناظرة --- */
         .titles-container {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
-            align-items: center; margin-bottom: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            width: 100%;
+            align-items: flex-end; 
+            margin-bottom: 30px;
         }
+
+        .title-block { display: flex; flex-direction: column; justify-content: center; }
         .title-block.ar { text-align: left; padding-left: 15px; padding-top: 5px; }
         .title-block.en { text-align: right; direction: ltr; padding-right: 15px; }
 
         .main-title { 
             color: var(--gold-amber); font-weight: 900; 
-            font-size: clamp(1rem, 3vw, 1.8rem); text-transform: uppercase; line-height: 1.2; margin-bottom: 5px;
+            font-size: clamp(1rem, 3vw, 1.8rem); 
+            text-transform: uppercase; line-height: 1.2; margin-bottom: 5px;
         }
         .sub-title { 
-            color: var(--primary-orange); font-size: clamp(0.8rem, 2.2vw, 1.2rem); 
+            color: var(--primary-orange); 
+            font-size: clamp(0.85rem, 2.2vw, 1.2rem); 
             font-weight: 700; font-family: sans-serif; display: block;
         }
         .ar-font { font-family: 'Cairo', sans-serif; }
@@ -70,11 +81,13 @@
         .timer-grid { display: flex; justify-content: center; gap: 15px; width: 100%; }
         .timer-unit { 
             background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); 
-            padding: 15px; border-radius: 12px; min-width: clamp(70px, 12vw, 110px); text-align: center; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center;
+            padding: 12px; border-radius: 12px; 
+            min-width: clamp(70px, 12vw, 100px); text-align: center; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.5); 
         }
         .timer-val { font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
-        .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; font-weight: bold; text-transform: uppercase; }
+        .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
+
         .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
         /* --- التطبيق الرئيسي --- */
@@ -86,22 +99,27 @@
         .brand span { color: var(--primary-orange); }
 
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
-        .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 15px; text-align: center; border-bottom: 1px solid #333; font-size: 0.9rem; }
+        .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 20px 30px; border-bottom: 1px solid #333; font-size: 0.9rem; text-align: center; }
         .alert-text { color: var(--primary-orange); font-weight: bold; }
+        .highlight { color: var(--gold-amber); font-weight: bold; }
 
-        /* --- شبكة الطائرة (Plane Grid Layout) --- */
+        /* --- شبكة الطائرة (The Plane Grid) --- */
         .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
         
+        /* الذيل */
         .tail-section { display: flex; justify-content: center; }
         .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
 
+        /* الأجنحة */
         .wings-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
-        
         .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
+        
+        /* الجناح الأيمن (نفسي) */
         .wing.right-wing { border-right: 4px solid var(--gold-amber); }
+        /* الجناح الأيسر (جسدي) */
         .wing.left-wing { border-left: 4px solid var(--primary-orange); }
 
-        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
+        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 90px; display: flex; flex-direction: column; justify-content: center; }
         .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
         .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
 
@@ -113,14 +131,13 @@
         
         .progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 10px; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber)); width: 0%; transition: width 1s; }
-        
+
         /* شاشة التسجيل */
         #registration-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; transition: transform 1s; }
         .registration-hidden { transform: translateY(-100%); }
         .reg-form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
         .hero-input { background: rgba(255,255,255,0.05); border: 2px solid #333; border-radius: 12px; padding: 15px; color: white; font-family: 'Cairo'; font-size: 1.1rem; text-align: center; outline: none; }
         .start-btn { background: var(--primary-orange); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
-        .highlight { color: var(--gold-amber); font-weight: bold; }
 
         /* نافذة الروح */
         #soul-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; justify-content: center; align-items: flex-end; }
@@ -215,7 +232,8 @@
             </div>
             
             <div class="wings-wrapper">
-                <!-- الجناح الأيمن: النفسي -->
+                
+                <!-- الجناح الأيمن: النفسي (فكري، أكاديمي، اجتماعي) -->
                 <div class="wing right-wing">
                     <div class="wing-header"><h2>الجناح الأيمن: الاستقرار النفسي</h2><span>Right Wing: Psychological Base</span></div>
                     <div class="wing-grid">
@@ -224,7 +242,8 @@
                         <div class="engine-card"><i data-lucide="users" style="color:white;"></i><h3 style="color:white; font-size:1rem;">3. الاستقرار الاجتماعي</h3><p style="font-size:0.7rem;color:#888;">Social Life</p><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div></div>
                     </div>
                 </div>
-                <!-- الجناح الأيسر: الجسدي -->
+
+                <!-- الجناح الأيسر: الجسدي (مهاراتي، مهني، مالي) -->
                 <div class="wing left-wing">
                     <div class="wing-header"><h2>الجناح الأيسر: الاستقرار الجسدي</h2><span>Left Wing: Physical Base</span></div>
                     <div class="wing-grid">
@@ -233,6 +252,7 @@
                         <div class="engine-card"><i data-lucide="coins" style="color:white;"></i><h3 style="color:white; font-size:1rem;">6. الاستقرار المالي</h3><p style="font-size:0.7rem;color:#888;">Financial</p><div class="progress-track"><div class="progress-fill" style="width:25%"></div></div></div>
                     </div>
                 </div>
+
             </div>
         </div>
     </main>
