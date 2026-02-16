@@ -32,7 +32,7 @@
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
-        /* --- محتوى ما قبل العرض (المركز) --- */
+        /* --- محتوى ما قبل العرض --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             z-index: 1002; width: 100%; max-width: 1200px;
@@ -41,60 +41,40 @@
         }
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
 
-        /* اللوغو */
         .glowing-logo { 
-            width: clamp(140px, 18vw, 200px); 
-            height: auto;
+            width: clamp(140px, 18vw, 200px); height: auto;
             filter: drop-shadow(0 0 30px rgba(232, 66, 34, 0.4)); 
-            cursor: pointer; transition: transform 0.3s; 
-            margin-bottom: 40px;
+            cursor: pointer; transition: transform 0.3s; margin-bottom: 40px;
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
         /* --- العناوين المتناظرة --- */
         .titles-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            width: 100%;
-            align-items: flex-end; 
-            margin-bottom: 30px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
+            align-items: center; margin-bottom: 30px;
         }
-
-        .title-block { display: flex; flex-direction: column; justify-content: center; }
-
-        /* العربي (يمين) - محاذاة لليسار */
         .title-block.ar { text-align: left; padding-left: 15px; padding-top: 5px; }
-        
-        /* الإنجليزي (يسار) - محاذاة لليمين */
         .title-block.en { text-align: right; direction: ltr; padding-right: 15px; }
 
         .main-title { 
             color: var(--gold-amber); font-weight: 900; 
-            font-size: clamp(1rem, 3vw, 1.8rem); 
-            text-transform: uppercase; line-height: 1.2; 
-            margin-bottom: 5px;
+            font-size: clamp(1rem, 3vw, 1.8rem); text-transform: uppercase; line-height: 1.2; margin-bottom: 5px;
         }
-        
         .sub-title { 
-            color: var(--primary-orange); 
-            font-size: clamp(0.8rem, 2.2vw, 1.2rem); 
-            font-weight: 700; font-family: sans-serif; 
-            display: block;
+            color: var(--primary-orange); font-size: clamp(0.8rem, 2.2vw, 1.2rem); 
+            font-weight: 700; font-family: sans-serif; display: block;
         }
         .ar-font { font-family: 'Cairo', sans-serif; }
 
-        /* --- العداد --- */
+        /* العداد */
         .timer-grid { display: flex; justify-content: center; gap: 15px; width: 100%; }
         .timer-unit { 
             background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); 
-            padding: 12px; border-radius: 12px; 
-            min-width: clamp(70px, 12vw, 110px); text-align: center; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+            padding: 15px; border-radius: 12px; min-width: clamp(70px, 12vw, 110px); text-align: center; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.5); display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
         .timer-val { font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
         .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; font-weight: bold; text-transform: uppercase; }
-
         .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
         /* --- التطبيق الرئيسي --- */
@@ -121,18 +101,7 @@
         .wing.right-wing { border-right: 4px solid var(--gold-amber); }
         .wing.left-wing { border-left: 4px solid var(--primary-orange); }
 
-        /* تنسيق عناوين الأجنحة (محاذاة مثالية) */
-        .wing-header { 
-            text-align: center; 
-            margin-bottom: 30px; 
-            padding-bottom: 15px; 
-            border-bottom: 1px solid #333; 
-            /* تثبيت الارتفاع لضمان المحاذاة */
-            height: 90px; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-        }
+        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
         .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
         .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
 
@@ -151,6 +120,7 @@
         .reg-form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
         .hero-input { background: rgba(255,255,255,0.05); border: 2px solid #333; border-radius: 12px; padding: 15px; color: white; font-family: 'Cairo'; font-size: 1.1rem; text-align: center; outline: none; }
         .start-btn { background: var(--primary-orange); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
+        .highlight { color: var(--gold-amber); font-weight: bold; }
 
         /* نافذة الروح */
         #soul-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; justify-content: center; align-items: flex-end; }
@@ -176,7 +146,6 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
-            <!-- اللوغو (في الوسط تماماً) -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
@@ -185,21 +154,17 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة (Grid System) -->
             <div class="titles-container">
-                <!-- العمود الأيمن (العربي) -->
                 <div class="title-block ar">
                     <span class="main-title ar-font">بداية العام الهجري الجديد 1448 هـ</span>
                     <span class="sub-title ar-font">الموافق: الثلاثاء 16 يونيو 2026 م</span>
                 </div>
-                <!-- العمود الأيسر (الإنجليزي) -->
                 <div class="title-block en">
                     <span class="main-title">THE GRAND PREMIERE OF HIJRI 1448</span>
                     <span class="sub-title">Tuesday, June 16, 2026 | AD</span>
                 </div>
             </div>
 
-            <!-- العداد (في الوسط تماماً) -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -241,7 +206,7 @@
             <!-- الذيل: الاستقرار الروحي -->
             <div class="tail-section">
                 <div class="engine-card tail-card active" onclick="openSoul()">
-                    <div style="display:flex;justify-content:space-between;"><i data-lucide="compass" style="color:var(--primary-orange)"></i><span style="font-size:0.7rem; font-weight:bold; color:white;">الذيل / البوصلة | TAIL / COMPASS</span></div>
+                    <div style="display:flex;justify-content:space-between;"><i data-lucide="compass" style="color:var(--primary-orange)"></i><span style="font-size:0.7rem; font-weight:bold; color:white;">TAIL / COMPASS | الموجه</span></div>
                     <h3 style="color:white; margin:10px 0;">الاستقرار الروحي</h3>
                     <p style="font-size:0.8rem; color:#888;">Spiritual Stability</p>
                     <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
