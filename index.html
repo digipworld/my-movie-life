@@ -18,7 +18,6 @@
             --card-bg: #111111;
             --text-white: #ffffff;
             --text-grey: #cccccc;
-            --wing-bg: rgba(255, 255, 255, 0.03);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -32,10 +31,10 @@
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
-        /* --- محتوى ما قبل العرض --- */
+        /* --- محتوى ما قبل العرض (المركز) --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 1002; width: 95%; max-width: 1200px;
+            z-index: 1002; width: 100%; max-width: 1200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.5s;
         }
@@ -51,92 +50,82 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة (Perfect Symmetry) --- */
+        /* --- العناوين المتناظرة (تصحيح المحاذاة) --- */
         .titles-container {
-            display: flex;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
             width: 100%;
-            justify-content: center;
-            align-items: flex-end; /* ضمان توازي السطر الأخير */
-            gap: 40px; /* الفجوة في المنتصف */
-            margin-bottom: 40px;
+            align-items: center; /* استخدام المركز بدلاً من الأسفل لضمان التساوي */
+            margin-bottom: 30px;
         }
 
-        .title-block { flex: 1; display: flex; flex-direction: column; justify-content: center; }
+        .title-block { display: flex; flex-direction: column; justify-content: center; }
 
-        /* العربي (يمين الشاشة) - محاذاة لليسار */
-        .title-block.ar { text-align: left; }
+        /* العربي (يمين) - إضافة إزاحة بصرية بسيطة للأسفل لموازنة الخط الإنجليزي */
+        .title-block.ar { 
+            text-align: left; 
+            padding-left: 15px; 
+            padding-top: 5px; /* تصحيح بصري لارتفاع خط Cairo */
+        }
         
-        /* الإنجليزي (يسار الشاشة) - محاذاة لليمين */
-        .title-block.en { text-align: right; direction: ltr; }
+        /* الإنجليزي (يسار) */
+        .title-block.en { 
+            text-align: right; 
+            direction: ltr; 
+            padding-right: 15px; 
+        }
 
         .main-title { 
             color: var(--gold-amber); font-weight: 900; 
             font-size: clamp(1rem, 3vw, 1.8rem); 
-            text-transform: uppercase; line-height: 1.3; 
+            text-transform: uppercase; line-height: 1.2; 
             margin-bottom: 5px;
         }
         
         .sub-title { 
             color: var(--primary-orange); 
-            font-size: clamp(0.85rem, 2.2vw, 1.2rem); 
+            font-size: clamp(0.8rem, 2.2vw, 1.2rem); 
             font-weight: 700; font-family: sans-serif; 
-            display: block;
         }
         .ar-font { font-family: 'Cairo', sans-serif; }
 
-        /* --- العداد --- */
-        .timer-grid { display: flex; justify-content: center; gap: 15px; width: 100%; }
+        /* --- العداد (تمركز تام) --- */
+        .timer-grid { 
+            display: flex; 
+            justify-content: center; /* تمركز أفقي صريح */
+            gap: 15px; 
+            width: 100%;
+        }
+        
         .timer-unit { 
             background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); 
-            padding: 12px; border-radius: 12px; 
-            min-width: clamp(70px, 12vw, 100px); text-align: center; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+            padding: 15px; border-radius: 12px; 
+            min-width: clamp(70px, 12vw, 110px); text-align: center; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .timer-val { font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; display: block; }
-        .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
+
+        .timer-val { font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
+        .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; font-weight: bold; text-transform: uppercase; }
 
         .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
         /* --- التطبيق الرئيسي --- */
         #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s 1s; overflow-y: auto; }
         .curtain-open #app-container { opacity: 1; }
-
+        
         .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
-
-        .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
-        .highlight { color: var(--gold-amber); font-weight: bold; }
-
-        .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 20px 30px; border-bottom: 1px solid #333; font-size: 0.9rem; text-align: center; }
-        .alert-text { color: var(--primary-orange); font-weight: bold; }
-
-        /* --- شبكة الطائرة (Plane Grid Layout) --- */
-        .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
-        
-        .tail-section { display: flex; justify-content: center; }
-        .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
-
-        .wings-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
-        
-        /* تصميم الأجنحة */
-        .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
-        
-        .wing.right-wing { border-right: 4px solid var(--gold-amber); }
-        .wing.left-wing { border-left: 4px solid var(--primary-orange); }
-
-        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
-        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
-        .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; }
-
-        .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
-
-        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; }
-        .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); background: #161616; }
-        .engine-card.active { border-color: var(--gold-amber); box-shadow: 0 0 20px rgba(255, 191, 0, 0.1); }
-        
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 30px; }
+        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; }
+        .engine-card.active { border-left-color: var(--primary-orange); }
         .progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 10px; }
         .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber)); width: 0%; transition: width 1s; }
+        .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
+        .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 15px; text-align: center; border-bottom: 1px solid #333; font-size: 0.9rem; }
+        .alert-text { color: var(--primary-orange); font-weight: bold; }
 
         /* شاشة التسجيل */
         #registration-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; transition: transform 1s; }
@@ -155,18 +144,15 @@
 
         @media (max-width: 768px) {
             .titles-container { flex-direction: column; gap: 20px; text-align: center; }
-            .title-block.ar { text-align: center; } /* في الجوال نوسط كل شيء */
-            .title-block.en { text-align: center; }
+            .title-block.right, .title-block.left { text-align: center !important; width: 100%; padding: 0; }
             .timer-unit { min-width: 70px; padding: 10px; }
             .timer-val { font-size: 1.8rem; }
             .glowing-logo { width: 100px; margin-bottom: 20px; }
-            .wings-wrapper { flex-direction: column; }
         }
     </style>
 </head>
 <body>
 
-    <!-- المرحلة 1: الستارة -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
@@ -180,21 +166,21 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة (بدون حدود عمودية) -->
+            <!-- العناوين المتناظرة (Grid System) -->
             <div class="titles-container">
-                <!-- الكتلة اليمنى (العربية) -->
+                <!-- العمود الأيمن (العربي) -->
                 <div class="title-block ar">
                     <span class="main-title ar-font">بداية العام الهجري الجديد 1448 هـ</span>
                     <span class="sub-title ar-font">الموافق: الثلاثاء 16 يونيو 2026 م</span>
                 </div>
-                <!-- الكتلة اليسرى (الإنجليزية) -->
+                <!-- العمود الأيسر (الإنجليزي) -->
                 <div class="title-block en">
                     <span class="main-title">THE GRAND PREMIERE OF HIJRI 1448</span>
                     <span class="sub-title">Tuesday, June 16, 2026 | AD</span>
                 </div>
             </div>
 
-            <!-- العداد -->
+            <!-- العداد (في الوسط تماماً) -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -216,7 +202,7 @@
         </div>
     </section>
 
-    <!-- لوحة التحكم (هيكل الطائرة) -->
+    <!-- لوحة التحكم -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
@@ -267,7 +253,6 @@
         </div>
     </main>
 
-    <!-- نافذة الروح -->
     <div id="soul-modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeSoul()">✕</button>
