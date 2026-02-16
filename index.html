@@ -18,7 +18,6 @@
             --card-bg: #111111;
             --text-white: #ffffff;
             --text-grey: #cccccc;
-            --wing-bg: rgba(255, 255, 255, 0.03);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -51,7 +50,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة --- */
+        /* --- العناوين (Desktop Default) --- */
         .titles-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -62,7 +61,11 @@
         }
 
         .title-block { display: flex; flex-direction: column; justify-content: center; }
+
+        /* العربي (يمين) - محاذاة لليسار */
         .title-block.ar { text-align: left; padding-left: 15px; padding-top: 5px; }
+        
+        /* الإنجليزي (يسار) - محاذاة لليمين */
         .title-block.en { text-align: right; direction: ltr; padding-right: 15px; }
 
         .main-title { 
@@ -80,7 +83,7 @@
         }
         .ar-font { font-family: 'Cairo', sans-serif; }
 
-        /* العداد */
+        /* --- العداد --- */
         .timer-grid { display: flex; justify-content: center; gap: 15px; width: 100%; }
         .timer-unit { 
             background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); 
@@ -144,7 +147,6 @@
         .reg-form { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: 20px; margin-top: 30px; }
         .hero-input { background: rgba(255,255,255,0.05); border: 2px solid #333; border-radius: 12px; padding: 15px; color: white; font-family: 'Cairo'; font-size: 1.1rem; text-align: center; outline: none; }
         .start-btn { background: var(--primary-orange); color: white; border: none; padding: 15px; border-radius: 12px; font-weight: 900; font-size: 1.1rem; cursor: pointer; transition: 0.3s; }
-        .highlight { color: var(--gold-amber); font-weight: bold; }
 
         /* نافذة الروح */
         #soul-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; display: none; justify-content: center; align-items: flex-end; }
@@ -154,14 +156,58 @@
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
 
+        /* --- تحسينات الجوال الحاسمة (Mobile Vertical Fix) --- */
         @media (max-width: 768px) {
-            .titles-container { flex-direction: column; gap: 20px; text-align: center; }
-            .title-block.ar, .title-block.en { text-align: center !important; width: 100%; padding: 0; }
+            /* 1. إصلاح شاشة الستار: ترتيب عمودي صارم */
+            .titles-container { 
+                display: flex;
+                flex-direction: column;
+                gap: 40px; /* مسافة واضحة بين الكتلة العربية والإنجليزية */
+                width: 100%;
+                margin-bottom: 30px;
+                padding: 0 25px; /* مساحة راحة للعين يميناً ويساراً */
+            }
+            
+            .title-block.ar, .title-block.en { 
+                text-align: center !important; /* توسيط كل النصوص */
+                width: 100%; 
+                padding: 0; 
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .main-title { 
+                font-size: 1.6rem; 
+                margin-bottom: 8px;
+            }
+            
+            /* التأكيد على وجود التاريخ في سطر منفصل */
+            .sub-title { 
+                font-size: 1.1rem; 
+                display: block; 
+                margin-top: 5px;
+            }
+
             .timer-unit { min-width: 70px; padding: 10px; }
             .timer-val { font-size: 1.8rem; }
-            .glowing-logo { width: 100px; margin-bottom: 20px; }
+            .glowing-logo { width: 110px; margin-bottom: 30px; }
+            
+            /* 2. إصلاح الشريط العلوي (اللوغو فوق الاسم) */
+            .top-nav { 
+                flex-direction: column; 
+                justify-content: center;
+                gap: 8px; 
+                padding: 15px;
+            }
+            
+            /* تحسينات الطائرة للجوال */
             .wings-wrapper { flex-direction: column; }
-            .flight-ar, .flight-en { text-align: center; }
+            .wing { border: none; border-bottom: 3px solid #333; min-width: auto; }
+            .wing.right-wing { border-right: none; border-bottom: 3px solid var(--gold-amber); }
+            .wing.left-wing { border-left: none; border-bottom: 3px solid var(--primary-orange); }
+            .flight-row { flex-direction: column; gap: 8px; }
+            .flight-ar, .flight-en { text-align: center; min-width: auto; }
         }
     </style>
 </head>
@@ -180,18 +226,21 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة -->
+            <!-- العناوين (نظام Grid للحاسوب / Flex Column للجوال) -->
             <div class="titles-container">
+                <!-- الكتلة العربية -->
                 <div class="title-block ar">
                     <span class="main-title ar-font">بداية العام الهجري الجديد 1448 هـ</span>
                     <span class="sub-title ar-font">الموافق: الثلاثاء، 16 يونيو 2026 م</span>
                 </div>
+                <!-- الكتلة الإنجليزية -->
                 <div class="title-block en">
                     <span class="main-title">THE GRAND PREMIERE OF HIJRI 1448</span>
                     <span class="sub-title">Tuesday, June 16, 2026 | AD</span>
                 </div>
             </div>
 
+            <!-- العداد -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -220,24 +269,25 @@
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
-        <!-- (1) المانشيت الرئيسي: مقولة القناص -->
-        <div class="sniper-banner">
-            <p style="font-size: 1.1rem; color: white;">"علاقتك بالله، بوالديك وبصحتك هي <span class="highlight" style="color: var(--gold-amber);">بندقية ︻╦╤─ قنصك</span> في الحياة"</p>
+        <!-- (1) المانشيت الرئيسي: 7 استقرارات -->
+        <div class="sniper-banner main-banner">
+            <p style="font-size: 1.1rem; color: white;">
+                "هناك <strong>7 استقرارات</strong> لضمان توازن الرحلة، ويبقى <span class="highlight">الاستقرار الصحي</span> هو الأساس الذي لا وجود لباقي الاستقرارات بدونه"
+            </p>
+            <p style="font-size: 0.8rem; color: var(--text-grey); margin-top: 5px;">There are <strong>7 Stabilities</strong> for a balanced flight, but <strong>Health Stability</strong> is the Foundation.</p>
         </div>
 
-        <!-- شريط حالة الرحلة (المعاد ترتيبه) -->
+        <!-- شريط حالة الرحلة -->
         <div class="flight-status-banner">
-            
-            <!-- القسم الثاني: هناك 7 استقرارات -->
             <div class="flight-row">
-                <p class="flight-ar">هناك <strong>7 استقرارات</strong> لضمان توازن الرحلة، ويبقى <strong>الاستقرار الصحي</strong> هو الأساس.</p>
-                <p class="flight-en" style="direction: ltr;">There are <strong>7 Stabilities</strong> for a balanced flight, but <strong>Health Stability</strong> is the Foundation.</p>
+                <p class="flight-ar"><span class="alert-text">تذكير هام :</span> توازن الطائرة ✈️ يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي + روحي).</p>
+                <p class="flight-en" style="direction: ltr;"><span class="alert-text">IMPORTANT REMINDER :</span> Plane ✈️ Balance depends on <strong>Health Stability</strong> (Mental + Physical + Spiritual).</p>
             </div>
             
-            <!-- القسم الأخير: تذكير هام -->
+            <!-- مقولة القناص -->
             <div class="flight-row" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 10px;">
-                <p class="flight-ar"><span class="alert-text">تذكير هام :</span> توازن الطائرة ✈️ يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي) وتوجيه <strong>الروح</strong>.</p>
-                <p class="flight-en" style="direction: ltr;"><span class="alert-text">IMPORTANT REMINDER :</span> Plane ✈️ Balance depends on <strong>Health Stability</strong> & <strong>Soul Guidance</strong>.</p>
+                <p class="quote-text">"علاقتك بالله، بوالديك وبصحتك هي بندقية ︻╦╤─ قنصك في الحياة"</p>
+                <p class="quote-text" style="direction: ltr;">"Faith, Parents & Health is your Sniper Rifle"</p>
             </div>
         </div>
 
@@ -254,7 +304,7 @@
             </div>
             
             <div class="wings-wrapper">
-                <!-- الجناح الأيمن: النفسي -->
+                <!-- الجناح الأيمن -->
                 <div class="wing right-wing">
                     <div class="wing-header">
                         <h2>الجناح الأيمن: الاستقرار النفسي</h2>
@@ -266,7 +316,7 @@
                         <div class="engine-card"><i data-lucide="users" style="color:white;"></i><h3 style="color:white; font-size:1rem;">3. الاستقرار الاجتماعي</h3><p style="font-size:0.7rem;color:#888;">Social Life</p><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div></div>
                     </div>
                 </div>
-                <!-- الجناح الأيسر: الجسدي -->
+                <!-- الجناح الأيسر -->
                 <div class="wing left-wing">
                     <div class="wing-header">
                         <h2>الجناح الأيسر: الاستقرار الجسدي</h2>
