@@ -82,9 +82,9 @@
             display: flex;
             width: 100%;
             justify-content: center;
-            gap: 30px; /* مسافة مركزية دقيقة */
-            margin-bottom: 10px;
-            align-items: flex-end; /* لضمان وقوف النصين على نفس السطر الأفقي */
+            gap: 40px; /* مسافة مركزية دقيقة */
+            margin-bottom: 12px;
+            align-items: flex-end; 
         }
 
         /* العربية (يمين الشاشة، محاذاة لليسار باتجاه المركز) */
@@ -94,7 +94,7 @@
             font-weight: 800;
             font-size: 1.2rem;
             text-align: left; 
-            line-height: 1;
+            line-height: 1.2;
         }
 
         /* الإنجليزية (يسار الشاشة، محاذاة لليمين باتجاه المركز) */
@@ -102,12 +102,12 @@
             flex: 1;
             color: var(--gold-amber);
             font-weight: 800;
-            font-size: 1.15rem; /* تم تكبيره قليلاً لموازنة العربية */
+            font-size: 1.15rem; 
             text-align: right; 
-            font-family: 'Cairo', sans-serif; /* توحيد الخط لضمان تساوى الوزن البصري */
-            letter-spacing: 1px;
+            font-family: 'Cairo', sans-serif; 
+            letter-spacing: 0.5px;
             text-transform: uppercase;
-            line-height: 1;
+            line-height: 1.2;
         }
 
         .date-sub-ar {
@@ -115,15 +115,15 @@
             color: var(--primary-orange);
             font-size: 0.95rem;
             text-align: left;
-            line-height: 1;
+            line-height: 1.2;
         }
 
         .date-sub-en {
             flex: 1;
             color: var(--primary-orange);
-            font-size: 0.9rem; /* تم رفعه قليلاً للموازنة */
+            font-size: 0.9rem; 
             text-align: right;
-            line-height: 1;
+            line-height: 1.2;
         }
 
         /* العداد المدمج */
@@ -239,15 +239,15 @@
                 </svg>
             </div>
             
-            <!-- العناوين الهجينة المتناظرة (تم ضبط الوزن البصري) -->
+            <!-- العناوين الهجينة المتناظرة (تم إثراء النص الإنجليزي للتوازن) -->
             <div class="event-container">
                 <div class="hybrid-row">
                     <div class="event-tag-ar">بداية العام الهجري الجديد 1448 هـ</div>
-                    <div class="event-tag-en">Hijri 1448 Premiere</div>
+                    <div class="event-tag-en">The Grand Premiere of Hijri 1448</div>
                 </div>
                 <div class="hybrid-row">
                     <div class="date-sub-ar">الموافق: 16 يونيو 2026 م</div>
-                    <div class="date-sub-en">June 16, 2026</div>
+                    <div class="date-sub-en">Tuesday, June 16, 2026 | AD</div>
                 </div>
             </div>
             
