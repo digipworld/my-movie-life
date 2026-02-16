@@ -32,7 +32,7 @@
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
-        /* --- محتوى ما قبل العرض --- */
+        /* --- محتوى ما قبل العرض (المركز) --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             z-index: 1002; width: 100%;
@@ -48,7 +48,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة --- */
+        /* --- العناوين المتناظرة (Desktop) --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
@@ -83,35 +83,14 @@
         .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
         .timer-label { font-size: 0.6rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
-        /* --- التلميح (Click Hint) المتناظر بدقة --- */
-        .click-hint-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px; /* المسافة حول الخط الفاصل */
-            margin-top: 40px;
-            width: 100%;
-            color: var(--text-grey);
-            font-size: 0.8rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .hint-side { flex: 1; }
-        
-        /* العربي يمين، يحاذي لليسار (باتجاه المركز) */
-        .hint-side.ar { text-align: left; }
-        
-        /* الإنجليزي يسار، يحاذي لليمين (باتجاه المركز) */
-        .hint-side.en { text-align: right; direction: ltr; font-family: sans-serif; }
-        
-        /* الخط الفاصل في المنتصف بالضبط */
-        .hint-sep { color: var(--text-white); font-weight: 100; font-size: 1.2rem; opacity: 0.5; margin-top: -3px; }
-
+        .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
         /* --- التطبيق الرئيسي --- */
-        #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 0.5s; overflow-y: auto; }
+        #app-container { 
+            width: 100%; height: 100%; display: flex; flex-direction: column; 
+            opacity: 0; transition: opacity 0.5s;
+            overflow-y: auto; 
+        }
         .curtain-open #app-container { opacity: 1; }
         
         .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
@@ -129,8 +108,22 @@
         .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
         .wing.right-wing { border-right: 4px solid var(--gold-amber); }
         .wing.left-wing { border-left: 4px solid var(--primary-orange); }
-        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
-        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
+        
+        .wing-header { 
+            text-align: center; margin-bottom: 30px; padding-bottom: 15px; 
+            border-bottom: 1px solid #333; height: 80px; 
+            display: flex; flex-direction: column; justify-content: center; 
+        }
+        
+        /* التعديل الهام: فرض سطر واحد لعناوين الأجنحة في الحاسوب */
+        .wing-header h2 { 
+            font-size: clamp(1rem, 2vw, 1.3rem); /* حجم متكيف */
+            color: var(--text-white); 
+            margin-bottom: 5px; 
+            font-weight: 800; 
+            white-space: nowrap; /* إجبار النص على البقاء في سطر واحد */
+        }
+        
         .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
         .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
 
@@ -154,6 +147,7 @@
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
 
+        /* --- تحسينات الجوال المعتمدة --- */
         @media (max-width: 768px) {
             .line-break { display: block; height: 0; } 
             
@@ -186,13 +180,8 @@
             .wing.right-wing { border-bottom-color: var(--gold-amber); }
             .wing.left-wing { border-bottom-color: var(--primary-orange); }
 
-            .wing-header h2 {
-                font-size: 1rem;
-                white-space: nowrap;
-            }
-            
-            /* تعديل الهامش للتلميح في الجوال */
-            .click-hint-container { gap: 10px; margin-top: 30px; font-size: 0.7rem; }
+            /* السماح بالانكسار في الجوال فقط إذا لزم الأمر */
+            .wing-header h2 { font-size: 1rem; white-space: normal; }
         }
     </style>
 </head>
@@ -215,7 +204,6 @@
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">
-                        <!-- التعديل الأول: افتتاح بدلاً من بداية -->
                         افتتاح العام الهجري <span class="line-break"></span> الجديد 1448 هـ
                     </span>
                     <span class="sub-title ar-font">
@@ -239,16 +227,10 @@
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
             
-            <!-- التعديل الثاني: التلميح المتناظر (الجديد) -->
-            <div class="click-hint-container">
-                <div class="hint-side ar">اضغط على الشعار</div>
-                <div class="hint-sep">|</div>
-                <div class="hint-side en">CLICK LOGO</div>
-            </div>
+            <p class="click-hint">اضغط على الشعار | CLICK LOGO</p>
         </div>
     </div>
 
-    <!-- شاشة إدخال الاسم -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 <br> <span class="highlight">قنصك في الحياة</span></h1>
         <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> is your Sniper Rifle</p>
@@ -258,7 +240,6 @@
         </div>
     </section>
 
-    <!-- لوحة التحكم (هيكل الطائرة) -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
@@ -270,7 +251,7 @@
                 هناك <strong>7 استقرارات</strong> لضمان توازن رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
             </p>
             <p style="font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-grey); margin-top: 10px; line-height: 1.5;">
-                There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual, Psychological, Physical) is the foundation for the flight's balance and continuity
+                There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual + Psychological + Physical) is the foundation for the flight's balance and continuity
             </p>
         </div>
 
