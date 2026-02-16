@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Movie Life | اصنع فيلم حياتك</title>
     
-    <!-- Favicon -->
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='85' stroke='%23E84222' stroke-width='4' fill='none' opacity='0.6'/><path d='M40 160 V 40 L 100 100 L 160 40 V 160' stroke='%23E84222' stroke-width='20' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M100 100 V 190' stroke='%23FFBF00' stroke-width='20' stroke-linecap='round' fill='none'/></svg>">
+    <!-- Favicon (Updated Colors) -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='85' stroke='%23E84222' stroke-width='4' fill='none' opacity='0.6'/><path d='M45 40 V 160' stroke='%23E84222' stroke-width='20' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M155 40 V 160' stroke='%23E84222' stroke-width='20' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M45 40 L 100 100 L 155 40' stroke='%23FFBF00' stroke-width='20' stroke-linecap='round' fill='none'/><path d='M100 100 V 190' stroke='%23FFBF00' stroke-width='20' stroke-linecap='round' fill='none'/></svg>">
 
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -32,18 +32,18 @@
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
-        /* --- محتوى ما قبل العرض --- */
+        /* --- محتوى ما قبل العرض (المركز) --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 1002; width: 95%; max-width: 1200px;
+            z-index: 1002; width: 100%; max-width: 1200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.5s;
         }
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
 
-        /* اللوغو */
+        /* اللوغو (ألوان صحيحة وتمركز) */
         .glowing-logo { 
-            width: clamp(130px, 15vw, 180px); 
+            width: clamp(140px, 18vw, 200px); 
             height: auto;
             filter: drop-shadow(0 0 30px rgba(232, 66, 34, 0.4)); 
             cursor: pointer; transition: transform 0.3s; 
@@ -51,27 +51,27 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة (العنوان وتحته التاريخ) --- */
+        /* --- العناوين المتناظرة (تم إزالة الخطوط العمودية وضبط المحاذاة) --- */
         .titles-container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             width: 100%;
-            align-items: start;
+            align-items: flex-end; /* لضمان أن السطر الأخير (التاريخ) على نفس المستوى */
             margin-bottom: 40px;
         }
 
         .title-block { display: flex; flex-direction: column; justify-content: center; }
 
         /* العربي (يمين) - محاذاة لليسار */
-        .title-block.ar { text-align: left; border-left: 2px solid rgba(255, 191, 0, 0.3); padding-left: 15px; }
+        .title-block.ar { text-align: left; padding-left: 15px; } /* تم حذف الحدود */
         /* الإنجليزي (يسار) - محاذاة لليمين */
         .title-block.en { text-align: right; direction: ltr; padding-right: 15px; }
 
         .main-title { 
             color: var(--gold-amber); font-weight: 900; 
             font-size: clamp(1rem, 3vw, 1.8rem); 
-            text-transform: uppercase; line-height: 1.3; 
+            text-transform: uppercase; line-height: 1.2; 
             margin-bottom: 5px;
         }
         
@@ -83,12 +83,14 @@
         }
         .ar-font { font-family: 'Cairo', sans-serif; }
 
-        /* --- العداد --- */
-        .timer-grid { display: flex; justify-content: center; gap: 15px; width: 100%; }
+        /* --- العداد (تمركز تام) --- */
+        .timer-grid { 
+            display: flex; justify-content: center; gap: 15px; width: 100%;
+        }
         .timer-unit { 
             background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); 
             padding: 12px; border-radius: 12px; 
-            min-width: clamp(70px, 12vw, 100px); text-align: center; 
+            min-width: clamp(70px, 12vw, 110px); text-align: center; 
             box-shadow: 0 0 20px rgba(0,0,0,0.5); 
         }
         .timer-val { font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; display: block; }
@@ -170,21 +172,26 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
-            <!-- اللوغو (في الوسط تماماً) -->
+            <!-- اللوغو (ألوان مصححة) -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
-                    <path d="M40 160 V 40 L 100 100 L 160 40 V 160" stroke="#E84222" stroke-width="15" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round" fill="none"/>
+                    <!-- M Left (Orange) -->
+                    <path d="M45 40 V 160" stroke="#E84222" stroke-width="20" stroke-linecap="round" fill="none"/>
+                    <!-- M Right (Orange) -->
+                    <path d="M155 40 V 160" stroke="#E84222" stroke-width="20" stroke-linecap="round" fill="none"/>
+                    <!-- Y Center (Gold) -->
+                    <path d="M45 40 L 100 100 L 155 40" stroke="#FFBF00" stroke-width="20" stroke-linecap="round" fill="none"/>
+                    <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="20" stroke-linecap="round" fill="none"/>
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة (العنوان وتحته التاريخ) -->
+            <!-- العناوين المتناظرة (نظيف وبدون حدود) -->
             <div class="titles-container">
                 <!-- العمود الأيمن (العربي) -->
                 <div class="title-block ar">
                     <span class="main-title ar-font">بداية العام الهجري الجديد 1448 هـ</span>
-                    <span class="sub-title ar-font">الثلاثاء، 16 يونيو 2026 م</span>
+                    <span class="sub-title ar-font">الموافق: 16 يونيو 2026 م</span>
                 </div>
                 <!-- العمود الأيسر (الإنجليزي) -->
                 <div class="title-block en">
@@ -193,7 +200,7 @@
                 </div>
             </div>
 
-            <!-- العداد -->
+            <!-- العداد (في الوسط تماماً) -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -244,7 +251,7 @@
             </div>
             
             <div class="wings-wrapper">
-                <!-- الجناح الأيمن: النفسي (فكري، أكاديمي، اجتماعي) -->
+                <!-- الجناح الأيمن: النفسي -->
                 <div class="wing right-wing">
                     <div class="wing-header"><h2>الجناح الأيمن: الاستقرار النفسي</h2><span>Right Wing: Psychological Base</span></div>
                     <div class="wing-grid">
@@ -253,7 +260,7 @@
                         <div class="engine-card"><i data-lucide="users" style="color:white;"></i><h3 style="color:white; font-size:1rem;">3. الاستقرار الاجتماعي</h3><p style="font-size:0.7rem;color:#888;">Social Life</p><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div></div>
                     </div>
                 </div>
-                <!-- الجناح الأيسر: الجسدي (مهاراتي، مهني، مالي) -->
+                <!-- الجناح الأيسر: الجسدي -->
                 <div class="wing left-wing">
                     <div class="wing-header"><h2>الجناح الأيسر: الاستقرار الجسدي</h2><span>Left Wing: Physical Base</span></div>
                     <div class="wing-grid">
