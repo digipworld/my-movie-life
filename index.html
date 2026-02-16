@@ -35,7 +35,7 @@
         /* --- محتوى ما قبل العرض (المركز) --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 1002; width: 100%; max-width: 1200px;
+            z-index: 1002; width: 100%;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.5s;
         }
@@ -43,7 +43,7 @@
 
         /* اللوغو */
         .glowing-logo { 
-            width: clamp(140px, 18vw, 200px); 
+            width: clamp(120px, 15vw, 180px); 
             height: auto;
             filter: drop-shadow(0 0 30px rgba(232, 66, 34, 0.4)); 
             cursor: pointer; transition: transform 0.3s; 
@@ -57,27 +57,30 @@
             grid-template-columns: 1fr 1fr;
             gap: 40px;
             width: 100%;
-            align-items: flex-start; /* التوازي من الأعلى لضمان تطابق الأسطر */
+            max-width: 1400px;
+            align-items: flex-start; 
             margin-bottom: 30px;
+            padding: 0 5%; /* مساحة مريحة على الجوانب */
         }
 
         .title-block { display: flex; flex-direction: column; }
 
-        /* العربي يمين، يحاذي لليسار باتجاه المنتصف */
-        .title-block.ar { text-align: left; padding-left: 20px; border-left: 1px solid rgba(232, 66, 34, 0.2); }
+        /* العربي يمين، يحاذي لليسار باتجاه المنتصف - تم حذف الخط الأحمر */
+        .title-block.ar { text-align: left; padding-left: 20px; border: none; }
+        
         /* الإنجليزي يسار، يحاذي لليمين باتجاه المنتصف */
-        .title-block.en { text-align: right; direction: ltr; padding-right: 20px; }
+        .title-block.en { text-align: right; direction: ltr; padding-right: 20px; border: none; }
 
         .main-title { 
             color: var(--gold-amber); font-weight: 900; 
-            font-size: clamp(1rem, 3vw, 1.8rem); 
+            font-size: clamp(0.9rem, 2.5vw, 1.7rem); 
             text-transform: uppercase; line-height: 1.2; 
             margin-bottom: 8px;
         }
         
         .sub-title { 
             color: var(--primary-orange); 
-            font-size: clamp(0.8rem, 2.2vw, 1.2rem); 
+            font-size: clamp(0.7rem, 2vw, 1.1rem); 
             font-weight: 700; font-family: sans-serif; 
             display: block;
             line-height: 1.2;
@@ -92,11 +95,11 @@
         .timer-unit { 
             background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); 
             padding: 12px; border-radius: 12px; 
-            min-width: clamp(70px, 12vw, 110px); text-align: center; 
+            min-width: clamp(65px, 10vw, 110px); text-align: center; 
             box-shadow: 0 0 20px rgba(0,0,0,0.5); 
         }
-        .timer-val { font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
-        .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
+        .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
+        .timer-label { font-size: 0.6rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
         .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
 
@@ -156,47 +159,44 @@
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
 
-        /* --- تحسينات الجوال الحاسمة (Mobile Visual Balance & Symmetry) --- */
+        /* --- تحسينات الجوال الحاسمة (Mobile Visual Balance) --- */
         @media (max-width: 768px) {
             .titles-container { 
-                grid-template-columns: 1fr 1fr; /* الإصرار على التقابل الجانبي في الهاتف */
-                gap: 10px; /* فجوة ضيقة جداً للمنتصف */
-                padding: 0 12%; /* مساحة راحة واسعة يميناً ويساراً (12%) */
+                grid-template-columns: 1fr 1fr; /* الحفاظ على الانقسام الجانبي */
+                gap: 10px; 
+                padding: 0 10%; /* مساحة مريحة يميناً ويساراً لمنع خروج النص */
                 margin-bottom: 25px;
             }
             
             .title-block.ar { 
-                text-align: left !important; /* يحاذي لليسار باتجاه الخط الفاصل */
-                padding-left: 8px;
+                text-align: left !important; 
+                padding-left: 10px;
                 padding-right: 0;
-                border-left: 1.5px solid rgba(255, 191, 0, 0.4); /* خط فاصل خفيف جداً في المنتصف */
             }
             
             .title-block.en { 
-                text-align: right !important; /* يحاذي لليمين باتجاه الخط الفاصل */
-                padding-right: 8px;
+                text-align: right !important; 
+                padding-right: 10px;
                 padding-left: 0;
             }
             
             .main-title { 
-                font-size: 0.65rem; /* تصغير الخط لضمان عدم انكسار السطر */
+                font-size: 0.65rem; /* تصغير الخط لمنع الانكسار والخروج عن الشاشة */
                 margin-bottom: 4px;
                 white-space: nowrap; 
-                letter-spacing: -0.2px;
             }
             
             .sub-title { 
-                font-size: 0.52rem; /* تصغير التاريخ لضمان التوازن */
+                font-size: 0.52rem; 
                 display: block;
                 white-space: nowrap; 
             }
 
-            .timer-unit { min-width: 58px; padding: 8px; }
+            .timer-unit { min-width: 55px; padding: 8px; }
             .timer-val { font-size: 1.5rem; }
             .timer-label { font-size: 0.45rem; }
-            .glowing-logo { width: 85px; margin-bottom: 15px; }
+            .glowing-logo { width: 80px; margin-bottom: 20px; }
             
-            /* شاشة ما بعد الاسم: اللوغو فوق اسم البطل عمودياً في الوسط */
             .top-nav { 
                 flex-direction: column; 
                 justify-content: center;
@@ -205,7 +205,6 @@
                 text-align: center;
             }
             
-            /* أجنحة الطائرة في الهاتف */
             .wings-wrapper { flex-direction: column; gap: 20px; }
             .wing { border: none; border-bottom: 3px solid #333; min-width: auto; padding: 15px; }
             .wing.right-wing { border-right: none; border-bottom: 3px solid var(--gold-amber); }
@@ -228,7 +227,7 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة (المحاذاة المجهرية) -->
+            <!-- العناوين المتناظرة (التقابل التام) -->
             <div class="titles-container">
                 <!-- العمود الأيمن (العربي) -->
                 <div class="title-block ar">
@@ -271,7 +270,7 @@
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
-        <!-- المانشيت الرئيسي (الجملة المحدثة) -->
+        <!-- المانشيت الرئيسي المحدث -->
         <div class="sniper-banner main-banner">
             <p style="font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: white; line-height: 1.6;">
                 هناك <strong>7 استقرارات</strong> لضمان توازن رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي + النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها+
@@ -322,6 +321,7 @@
         </div>
     </main>
 
+    <!-- نافذة الروح -->
     <div id="soul-modal">
         <div class="modal-content">
             <button class="close-btn" onclick="closeSoul()">✕</button>
