@@ -139,6 +139,13 @@
         .body-mind-grid {
             display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%;
         }
+        
+        .wing-section-header {
+            text-align: center; margin-bottom: 10px; color: var(--text-white); font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px;
+        }
+        .wing-section-header i { color: var(--gold-amber); }
+        .wing-section-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; margin-top: 5px; display: block; }
+
 
         /* 2. مجموعات المحركات (The Engines) */
         .engines-wrapper {
@@ -352,17 +359,30 @@
 
                     <!-- النفسي والجسدي (تحت الروحي) -->
                     <div class="body-mind-grid">
-                        <!-- النفسي -->
-                        <div class="engine-card">
-                            <div style="display:flex;justify-content:space-between;"><i data-lucide="brain-circuit" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار النفسي</h3></div>
-                            <p style="font-size:0.7rem;color:#888; margin-top:5px; border-bottom: 1px solid #333; padding-bottom: 5px;">Psychological Stability</p>
-                            <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+                        <!-- النفسي (الجناح الأيمن) -->
+                        <div class="engine-wrapper">
+                            <div class="wing-section-header">
+                                <i data-lucide="wing" style="transform: scaleX(-1);"></i>
+                                <span>الجناح الأيمن <br> RIGHT WING</span>
+                            </div>
+                            <div class="engine-card">
+                                <div style="display:flex;justify-content:space-between;"><i data-lucide="brain-circuit" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار النفسي</h3></div>
+                                <p style="font-size:0.7rem;color:#888; margin-top:5px; border-bottom: 1px solid #333; padding-bottom: 5px;">Psychological Stability</p>
+                                <div class="progress-track"><div class="progress-fill" style="width:40%"></div></div>
+                            </div>
                         </div>
-                        <!-- الجسدي -->
-                        <div class="engine-card">
-                            <div style="display:flex;justify-content:space-between;"><i data-lucide="dumbbell" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار الجسدي</h3></div>
-                            <p style="font-size:0.7rem;color:#888; margin-top:5px; border-bottom: 1px solid #333; padding-bottom: 5px;">Physical Stability</p>
-                            <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+                        
+                        <!-- الجسدي (الجناح الأيسر) -->
+                        <div class="engine-wrapper">
+                            <div class="wing-section-header">
+                                <i data-lucide="wing"></i>
+                                <span>الجناح الأيسر <br> LEFT WING</span>
+                            </div>
+                            <div class="engine-card">
+                                <div style="display:flex;justify-content:space-between;"><i data-lucide="dumbbell" style="color:white;"></i><h3 style="color:white; font-size:1rem; margin:0;">الاستقرار الجسدي</h3></div>
+                                <p style="font-size:0.7rem;color:#888; margin-top:5px; border-bottom: 1px solid #333; padding-bottom: 5px;">Physical Stability</p>
+                                <div class="progress-track"><div class="progress-fill" style="width:50%"></div></div>
+                            </div>
                         </div>
                     </div>
                 </div>
