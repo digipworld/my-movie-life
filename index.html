@@ -18,7 +18,6 @@
             --card-bg: #111111;
             --text-white: #ffffff;
             --text-grey: #cccccc;
-            --wing-bg: rgba(255, 255, 255, 0.03);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -35,7 +34,7 @@
         /* --- محتوى ما قبل العرض (المركز) --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-            z-index: 1002; width: 95%; max-width: 1200px;
+            z-index: 1002; width: 100%; max-width: 1200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.5s;
         }
@@ -47,24 +46,35 @@
             height: auto;
             filter: drop-shadow(0 0 30px rgba(232, 66, 34, 0.4)); 
             cursor: pointer; transition: transform 0.3s; 
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
         /* --- العناوين المتناظرة --- */
         .titles-container {
             display: grid;
-            grid-template-columns: 1fr 1fr; /* تقسيم متساوي للحاسوب */
+            grid-template-columns: 1fr 1fr;
             gap: 40px;
             width: 100%;
-            align-items: flex-end; 
+            align-items: center;
             margin-bottom: 30px;
         }
 
         .title-block { display: flex; flex-direction: column; justify-content: center; }
 
-        .title-block.ar { text-align: left; padding-left: 15px; padding-top: 5px; }
-        .title-block.en { text-align: right; direction: ltr; padding-right: 15px; }
+        /* العربي (يمين) - إضافة إزاحة بصرية بسيطة */
+        .title-block.ar { 
+            text-align: left; 
+            padding-left: 15px; 
+            padding-top: 5px;
+        }
+        
+        /* الإنجليزي (يسار) */
+        .title-block.en { 
+            text-align: right; 
+            direction: ltr; 
+            padding-right: 15px; 
+        }
 
         .main-title { 
             color: var(--gold-amber); font-weight: 900; 
@@ -81,15 +91,22 @@
         }
         .ar-font { font-family: 'Cairo', sans-serif; }
 
-        /* العداد */
-        .timer-grid { display: flex; justify-content: center; gap: 15px; width: 100%; }
+        /* --- العداد (تمركز تام) --- */
+        .timer-grid { 
+            display: flex; 
+            justify-content: center; 
+            gap: 15px; 
+            width: 100%;
+        }
+        
         .timer-unit { 
             background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); 
-            padding: 12px; border-radius: 12px; 
+            padding: 15px; border-radius: 12px; 
             min-width: clamp(70px, 12vw, 110px); text-align: center; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); 
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
+
         .timer-val { font-size: clamp(2rem, 5vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
         .timer-label { font-size: 0.7rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
@@ -154,29 +171,31 @@
         /* --- تحسينات الجوال الحاسمة (Mobile Fixes) --- */
         @media (max-width: 768px) {
             .titles-container { 
-                grid-template-columns: 1fr; /* تحويل الشبكة لعمود واحد */
-                gap: 20px; 
+                /* تحويل الشبكة لعمود واحد لتجنب التزاحم */
+                display: flex;
+                flex-direction: column;
+                gap: 30px; /* مسافة واضحة بين اللغتين */
                 text-align: center;
-                margin-bottom: 20px;
+                align-items: center;
             }
             
             .title-block.ar, .title-block.en { 
-                text-align: center !important; /* إجبار التوسيط */
+                text-align: center !important; /* إجبار التوسيط في الجوال */
                 width: 100%; 
                 padding: 0; 
-                border: none;
             }
             
             .main-title { 
-                font-size: 1.5rem; 
-                margin-bottom: 5px;
+                font-size: 1.4rem; 
+                margin-bottom: 8px;
             }
             
             .sub-title { 
                 font-size: 1rem; 
+                display: block; /* لضمان نزول التاريخ لسطر جديد */
             }
 
-            .timer-unit { min-width: 65px; padding: 10px; }
+            .timer-unit { min-width: 70px; padding: 10px; }
             .timer-val { font-size: 1.8rem; }
             .glowing-logo { width: 100px; margin-bottom: 20px; }
             
@@ -195,7 +214,7 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
-            <!-- اللوغو -->
+            <!-- اللوغو (في الوسط تماماً) -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
@@ -204,19 +223,21 @@
                 </svg>
             </div>
             
-            <!-- العناوين -->
+            <!-- العناوين المتناظرة (Grid System) -->
             <div class="titles-container">
+                <!-- العمود الأيمن (العربي) -->
                 <div class="title-block ar">
                     <span class="main-title ar-font">بداية العام الهجري الجديد 1448 هـ</span>
                     <span class="sub-title ar-font">الموافق: الثلاثاء، 16 يونيو 2026 م</span>
                 </div>
+                <!-- العمود الأيسر (الإنجليزي) -->
                 <div class="title-block en">
                     <span class="main-title">THE GRAND PREMIERE OF HIJRI 1448</span>
                     <span class="sub-title">Tuesday, June 16, 2026 | AD</span>
                 </div>
             </div>
 
-            <!-- العداد -->
+            <!-- العداد (في الوسط تماماً) -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -245,25 +266,13 @@
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
-        <!-- المانشيت الرئيسي: 7 استقرارات -->
-        <div class="sniper-banner main-banner">
-            <p style="font-size: 1.1rem; color: white;">
-                "هناك <strong>7 استقرارات</strong> لضمان توازن الرحلة، ويبقى <span class="highlight">الاستقرار الصحي</span> هو الأساس الذي لا وجود لباقي الاستقرارات بدونه"
-            </p>
-            <p style="font-size: 0.8rem; color: var(--text-grey); margin-top: 5px;">There are <strong>7 Stabilities</strong> for a balanced flight, but <strong>Health Stability</strong> is the Foundation.</p>
+        <div class="sniper-banner">
+            <p style="font-size: 1.1rem; color: white;">"علاقتك بالله، بوالديك وبصحتك هي <span class="highlight" style="color: var(--gold-amber);">بندقية ︻╦╤─ قنصك</span> في الحياة"</p>
         </div>
 
-        <!-- شريط حالة الرحلة + مقولة القناص -->
         <div class="flight-status-banner">
-            <div class="flight-row">
-                <p class="flight-ar"><span class="alert-text">تذكير هام :</span> توازن الطائرة ✈️ يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي) وتوجيه <strong>الروح</strong>.</p>
-                <p class="flight-en" style="direction: ltr;"><span class="alert-text">IMPORTANT REMINDER :</span> Plane ✈️ Balance depends on <strong>Health Stability</strong> & <strong>Soul Guidance</strong>.</p>
-            </div>
-            
-            <div class="flight-row" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 10px;">
-                <p class="quote-text">"علاقتك بالله، بوالديك وبصحتك هي بندقية ︻╦╤─ قنصك في الحياة"</p>
-                <p class="quote-text" style="direction: ltr;">"Faith, Parents & Health is your Sniper Rifle"</p>
-            </div>
+            <p><span class="alert-text">تذكير هام :</span> توازن الطائرة ✈️ يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي) وتوجيه <strong>الروح</strong>.</p>
+            <p style="direction: ltr; margin-top: 5px; opacity: 0.8; font-size: 0.8rem;">IMPORTANT: Plane ✈️ Balance depends on <strong>Health Stability</strong> & <strong>Soul Guidance</strong>.</p>
         </div>
 
         <div class="plane-layout">
