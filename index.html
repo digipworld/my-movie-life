@@ -41,6 +41,7 @@
         }
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
 
+        /* اللوغو */
         .glowing-logo { 
             width: clamp(120px, 15vw, 180px); height: auto;
             filter: drop-shadow(0 0 30px rgba(232, 66, 34, 0.4)); 
@@ -127,9 +128,23 @@
         }
         .curtain-open #app-container { opacity: 1; }
         
-        .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
+        /* الشريط العلوي (Top Nav) - الحاسوب: يمين ويسار */
+        .top-nav { 
+            padding: 15px 30px; 
+            display: flex; 
+            justify-content: space-between; /* يوزع العناصر على الأطراف */
+            align-items: center; 
+            background: rgba(0,0,0,0.95); 
+            border-bottom: 1px solid #222; 
+            position: sticky; top: 0; z-index: 100; 
+        }
+        
+        /* الشعار (في اليمين تلقائياً بسبب RTL) */
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
+
+        /* اسم البطل (في اليسار تلقائياً بسبب RTL) */
+        .hero-label { color: var(--gold-amber); font-weight: 800; font-size: 0.9rem; }
 
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 30px 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
         .highlight { color: var(--gold-amber); font-weight: bold; }
@@ -180,7 +195,7 @@
         .task-item.done { border-color: var(--gold-amber); background: #1a1600; }
         .checkbox { width: 22px; height: 22px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; }
 
-        /* --- تحسينات الجوال المعتمدة --- */
+        /* --- تحسينات الجوال (Mobile) --- */
         @media (max-width: 768px) {
             .line-break { display: block; height: 0; } 
             
@@ -206,14 +221,19 @@
             
             #registration-screen h1 { font-size: 1.1rem !important; }
             
-            .top-nav { flex-direction: column; gap: 8px; text-align: center; padding: 15px; }
+            /* شريط العنوان في الهاتف: عمودي ومتمركز */
+            .top-nav { 
+                flex-direction: column; 
+                gap: 8px; 
+                text-align: center; 
+                padding: 15px; 
+            }
             
             .wings-wrapper { flex-direction: column; gap: 20px; }
             .wing { border: none; border-bottom: 3px solid #333; min-width: auto; padding: 15px; }
             .wing.right-wing { border-bottom-color: var(--gold-amber); }
             .wing.left-wing { border-bottom-color: var(--primary-orange); }
 
-            /* السماح بالانكسار في الجوال فقط إذا لزم الأمر */
             .wing-header h2 { font-size: 1rem; white-space: normal; }
             
             .click-hint-container { gap: 10px; margin-top: 30px; font-size: 0.7rem; }
@@ -226,7 +246,6 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
-            <!-- اللوغو (في الوسط تماماً) -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
@@ -235,7 +254,6 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة -->
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">
@@ -262,7 +280,6 @@
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
             
-            <!-- التلميح المتناظر (الجديد) -->
             <div class="click-hint-container">
                 <div class="hint-text ar">اضغط على الشعار</div>
                 <div class="hint-divider">|</div>
@@ -271,7 +288,6 @@
         </div>
     </div>
 
-    <!-- شاشة إدخال الاسم -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 <br> <span class="highlight">قنصك في الحياة</span></h1>
         <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> is your Sniper Rifle</p>
@@ -281,11 +297,10 @@
         </div>
     </section>
 
-    <!-- لوحة التحكم (هيكل الطائرة) -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
-            <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
+            <div id="display-hero-name" class="hero-label">البطل: جاري التسجيل 👤</div>
         </nav>
 
         <div class="sniper-banner main-banner">
