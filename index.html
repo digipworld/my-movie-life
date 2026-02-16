@@ -48,7 +48,7 @@
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
-        /* --- العناوين المتناظرة (Desktop) --- */
+        /* --- العناوين المتناظرة --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
@@ -83,10 +83,35 @@
         .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
         .timer-label { font-size: 0.6rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
-        .click-hint { color: var(--text-grey); font-size: 0.8rem; margin-top: 40px; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+        /* --- التلميح (Click Hint) المتناظر بدقة --- */
+        .click-hint-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px; /* المسافة حول الخط الفاصل */
+            margin-top: 40px;
+            width: 100%;
+            color: var(--text-grey);
+            font-size: 0.8rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .hint-side { flex: 1; }
+        
+        /* العربي يمين، يحاذي لليسار نحو المركز */
+        .hint-side.ar { text-align: left; }
+        
+        /* الإنجليزي يسار، يحاذي لليمين نحو المركز */
+        .hint-side.en { text-align: right; direction: ltr; font-family: sans-serif; }
+        
+        /* الخط الفاصل */
+        .hint-sep { color: var(--text-white); font-weight: 100; font-size: 1rem; opacity: 0.5; }
+
 
         /* --- التطبيق الرئيسي --- */
-        #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 0.5s; overflow-y: auto; }
+        #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s 1s; overflow-y: auto; }
         .curtain-open #app-container { opacity: 1; }
         
         .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
@@ -165,6 +190,9 @@
                 font-size: 1rem;
                 white-space: nowrap;
             }
+            
+            /* تعديل الهامش للتلميح في الجوال */
+            .click-hint-container { gap: 10px; margin-top: 30px; font-size: 0.7rem; }
         }
     </style>
 </head>
@@ -183,11 +211,11 @@
                 </svg>
             </div>
             
-            <!-- العناوين المتناظرة (Clean Symmetry) -->
+            <!-- العناوين المتناظرة -->
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">
-                        افتتاح العام الهجري <span class="line-break"></span> الجديد 1448 هـ
+                        بداية العام الهجري <span class="line-break"></span> الجديد 1448 هـ
                     </span>
                     <span class="sub-title ar-font">
                         الموافق: الثلاثاء، 16 <span class="line-break"></span> يونيو 2026 م
@@ -210,7 +238,12 @@
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
             
-            <p class="click-hint">اضغط على الشعار | CLICK LOGO</p>
+            <!-- التلميح المتناظر (الجديد) -->
+            <div class="click-hint-container">
+                <div class="hint-side ar">اضغط على الشعار</div>
+                <div class="hint-sep">|</div>
+                <div class="hint-side en">CLICK LOGO</div>
+            </div>
         </div>
     </div>
 
@@ -255,7 +288,7 @@
                 <div class="wing right-wing">
                     <div class="wing-header">
                         <h2>الجناح الأيمن: الاستقرار النفسي</h2>
-                        <span>Right Wing: Psychological Stability</span>
+                        <span>Right Wing: Psychological Base</span>
                     </div>
                     <div class="wing-grid">
                         <div class="engine-card"><i data-lucide="book-open" style="color:white;"></i><h3 style="color:white; font-size:1rem;">1. الاستقرار الفكري</h3><p style="font-size:0.7rem;color:#888;">Intellectual Stability</p><div class="progress-track"><div class="progress-fill" style="width:20%"></div></div></div>
@@ -266,7 +299,7 @@
                 <div class="wing left-wing">
                     <div class="wing-header">
                         <h2>الجناح الأيسر: الاستقرار الجسدي</h2>
-                        <span>Left Wing: Physical Stability</span>
+                        <span>Left Wing: Physical Base</span>
                     </div>
                     <div class="wing-grid">
                         <div class="engine-card"><i data-lucide="dumbbell" style="color:white;"></i><h3 style="color:white; font-size:1rem;">4. الاستقرار المهاراتي</h3><p style="font-size:0.7rem;color:#888;">Skills Stability</p><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div>
