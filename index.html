@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Movie Life | اصنع فيلم حياتك</title>
     
-    <!-- Favicon (M+Y Logo) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><circle cx='100' cy='100' r='85' stroke='%23E84222' stroke-width='4' fill='none' opacity='0.6'/><path d='M40 160 V 40 L 100 100 L 160 40 V 160' stroke='%23E84222' stroke-width='20' stroke-linecap='round' stroke-linejoin='round' fill='none'/><path d='M100 100 V 190' stroke='%23FFBF00' stroke-width='20' stroke-linecap='round' fill='none'/></svg>">
 
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;800;900&display=swap" rel="stylesheet">
@@ -20,6 +20,7 @@
             --text-white: #ffffff;
             --text-grey: #ffffff;
             --wing-bg: rgba(255, 255, 255, 0.03);
+            /* تم إزالة اللون الأحمر واستبداله بالبرتقالي في الاستخدام */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
@@ -58,8 +59,7 @@
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             z-index: 1001; text-align: center;
-            transition: opacity 0.6s ease; width: 95%; max-width: 1200px;
-            display: flex; flex-direction: column; align-items: center;
+            transition: opacity 0.6s ease; width: 95%; max-width: 1000px;
         }
 
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
@@ -67,59 +67,44 @@
         .glowing-logo {
             filter: drop-shadow(0 0 20px var(--primary-orange));
             cursor: pointer; transition: transform 0.3s ease;
-            margin-bottom: 30px;
-            width: clamp(120px, 20vw, 180px);
+            margin-bottom: 35px;
         }
         .glowing-logo:hover { transform: scale(1.05); }
 
         /* العناوين الهجينة */
-        .event-container { width: 100%; margin-top: 10px; padding: 0 15px; }
-        .hybrid-row { display: flex; width: 100%; justify-content: center; gap: 15px; margin-bottom: 10px; flex-direction: column; align-items: center; }
-
-        @media (min-width: 768px) {
-            .hybrid-row { flex-direction: row; gap: 40px; align-items: flex-end; }
-            .event-tag-ar { text-align: left !important; flex: 1; }
-            .event-tag-en { text-align: right !important; flex: 1; }
-            .date-sub-ar { text-align: left !important; flex: 1; }
-            .date-sub-en { text-align: right !important; flex: 1; }
-        }
-
-        .event-tag-ar { color: var(--gold-amber); font-weight: 900; font-size: clamp(1.1rem, 4vw, 1.45rem); line-height: 1.2; text-align: center; }
-        .event-tag-en { color: var(--gold-amber); font-weight: 800; font-size: clamp(0.9rem, 3.5vw, 1.15rem); line-height: 1.2; text-align: center; text-transform: uppercase; font-family: sans-serif; }
-        .date-sub-ar { color: var(--primary-orange); font-size: clamp(0.85rem, 3vw, 1.05rem); text-align: center; }
-        .date-sub-en { color: var(--primary-orange); font-size: clamp(0.75rem, 2.5vw, 0.9rem); text-align: center; opacity: 0.9; }
+        .event-container { margin-top: 10px; width: 100%; display: flex; flex-direction: column; align-items: center; }
+        .hybrid-row { display: flex; width: 100%; justify-content: center; gap: 35px; margin-bottom: 12px; align-items: flex-end; }
+        .event-tag-ar { flex: 1; color: var(--gold-amber); font-weight: 900; font-size: 1.45rem; text-align: left; line-height: 1; }
+        .event-tag-en { flex: 1; color: var(--gold-amber); font-weight: 800; font-size: 1.15rem; text-align: right; font-family: 'Cairo'; letter-spacing: 0.5px; text-transform: uppercase; line-height: 1.1; }
+        .date-sub-ar { flex: 1; color: var(--primary-orange); font-size: 1.05rem; text-align: left; line-height: 1; }
+        .date-sub-en { flex: 1; color: var(--primary-orange); font-size: 0.9rem; text-align: right; line-height: 1.1; }
 
         /* العداد */
-        .timer-grid { display: flex; justify-content: center; gap: clamp(8px, 2vw, 15px); margin-top: 30px; flex-wrap: wrap; }
-        .timer-unit { background: rgba(232, 66, 34, 0.05); border: 1px solid rgba(232, 66, 34, 0.3); padding: clamp(10px, 3vw, 18px); border-radius: 12px; min-width: clamp(75px, 20vw, 100px); box-shadow: 0 0 15px rgba(0,0,0,0.5); }
-        .timer-val { font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; display: block; }
-        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
+        .timer-grid { display: flex; justify-content: center; gap: 12px; margin-top: 30px; }
+        .timer-unit { background: rgba(232, 66, 34, 0.05); border: 1px solid rgba(232, 66, 34, 0.3); padding: 15px; border-radius: 12px; min-width: 95px; box-shadow: 0 0 15px rgba(0,0,0,0.5); }
+        .timer-val { font-size: 2.7rem; color: var(--gold-amber); font-family: monospace; font-weight: bold; display: block; }
+        .timer-label { font-size: 0.65rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; }
 
-        /* --- شاشة التسجيل --- */
-        #registration-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, #1a0500 0%, #050505 100%);
-            z-index: 500; display: flex; flex-direction: column;
-            justify-content: center; align-items: center;
-            padding: 30px; text-align: center;
-            transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1);
-        }
-        .registration-hidden { transform: translateY(-100%); }
-        .sniper-motto { max-width: 900px; margin-bottom: 40px; }
-        .sniper-motto h1 { font-size: clamp(1.4rem, 5vw, 2.4rem); font-weight: 900; color: var(--gold-amber); line-height: 1.4; text-shadow: 0 0 20px rgba(255, 191, 0, 0.4); margin-bottom: 15px; }
-        .sniper-motto p { font-size: clamp(0.9rem, 3vw, 1.2rem); color: var(--text-white); opacity: 0.9; font-weight: bold; }
-        .reg-form { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 20px; }
-        .hero-input { background: rgba(255,255,255,0.05); border: 2px solid #333; border-radius: 12px; padding: 18px; color: white; font-family: 'Cairo'; font-size: 1.1rem; text-align: center; outline: none; transition: 0.3s; }
-        .hero-input:focus { border-color: var(--primary-orange); box-shadow: 0 0 15px rgba(232, 66, 34, 0.3); }
-        .start-btn { background: var(--primary-orange); color: white; border: none; padding: 20px; border-radius: 12px; font-weight: 900; font-size: 1.2rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 20px rgba(232, 66, 34, 0.4); animation: pulse-orange 2s infinite; }
-
-        /* --- التطبيق الرئيسي (هيكل الطائرة) --- */
-        #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s 0.5s; overflow-y: auto; }
+        /* --- التطبيق الرئيسي --- */
+        #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 1s 1.2s; overflow-y: auto; }
         .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 10px; }
-        .brand { font-weight: 900; font-size: 1.3rem; color: var(--text-white); }
+        .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
-        .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 20px; text-align: center; border-bottom: 1px solid #333; font-size: clamp(0.8rem, 2.5vw, 1rem); line-height: 1.6; }
-        .flight-status-banner strong { color: var(--gold-amber); }
+        .hero-label { color: var(--gold-amber); font-weight: 800; font-size: 0.9rem; }
+        
+        .flight-status-banner { 
+            background: rgba(255, 191, 0, 0.05); padding: 25px; text-align: center; border-bottom: 1px solid #333; 
+        }
+        .flight-status-banner p { margin: 5px 0; line-height: 1.5; }
+        
+        .alert-text { color: var(--primary-orange); font-weight: bold; } /* تم التعديل للبرتقالي */
+        
+        /* تنسيقات النصوص الهجينة في البانر */
+        .banner-ar { font-size: clamp(0.9rem, 2.5vw, 1.1rem); color: var(--text-white); font-weight: bold; }
+        .banner-en { font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-white); opacity: 0.85; font-family: sans-serif; letter-spacing: 0.5px; }
+        
+        .banner-sub-ar { font-size: clamp(0.8rem, 2vw, 0.95rem); color: #ddd; margin-top: 10px; }
+        .banner-sub-en { font-size: clamp(0.7rem, 1.8vw, 0.85rem); color: #ccc; font-family: sans-serif; }
 
         /* --- شبكة الطائرة (The Plane Grid) --- */
         .plane-layout {
@@ -131,7 +116,6 @@
             gap: 40px;
         }
 
-        /* الذيل: الموجه */
         .tail-section {
             display: flex;
             justify-content: center;
@@ -145,11 +129,11 @@
             box-shadow: 0 0 30px rgba(232, 66, 34, 0.2);
         }
 
-        /* الأجنحة */
         .wings-wrapper {
             display: flex;
             gap: 30px;
             flex-wrap: wrap;
+            align-items: stretch;
         }
 
         .wing {
@@ -157,37 +141,41 @@
             background: var(--wing-bg);
             border: 1px solid #222;
             border-radius: 20px;
-            padding: 20px;
+            padding: 25px;
             min-width: 300px;
-            position: relative;
+            display: flex;
+            flex-direction: column;
         }
 
-        /* الجناح الأيمن (النفسي) */
         .wing.right-wing { border-right: 3px solid var(--gold-amber); }
-        /* الجناح الأيسر (الجسدي) */
         .wing.left-wing { border-left: 3px solid var(--primary-orange); }
 
         .wing-header {
             text-align: center;
-            margin-bottom: 25px;
-            padding-bottom: 10px;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
             border-bottom: 1px solid #333;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
-        .wing-header h2 { font-size: 1.2rem; color: var(--text-white); margin-bottom: 5px; }
-        .wing-header span { font-size: 0.8rem; color: var(--text-grey); letter-spacing: 1px; }
+        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
+        .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; }
 
         .wing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            flex-grow: 1;
         }
 
-        /* بطاقة المحرك */
         .engine-card {
             background: var(--card-bg); border: 1px solid #333;
             border-radius: 15px; padding: 20px; cursor: pointer;
             transition: 0.3s; position: relative;
             display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 160px;
         }
         .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); background: #161616; }
         .engine-card.active { box-shadow: 0 0 15px rgba(255, 191, 0, 0.2); border-color: var(--gold-amber); }
@@ -206,10 +194,24 @@
         .checkbox { width: 24px; height: 24px; border: 2px solid #555; border-radius: 50%; margin-left: 15px; flex-shrink: 0; }
         .task-item.done .checkbox { background: var(--gold-amber); border-color: var(--gold-amber); }
 
-        @keyframes pulse-orange { 0% { transform: scale(1); } 50% { transform: scale(1.02); box-shadow: 0 5px 30px rgba(232, 66, 34, 0.6); } 100% { transform: scale(1); } }
+        /* شاشة التسجيل */
+        #registration-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; transition: transform 1s cubic-bezier(0.7, 0, 0.3, 1); }
+        .registration-hidden { transform: translateY(-100%); }
+        .sniper-motto { max-width: 900px; margin-bottom: 40px; }
+        .sniper-motto h1 { font-size: clamp(1.4rem, 5vw, 2.4rem); font-weight: 900; color: var(--gold-amber); line-height: 1.4; text-shadow: 0 0 20px rgba(255, 191, 0, 0.4); margin-bottom: 15px; }
+        .sniper-motto p { font-size: clamp(0.9rem, 3vw, 1.2rem); color: var(--text-white); opacity: 0.9; font-weight: bold; }
+        .reg-form { width: 100%; max-width: 450px; display: flex; flex-direction: column; gap: 20px; }
+        .hero-input { background: rgba(255,255,255,0.05); border: 2px solid #333; border-radius: 12px; padding: 18px; color: white; font-family: 'Cairo'; font-size: 1.1rem; text-align: center; outline: none; transition: 0.3s; }
+        .hero-input:focus { border-color: var(--primary-orange); box-shadow: 0 0 15px rgba(232, 66, 34, 0.3); }
+        .start-btn { background: var(--primary-orange); color: white; border: none; padding: 20px; border-radius: 12px; font-weight: 900; font-size: 1.2rem; cursor: pointer; transition: 0.3s; box-shadow: 0 5px 20px rgba(232, 66, 34, 0.4); animation: pulse-orange 2s infinite; }
 
         @media (max-width: 900px) {
             .wings-wrapper { flex-direction: column; }
+            .wing.right-wing { border-right: none; border-bottom: 3px solid var(--gold-amber); }
+            .wing.left-wing { border-left: none; border-bottom: 3px solid var(--primary-orange); }
+            .timer-val { font-size: 2.1rem; }
+            .timer-unit { min-width: 80px; padding: 10px; }
+            .hybrid-row { gap: 15px; }
         }
     </style>
 </head>
@@ -266,11 +268,17 @@
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
-            <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">البطل: جاري التسجيل 👤</div>
+            <div id="display-hero-name" class="hero-label">البطل: جاري التسجيل 👤</div>
         </nav>
 
         <div class="flight-status-banner">
-            <p>✈️ توازن الطائرة يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي) وتوجيه <strong>الروح</strong>.</p>
+            <p class="banner-ar"><span class="alert-text">تذكير هام :</span> توازن الطائرة ✈️ يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي) وتوجيه <strong>الروح</strong>.</p>
+            <p class="banner-en"><span class="alert-text">IMPORTANT :</span> Plane's ✈️ balance depends on <strong>Health Stability</strong> (Mental + Physical) & <strong>Soul Guidance</strong>.</p>
+            
+            <div style="margin-top: 15px; border-top: 1px solid #333; padding-top: 10px;">
+                <p class="banner-sub-ar">هناك <strong>7 استقرارات</strong> لضمان توازن الرحلة، ويبقى <strong>الاستقرار الصحي</strong> هو الأساس.</p>
+                <p class="banner-sub-en">There are <strong>7 Stabilities</strong> for a balanced flight, but <strong>Health Stability</strong> is the foundation.</p>
+            </div>
         </div>
 
         <div class="plane-layout">
