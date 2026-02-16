@@ -133,7 +133,23 @@
             background: rgba(232, 66, 34, 0.02);
             position: relative;
         }
-        .frame-tag { position: absolute; top: -12px; right: 40px; background: var(--deep-black); padding: 0 15px; color: var(--primary-orange); font-size: 0.75rem; font-weight: bold; border: 1px solid var(--primary-orange); border-radius: 10px; }
+
+        /* تعديل عنوان الإطار ليصبح أجنحة الطائرة بالأصفر ومتوسط */
+        .frame-tag { 
+            position: absolute; 
+            top: -15px; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background: var(--deep-black); 
+            padding: 2px 20px; 
+            color: var(--gold-amber); 
+            font-size: 0.85rem; 
+            font-weight: 900; 
+            border: 2px solid var(--gold-amber); 
+            border-radius: 15px; 
+            z-index: 2;
+            white-space: nowrap;
+        }
 
         .health-grid { display: flex; flex-direction: column; gap: 30px; align-items: center; }
         
@@ -298,7 +314,9 @@
 
             <!-- إطار الاستقرار الصحي (The Core Trinity) -->
             <div class="health-trinity-frame">
-                <div class="frame-tag">المفاعل الثلاثي | TRINITY CORE</div>
+                <!-- تم التعديل هنا: عنوان أجنحة الطائرة بالأصفر وفي المنتصف -->
+                <div class="frame-tag">أجنحة الطائرة | PLANE WINGS</div>
+                
                 <div class="health-grid">
                     
                     <!-- الذيل / البوصلة -->
@@ -454,8 +472,8 @@
         // حساب الاستقرار الصحي الشامل
         function calculateOverallHealth() {
             const soulPercent = parseInt(document.getElementById('main-soul-percent').innerText) || 0;
-            const psychPercent = 40; // قيمة افتراضية حالياً
-            const physPercent = 50;  // قيمة افتراضية حالياً
+            const psychPercent = 40; 
+            const physPercent = 50;  
             
             const overall = Math.round((soulPercent + psychPercent + physPercent) / 3);
             
