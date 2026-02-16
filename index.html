@@ -119,15 +119,39 @@
         .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; padding: 30px; }
-        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; border-left: 4px solid transparent; min-height: 160px; display: flex; flex-direction: column; justify-content: space-between; }
-        .engine-card.active { border-left-color: var(--primary-orange); }
-        .progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 10px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber)); width: 0%; transition: width 1s; }
+
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
+        .highlight { color: var(--gold-amber); font-weight: bold; }
+
+        /* لافتة الطائرة الهجينة */
         .flight-status-banner { background: rgba(255, 191, 0, 0.05); padding: 15px; text-align: center; border-bottom: 1px solid #333; font-size: 0.9rem; }
         .alert-text { color: var(--primary-orange); font-weight: bold; }
 
+        /* --- شبكة الطائرة (Plane Grid Layout) --- */
+        .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
+        
+        .tail-section { display: flex; justify-content: center; }
+        .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
+
+        .wings-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
+        
+        .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
+        .wing.right-wing { border-right: 4px solid var(--gold-amber); }
+        .wing.left-wing { border-left: 4px solid var(--primary-orange); }
+
+        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
+        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; }
+        .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
+
+        .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
+
+        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; }
+        .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); background: #161616; }
+        .engine-card.active { border-color: var(--gold-amber); box-shadow: 0 0 20px rgba(255, 191, 0, 0.1); }
+        
+        .progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 10px; }
+        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--primary-orange), var(--gold-amber)); width: 0%; transition: width 1s; }
+        
         /* شاشة التسجيل */
         #registration-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: radial-gradient(circle at center, #1a0500 0%, #050505 100%); z-index: 500; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; transition: transform 1s; }
         .registration-hidden { transform: translateY(-100%); }
@@ -149,6 +173,7 @@
             .timer-unit { min-width: 70px; padding: 10px; }
             .timer-val { font-size: 1.8rem; }
             .glowing-logo { width: 100px; margin-bottom: 20px; }
+            .wings-wrapper { flex-direction: column; }
         }
     </style>
 </head>
@@ -158,6 +183,7 @@
         <div class="curtain left"></div>
         <div class="curtain right"></div>
         <div id="pre-show-content">
+            <!-- اللوغو (في الوسط تماماً) -->
             <div class="glowing-logo" onclick="openShow()">
                 <svg viewBox="0 0 200 200">
                     <circle cx="100" cy="100" r="85" stroke="#E84222" stroke-width="2" stroke-dasharray="10 5" opacity="0.6"/>
@@ -166,17 +192,21 @@
                 </svg>
             </div>
             
+            <!-- العناوين المتناظرة (Grid System) -->
             <div class="titles-container">
+                <!-- العمود الأيمن (العربي) -->
                 <div class="title-block ar">
                     <span class="main-title ar-font">بداية العام الهجري الجديد 1448 هـ</span>
                     <span class="sub-title ar-font">الموافق: الثلاثاء 16 يونيو 2026 م</span>
                 </div>
+                <!-- العمود الأيسر (الإنجليزي) -->
                 <div class="title-block en">
                     <span class="main-title">THE GRAND PREMIERE OF HIJRI 1448</span>
                     <span class="sub-title">Tuesday, June 16, 2026 | AD</span>
                 </div>
             </div>
 
+            <!-- العداد (في الوسط تماماً) -->
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
@@ -198,7 +228,7 @@
         </div>
     </section>
 
-    <!-- لوحة التحكم -->
+    <!-- لوحة التحكم (هيكل الطائرة) -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
@@ -210,35 +240,47 @@
         </div>
 
         <div class="flight-status-banner">
-            <p><span class="alert-text">تذكير هام :</span> توازن الطائرة ✈️ يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي) وتوجيه <strong>الروح</strong>.</p>
-            <p style="direction: ltr; margin-top: 5px; opacity: 0.8; font-size: 0.8rem;">IMPORTANT: Plane ✈️ Balance depends on <strong>Health Stability</strong> & <strong>Soul Guidance</strong>.</p>
+            <div class="flight-row">
+                <p class="flight-ar"><span class="alert-text">تذكير هام :</span> توازن الطائرة ✈️ يعتمد على <strong>الاستقرار الصحي</strong> (نفسي + جسدي) وتوجيه <strong>الروح</strong>.</p>
+                <p class="flight-en" style="direction: ltr;"><span class="alert-text">IMPORTANT:</span> Plane ✈️ Balance depends on <strong>Health Stability</strong> & <strong>Soul Guidance</strong>.</p>
+            </div>
+            <div class="flight-row" style="margin-top: 10px; border-top: 1px solid #444; padding-top: 10px;">
+                <p class="flight-ar">هناك <strong>7 استقرارات</strong> لضمان توازن الرحلة، ويبقى <strong>الاستقرار الصحي</strong> هو الأساس.</p>
+                <p class="flight-en" style="direction: ltr;">There are <strong>7 Stabilities</strong> for a balanced flight, but <strong>Health Stability</strong> is the Foundation.</p>
+            </div>
         </div>
 
-        <div class="dashboard-grid">
-            <div class="engine-card active" onclick="openSoul()">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <i data-lucide="heart" style="color: var(--primary-orange);"></i>
-                    <span style="font-size: 0.65rem; color: var(--text-white); font-weight: 800;">SOUL ENGINE | محرك الروح</span>
+        <div class="plane-layout">
+            <!-- الذيل: الاستقرار الروحي -->
+            <div class="tail-section">
+                <div class="engine-card tail-card active" onclick="openSoul()">
+                    <div style="display:flex;justify-content:space-between;"><i data-lucide="compass" style="color:var(--primary-orange)"></i><span style="font-size:0.7rem; font-weight:bold; color:white;">الذيل / البوصلة | TAIL / COMPASS</span></div>
+                    <h3 style="color:white; margin:10px 0;">الاستقرار الروحي</h3>
+                    <p style="font-size:0.8rem; color:#888;">Spiritual Stability</p>
+                    <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
+                    <div style="text-align:left; margin-top:5px; color:var(--gold-amber); font-weight:bold;"><span id="main-soul-percent">0</span>%</div>
                 </div>
-                <h3>محرك الروح</h3>
-                <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
-                <div style="text-align: left; margin-top: 8px; color: var(--gold-amber); font-weight: 900;"><span id="main-soul-percent">0</span>%</div>
             </div>
             
-            <div class="engine-card">
-                <i data-lucide="coins"></i>
-                <h3 style="font-size: 1rem; margin-top: 10px;">محرك الباءة | Financial</h3>
-                <div class="progress-track"><div class="progress-fill" style="width:30%"></div></div>
-            </div>
-            <div class="engine-card">
-                <i data-lucide="activity"></i>
-                <h3 style="font-size: 1rem; margin-top: 10px;">محرك الصحة | Health</h3>
-                <div class="progress-track"><div class="progress-fill" style="width:55%"></div></div>
-            </div>
-            <div class="engine-card">
-                <i data-lucide="book"></i>
-                <h3 style="font-size: 1rem; margin-top: 10px;">محرك العقل | Intellectual</h3>
-                <div class="progress-track"><div class="progress-fill" style="width:15%"></div></div>
+            <div class="wings-wrapper">
+                <!-- الجناح الأيمن: النفسي -->
+                <div class="wing right-wing">
+                    <div class="wing-header"><h2>الجناح الأيمن: الاستقرار النفسي</h2><span>Right Wing: Psychological Base</span></div>
+                    <div class="wing-grid">
+                        <div class="engine-card"><i data-lucide="book-open" style="color:white;"></i><h3 style="color:white; font-size:1rem;">1. الاستقرار الفكري</h3><p style="font-size:0.7rem;color:#888;">Intellectual</p><div class="progress-track"><div class="progress-fill" style="width:20%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="graduation-cap" style="color:white;"></i><h3 style="color:white; font-size:1rem;">2. الاستقرار الأكاديمي</h3><p style="font-size:0.7rem;color:#888;">Academic</p><div class="progress-track"><div class="progress-fill" style="width:45%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="users" style="color:white;"></i><h3 style="color:white; font-size:1rem;">3. الاستقرار الاجتماعي</h3><p style="font-size:0.7rem;color:#888;">Social Life</p><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div></div>
+                    </div>
+                </div>
+                <!-- الجناح الأيسر: الجسدي -->
+                <div class="wing left-wing">
+                    <div class="wing-header"><h2>الجناح الأيسر: الاستقرار الجسدي</h2><span>Left Wing: Physical Base</span></div>
+                    <div class="wing-grid">
+                        <div class="engine-card"><i data-lucide="dumbbell" style="color:white;"></i><h3 style="color:white; font-size:1rem;">4. الاستقرار المهاراتي</h3><p style="font-size:0.7rem;color:#888;">Skills</p><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="briefcase" style="color:white;"></i><h3 style="color:white; font-size:1rem;">5. الاستقرار المهني</h3><p style="font-size:0.7rem;color:#888;">Career</p><div class="progress-track"><div class="progress-fill" style="width:50%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="coins" style="color:white;"></i><h3 style="color:white; font-size:1rem;">6. الاستقرار المالي</h3><p style="font-size:0.7rem;color:#888;">Financial</p><div class="progress-track"><div class="progress-fill" style="width:25%"></div></div></div>
+                    </div>
+                </div>
             </div>
         </div>
     </main>
@@ -285,6 +327,7 @@
             document.getElementById('display-hero-name').innerText = `HERO: ${name} | البطل: ${name} 👤`;
             document.getElementById('registration-screen').style.transform = "translateY(-100%)";
             document.getElementById('app-container').style.opacity = "1";
+            document.body.style.overflow = "auto";
         }
 
         function openSoul() { document.getElementById('soul-modal').style.display = "flex"; }
