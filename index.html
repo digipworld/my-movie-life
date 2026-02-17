@@ -115,7 +115,7 @@
             background: rgba(0,0,0,0.95); 
             border-bottom: 1px solid #222; 
             position: sticky; top: 0; z-index: 100;
-            flex-direction: row-reverse; /* اللوغو يسار، البطل يمين للحاسوب */
+            flex-direction: row-reverse; 
         }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
@@ -198,7 +198,6 @@
         .wing-section-header span { font-size: 0.85rem; color: var(--text-white); letter-spacing: 1px; font-family: 'Cairo', sans-serif; margin-top: 5px; display: block; font-weight: 900; }
         .wing-section-header i.orange-wing { color: var(--primary-orange); }
 
-        /* المحركات الفرعية */
         .engines-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
         .engine-group { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
         .engine-group.right { border-right: 4px solid var(--gold-amber); }
@@ -210,6 +209,13 @@
 
         .card-ar-title { color:white; margin:0; font-size:1.1rem; font-weight:900; white-space: nowrap; }
         .card-en-text { font-size:0.75rem; color:white; font-family:sans-serif; display: inline-block; }
+
+        /* التعديل الجديد على عناوين المؤشر الصحي */
+        .total-health-title-row { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; }
+        .total-health-ar { font-size: 0.85rem; font-weight: 900; color: white; }
+        
+        /* التعديل هنا: الخط العادي للإنجليزي */
+        .total-health-en { font-size: 0.75rem; font-weight: normal; color: #ccc; font-family: sans-serif; letter-spacing: 0.5px; }
 
         @media (max-width: 768px) {
             .line-break { display: block; height: 0; } 
@@ -233,6 +239,7 @@
             .health-trinity-frame { padding: 30px 15px; }
             .body-mind-grid { grid-template-columns: 1fr; }
             .soul-break { display: block; height: 0; }
+            
             .total-health-title-row { flex-direction: column; align-items: center; text-align: center; }
             .total-health-ar, .total-health-en { display: block; margin-bottom: 3px; }
             .card-en-text { display: block !important; margin-top: 2px; }
@@ -296,6 +303,7 @@
 
     <!-- لوحة التحكم -->
     <main id="app-container">
+        <!-- الشريط العلوي (معكوس للحاسوب) -->
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
@@ -322,12 +330,10 @@
                             <span class="total-health-ar">المؤشر الصحي الشامل</span>
                             <span class="total-health-en">TOTAL HEALTH INDEX</span>
                         </div>
-                        
                         <div style="display:flex; justify-content: space-between; align-items:center; margin-top:10px;">
                              <h3 style="color:var(--gold-amber); margin:0; font-weight:900;">نتيجة الاستقرار</h3>
                              <i data-lucide="activity" style="color:var(--gold-amber)"></i>
                         </div>
-                        
                         <div class="progress-track"><div id="health-master-bar" style="width: 30%;" class="progress-fill"></div></div>
                         <div style="text-align:left; margin-top:5px; color:var(--gold-amber); font-weight:bold; font-size:0.9rem;"><span id="health-master-percent">30</span>%</div>
                     </div>
@@ -341,7 +347,7 @@
                     <div class="tail-wrapper">
                         <div class="tail-header">
                             <i data-lucide="compass" style="color:var(--primary-orange)"></i>
-                            <span>الذيل / البوصلة | TAIL / COMPASS</span>
+                            <span>الذيل / البوصلة <br> TAIL / COMPASS</span>
                         </div>
                         <div class="engine-card tail-card active" onclick="openSoul()">
                             <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
