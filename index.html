@@ -51,7 +51,7 @@
         .glowing-logo:hover { transform: scale(1.05); }
         .glowing-logo svg { pointer-events: none; }
 
-        /* --- العناوين المتناظرة --- */
+        /* --- العناوين المتناظرة (Desktop) --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
@@ -117,10 +117,9 @@
             position: sticky; top: 0; z-index: 100;
             flex-direction: row-reverse; /* اللوغو يسار، البطل يمين للحاسوب */
         }
+        /* الشعار: M برتقالي، Y MOVIE أصفر، LIVE برتقالي */
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--gold-amber); }
         .brand span { color: var(--primary-orange); }
-        /* تلوين حرف M */
-        .brand span.first-letter { color: var(--primary-orange); }
 
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 30px 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
         .highlight { color: var(--gold-amber); font-weight: bold; }
@@ -210,12 +209,13 @@
         .group-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
 
-        /* تم تعديل حجم الخط للعناوين العربية في البطاقات */
-        .card-ar-title { color:white; margin:0; font-size:0.9rem; font-weight:900; white-space: nowrap; }
+        .card-ar-title { color:white; margin:0; font-size:1.1rem; font-weight:900; white-space: nowrap; }
         .card-en-text { font-size:0.75rem; color:white; font-family:sans-serif; display: inline-block; }
 
         .total-health-title-row { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; }
+        /* تم تعديل وزن الخط العربي */
         .total-health-ar { font-size: 0.85rem; font-weight: 900; color: white; }
+        /* تم تعديل وزن الخط الإنجليزي */
         .total-health-en { font-size: 0.75rem; font-weight: normal; color: #ccc; font-family: sans-serif; letter-spacing: 0.5px; }
 
         @media (max-width: 768px) {
@@ -303,8 +303,10 @@
 
     <!-- لوحة التحكم -->
     <main id="app-container">
+        <!-- الشريط العلوي -->
         <nav class="top-nav">
-            <div class="brand">MY MOVIE <span>LIVE</span></div>
+            <!-- الشعار المعدل -->
+            <div class="brand"><span>M</span>Y MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
@@ -325,6 +327,7 @@
                 
                 <div class="master-card-container">
                     <div class="engine-card active" style="min-height: 120px; border-left: 4px solid var(--gold-amber); background: rgba(255, 191, 0, 0.05);">
+                        <!-- العنوان للمؤشر الشامل (معدل: العربي غليظ، الإنجليزي عادي) -->
                         <div class="total-health-title-row">
                             <span class="total-health-ar">المؤشر الصحي الشامل</span>
                             <span class="total-health-en">TOTAL HEALTH INDEX</span>
@@ -343,12 +346,14 @@
 
             <div class="health-trinity-frame">
                 <div class="frame-tag">أجنحة الطائرة | PLANE WINGS</div>
+                
                 <div class="health-grid">
                     
+                    <!-- الذيل / البوصلة -->
                     <div class="tail-wrapper">
                         <div class="tail-header">
                             <i data-lucide="compass" style="color:var(--primary-orange)"></i>
-                            <span>الذيل / البوصلة <br> TAIL / COMPASS</span>
+                            <span>الذيل / البوصلة | TAIL / COMPASS</span>
                         </div>
                         <div class="engine-card tail-card active" onclick="openSoul()">
                             <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
@@ -376,7 +381,7 @@
                             </div>
                             <div class="engine-card">
                                 <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
-                                    <div style="display:flex; justify-content: space-between; align-items: center; gap: 10px;">
+                                    <div style="display:flex; justify-content: space-between; align-items: center;">
                                         <div style="display:flex; align-items: center; gap: 8px;">
                                             <i data-lucide="brain-circuit" style="color:white; width:18px;"></i>
                                             <h3 class="card-ar-title">الاستقرار <span class="soul-break"></span> النفسي</h3>
@@ -490,7 +495,18 @@
             const titleEn = selectedGender === 'male' ? 'HERO' : 'HEROINE';
             const titleAr = selectedGender === 'male' ? 'البطل' : 'البطلة';
             const emoji = selectedGender === 'male' ? '👤' : '🧕';
-            document.getElementById('display-hero-name').innerText = `${titleEn}: ${name} | ${titleAr}: ${name} ${emoji}`;
+            
+            // تعديل الألوان هنا باستخدام HTML
+            const heroHtml = `
+                <span style="color: var(--primary-orange);">${titleEn}</span>
+                <span style="color: var(--gold-amber);">: ${name}</span>
+                <span style="color: var(--gold-amber); margin: 0 5px;">|</span>
+                <span style="color: var(--primary-orange);">${titleAr}</span>
+                <span style="color: var(--gold-amber);">: ${name} ${emoji}</span>
+            `;
+            
+            document.getElementById('display-hero-name').innerHTML = heroHtml;
+            
             const regScreen = document.getElementById('registration-screen');
             regScreen.style.transform = "translateY(-110%)";
             document.getElementById('app-container').style.opacity = "1";
