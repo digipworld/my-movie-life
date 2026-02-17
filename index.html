@@ -32,13 +32,12 @@
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
-        /* --- محتوى ما قبل العرض --- */
+        /* --- محتوى ما قبل العرض (المركز) --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             z-index: 1002; width: 100%; max-width: 1200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.5s;
-            pointer-events: none;
         }
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
 
@@ -53,7 +52,7 @@
         .glowing-logo:hover { transform: scale(1.05); }
         .glowing-logo svg { pointer-events: none; }
 
-        /* --- العناوين المتناظرة --- */
+        /* --- العناوين المتناظرة (Desktop) --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
@@ -108,8 +107,7 @@
         #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 0.5s; overflow-y: auto; }
         .curtain-open #app-container { opacity: 1; }
         
-        /* الشريط العلوي */
-        .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; flex-direction: row-reverse; }
+        .top-nav { padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.95); border-bottom: 1px solid #222; position: sticky; top: 0; z-index: 100; }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
 
@@ -256,12 +254,14 @@
                     <span class="sub-title">Tuesday, June 16, <span class="line-break"></span> 2026 | AD</span>
                 </div>
             </div>
+
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
                 <div class="timer-unit"><span id="minutes" class="timer-val">00</span><span class="timer-label">دقيقة | Mins</span></div>
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
+            
             <div class="click-hint-container">
                 <div class="hint-side ar">اضغط على الشعار</div>
                 <div class="hint-sep">|</div>
@@ -270,9 +270,10 @@
         </div>
     </div>
 
+    <!-- التسجيل -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 <br> <span class="highlight">قنصك في الحياة</span></h1>
-        <!-- تم إضافة الترجمة هنا -->
+        <!-- الترجمة الإنجليزية المعاد إضافتها -->
         <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> is your Sniper Rifle</p>
         <div class="reg-form">
             <div class="gender-container">
@@ -284,6 +285,7 @@
         </div>
     </section>
 
+    <!-- لوحة التحكم -->
     <main id="app-container">
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
@@ -294,7 +296,7 @@
             <p style="font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: white; line-height: 1.6;">
                 هناك <strong>7 استقرارات</strong> لضمان توازن رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
             </p>
-            <!-- تم إضافة الترجمة هنا -->
+            <!-- الترجمة الإنجليزية المعاد إضافتها -->
             <p style="font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-grey); margin-top: 10px; line-height: 1.5;">
                 There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual + Psychological + Physical) is the foundation for the flight's balance and continuity
             </p>
