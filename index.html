@@ -51,7 +51,7 @@
         .glowing-logo:hover { transform: scale(1.05); }
         .glowing-logo svg { pointer-events: none; }
 
-        /* --- العناوين المتناظرة (Desktop) --- */
+        /* --- العناوين المتناظرة --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
@@ -87,7 +87,7 @@
         .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
         .timer-label { font-size: 0.6rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
-        /* --- التلميح (Click Hint) --- */
+        /* --- التلميح --- */
         .click-hint-container {
             display: grid;
             grid-template-columns: 1fr auto 1fr;
@@ -126,7 +126,7 @@
         .highlight { color: var(--gold-amber); font-weight: bold; }
 
         /* --- شبكة الطائرة --- */
-        .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 60px; }
+        .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
         .tail-section { display: flex; justify-content: center; }
         .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
         .wings-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
@@ -210,7 +210,8 @@
         .group-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
 
-        .card-ar-title { color:white; margin:0; font-size:1.1rem; font-weight:900; white-space: nowrap; }
+        /* تم تعديل حجم الخط للعناوين العربية في البطاقات */
+        .card-ar-title { color:white; margin:0; font-size:0.9rem; font-weight:900; white-space: nowrap; }
         .card-en-text { font-size:0.75rem; color:white; font-family:sans-serif; display: inline-block; }
 
         .total-health-title-row { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; }
@@ -250,6 +251,7 @@
 </head>
 <body>
 
+    <!-- ستارة البداية -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
@@ -261,7 +263,6 @@
                     <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round" fill="none"/>
                 </svg>
             </div>
-            
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">افتتاح العام الهجري <span class="line-break"></span> الجديد 1448 هـ</span>
@@ -272,14 +273,12 @@
                     <span class="sub-title">Tuesday, June 16, <span class="line-break"></span> 2026 | AD</span>
                 </div>
             </div>
-
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
                 <div class="timer-unit"><span id="minutes" class="timer-val">00</span><span class="timer-label">دقيقة | Mins</span></div>
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
-            
             <div class="click-hint-container">
                 <div class="hint-side ar">اضغط على الشعار</div>
                 <div class="hint-sep">|</div>
@@ -288,6 +287,7 @@
         </div>
     </div>
 
+    <!-- التسجيل -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 <br> <span class="highlight">قنصك في الحياة</span></h1>
         <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> is your Sniper Rifle</p>
@@ -301,16 +301,16 @@
         </div>
     </section>
 
+    <!-- لوحة التحكم -->
     <main id="app-container">
         <nav class="top-nav">
-            <!-- الشعار المعدل -->
-            <div class="brand"><span style="color:var(--primary-orange);">M</span>Y MOVIE <span>LIVE</span></div>
+            <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
         <div class="sniper-banner main-banner">
             <p style="font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: white; line-height: 1.6;">
-                هناك <strong>7 استقرارات</strong> لضمان توازن طائرة ✈️رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
+                هناك <strong style="color:var(--gold-amber);">7 استقرارات</strong> لضمان توازن طائرة ✈️رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
             </p>
             <p style="font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-grey); margin-top: 10px; line-height: 1.5;">
                 There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual + Psychological + Physical) is the foundation for the flight's balance and continuity
@@ -376,7 +376,7 @@
                             </div>
                             <div class="engine-card">
                                 <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
-                                    <div style="display:flex; justify-content: space-between; align-items: center;">
+                                    <div style="display:flex; justify-content: space-between; align-items: center; gap: 10px;">
                                         <div style="display:flex; align-items: center; gap: 8px;">
                                             <i data-lucide="brain-circuit" style="color:white; width:18px;"></i>
                                             <h3 class="card-ar-title">الاستقرار <span class="soul-break"></span> النفسي</h3>
@@ -490,18 +490,7 @@
             const titleEn = selectedGender === 'male' ? 'HERO' : 'HEROINE';
             const titleAr = selectedGender === 'male' ? 'البطل' : 'البطلة';
             const emoji = selectedGender === 'male' ? '👤' : '🧕';
-            
-            // تعديل الألوان هنا باستخدام HTML
-            const heroHtml = `
-                <span style="color: var(--primary-orange);">${titleEn}</span>
-                <span style="color: var(--gold-amber);">: ${name}</span>
-                <span style="color: var(--gold-amber); margin: 0 5px;">|</span>
-                <span style="color: var(--primary-orange);">${titleAr}</span>
-                <span style="color: var(--gold-amber);">: ${name} ${emoji}</span>
-            `;
-            
-            document.getElementById('display-hero-name').innerHTML = heroHtml;
-            
+            document.getElementById('display-hero-name').innerText = `${titleEn}: ${name} | ${titleAr}: ${name} ${emoji}`;
             const regScreen = document.getElementById('registration-screen');
             regScreen.style.transform = "translateY(-110%)";
             document.getElementById('app-container').style.opacity = "1";
