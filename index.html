@@ -117,7 +117,6 @@
             position: sticky; top: 0; z-index: 100;
             flex-direction: row-reverse; 
         }
-        /* الشعار: M برتقالي، Y MOVIE أصفر، LIVE برتقالي */
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--gold-amber); }
         .brand span { color: var(--primary-orange); }
 
@@ -248,6 +247,7 @@
 </head>
 <body>
 
+    <!-- ستارة البداية -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
@@ -259,7 +259,6 @@
                     <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round" fill="none"/>
                 </svg>
             </div>
-            
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">افتتاح العام الهجري <span class="line-break"></span> الجديد 1448 هـ</span>
@@ -270,14 +269,12 @@
                     <span class="sub-title">Tuesday, June 16, <span class="line-break"></span> 2026 | AD</span>
                 </div>
             </div>
-
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
                 <div class="timer-unit"><span id="minutes" class="timer-val">00</span><span class="timer-label">دقيقة | Mins</span></div>
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
-            
             <div class="click-hint-container">
                 <div class="hint-side ar">اضغط على الشعار</div>
                 <div class="hint-sep">|</div>
@@ -286,6 +283,7 @@
         </div>
     </div>
 
+    <!-- التسجيل -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 <br> <span class="highlight">قنصك في الحياة</span></h1>
         <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> is your Sniper Rifle</p>
@@ -299,11 +297,10 @@
         </div>
     </section>
 
+    <!-- لوحة التحكم -->
     <main id="app-container">
-        <!-- الشريط العلوي (تم عكسه للحاسوب بـ flex-direction) -->
         <nav class="top-nav">
-            <!-- الشعار المعدل: M بالبرتقالي، والباقي بالأصفر -->
-            <div class="brand"><span>M</span>Y MOVIE <span>LIVE</span></div>
+            <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
@@ -344,10 +341,11 @@
                 <div class="frame-tag">أجنحة الطائرة | PLANE WINGS</div>
                 <div class="health-grid">
                     
+                    <!-- الذيل / البوصلة -->
                     <div class="tail-wrapper">
                         <div class="tail-header">
                             <i data-lucide="compass" style="color:var(--primary-orange)"></i>
-                            <span>الذيل / البوصلة <br> TAIL / COMPASS</span>
+                            <span>الذيل / البوصلة | TAIL / COMPASS</span>
                         </div>
                         <div class="engine-card tail-card active" onclick="openSoul()">
                             <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
@@ -489,7 +487,18 @@
             const titleEn = selectedGender === 'male' ? 'HERO' : 'HEROINE';
             const titleAr = selectedGender === 'male' ? 'البطل' : 'البطلة';
             const emoji = selectedGender === 'male' ? '👤' : '🧕';
-            document.getElementById('display-hero-name').innerText = `${titleEn}: ${name} | ${titleAr}: ${name} ${emoji}`;
+            
+            // تعديل الألوان هنا باستخدام HTML
+            const heroHtml = `
+                <span style="color: var(--primary-orange);">${titleEn}</span>
+                <span style="color: var(--gold-amber);">: ${name}</span>
+                <span style="color: var(--gold-amber); margin: 0 5px;">|</span>
+                <span style="color: var(--primary-orange);">${titleAr}</span>
+                <span style="color: var(--gold-amber);">: ${name} ${emoji}</span>
+            `;
+            
+            document.getElementById('display-hero-name').innerHTML = heroHtml;
+            
             const regScreen = document.getElementById('registration-screen');
             regScreen.style.transform = "translateY(-110%)";
             document.getElementById('app-container').style.opacity = "1";
