@@ -32,13 +32,13 @@
         .curtain-open .curtain.left { transform: translateX(-101%); }
         .curtain-open .curtain.right { transform: translateX(101%); }
 
-        /* --- محتوى ما قبل العرض (إصلاح النقر) --- */
+        /* --- محتوى ما قبل العرض --- */
         #pre-show-content { 
             position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
             z-index: 1002; width: 100%; max-width: 1200px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             transition: opacity 0.5s;
-            /* تم إزالة pointer-events: none للسماح بالنقر */
+            pointer-events: none;
         }
         .curtain-open #pre-show-content { opacity: 0; pointer-events: none; }
 
@@ -46,54 +46,33 @@
             width: clamp(120px, 15vw, 180px); height: auto;
             filter: drop-shadow(0 0 30px rgba(232, 66, 34, 0.4)); 
             cursor: pointer; transition: transform 0.3s; margin-bottom: 40px;
-            position: relative; z-index: 1010; /* ضمان أنه فوق كل شيء */
+            pointer-events: auto; position: relative; z-index: 1010;
         }
         .glowing-logo:hover { transform: scale(1.05); }
+        .glowing-logo svg { pointer-events: none; }
 
         /* --- العناوين المتناظرة --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
+            pointer-events: none;
         }
-
         .title-block { display: flex; flex-direction: column; }
         .title-block.ar { text-align: left; padding-left: 20px; } 
         .title-block.en { text-align: right; direction: ltr; padding-right: 20px; }
-
-        .main-title { 
-            color: var(--gold-amber); font-weight: 900; 
-            font-size: clamp(0.9rem, 2.5vw, 1.7rem); 
-            text-transform: uppercase; line-height: 1.2; margin-bottom: 8px;
-        }
-        
-        .sub-title { 
-            color: var(--primary-orange); 
-            font-size: clamp(0.7rem, 2vw, 1.1rem); 
-            font-weight: 700; font-family: sans-serif; display: block; line-height: 1.2;
-        }
+        .main-title { color: var(--gold-amber); font-weight: 900; font-size: clamp(0.9rem, 2.5vw, 1.7rem); text-transform: uppercase; line-height: 1.2; margin-bottom: 8px; }
+        .sub-title { color: var(--primary-orange); font-size: clamp(0.7rem, 2vw, 1.1rem); font-weight: 700; font-family: sans-serif; display: block; line-height: 1.2; }
         .ar-font { font-family: 'Cairo', sans-serif; }
-
         .line-break { display: none; }
 
         /* --- العداد --- */
-        .timer-grid { display: flex; justify-content: center; gap: 15px; width: 100%; }
-        .timer-unit { 
-            background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); 
-            padding: 12px; border-radius: 12px; min-width: clamp(65px, 10vw, 110px); text-align: center; 
-            box-shadow: 0 0 20px rgba(0,0,0,0.5); 
-        }
+        .timer-grid { display: flex; justify-content: center; gap: 15px; width: 100%; pointer-events: none; }
+        .timer-unit { background: rgba(232, 66, 34, 0.1); border: 1px solid rgba(232, 66, 34, 0.4); padding: 12px; border-radius: 12px; min-width: clamp(65px, 10vw, 110px); text-align: center; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
         .timer-val { font-size: clamp(1.8rem, 4vw, 3rem); color: var(--gold-amber); font-family: monospace; font-weight: bold; line-height: 1; }
         .timer-label { font-size: 0.6rem; color: var(--text-white); margin-top: 5px; display: block; font-weight: bold; text-transform: uppercase; }
 
         /* --- التلميح --- */
-        .click-hint-container {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center; gap: 15px; width: 100%; max-width: 600px;
-            margin-top: 40px; color: var(--text-grey);
-            font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase;
-        }
-
+        .click-hint-container { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 15px; width: 100%; max-width: 600px; margin-top: 40px; color: var(--text-grey); font-size: 0.8rem; font-weight: bold; letter-spacing: 2px; text-transform: uppercase; pointer-events: none; }
         .hint-side { flex: 1; }
         .hint-side.ar { text-align: left; padding-left: 10px; }
         .hint-side.en { text-align: right; direction: ltr; padding-right: 10px; font-family: sans-serif; }
@@ -103,7 +82,7 @@
         #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 0.5s; overflow-y: auto; }
         .curtain-open #app-container { opacity: 1; }
         
-        /* الشريط العلوي (تعديل الحاسوب: لوغو يسار، بطل يمين) */
+        /* الشريط العلوي (تعديل: اللوغو يسار، البطل يمين في الحاسوب RTL) */
         .top-nav { 
             padding: 15px 25px; 
             display: flex; 
@@ -112,7 +91,7 @@
             background: rgba(0,0,0,0.95); 
             border-bottom: 1px solid #222; 
             position: sticky; top: 0; z-index: 100;
-            flex-direction: row-reverse; /* هذا السطر يعكس الترتيب في الحاسوب */
+            flex-direction: row-reverse; /* عكس الاتجاه للحاسوب */
         }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
@@ -121,19 +100,52 @@
         .highlight { color: var(--gold-amber); font-weight: bold; }
 
         /* --- شبكة الطائرة --- */
-        .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 40px; }
-        .tail-section { display: flex; justify-content: center; }
-        .tail-card { width: 100%; max-width: 450px; border-top: 5px solid var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(232, 66, 34, 0.15); }
-        .wings-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
-        .wing { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
-        .wing.right-wing { border-right: 4px solid var(--gold-amber); }
-        .wing.left-wing { border-left: 4px solid var(--primary-orange); }
-        .wing-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
-        .wing-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; white-space: nowrap; }
-        .wing-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
-        .wing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
+        .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 60px; }
+        
+        /* الاستقرار الصحي العام */
+        .health-master-section { text-align: center; margin-bottom: 10px; }
+        .health-main-title { color: var(--gold-amber); font-weight: 900; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255, 191, 0, 0.3); }
+        .health-main-subtitle { display: block; font-size: 1rem; color: var(--text-white); font-weight: normal; font-family: sans-serif; letter-spacing: 1px; margin-top: -10px; margin-bottom: 25px; }
+        .master-card-container { max-width: 500px; margin: 0 auto 30px; }
 
-        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; }
+        /* عنوان المؤشر الصحي (متجاوب) */
+        .total-health-title-row { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; }
+
+        /* إطار أجنحة الطائرة */
+        .health-trinity-frame { border: 2px solid var(--primary-orange); border-radius: 25px; padding: 40px 30px; background: rgba(232, 66, 34, 0.02); position: relative; }
+        .frame-tag { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--deep-black); padding: 2px 25px; color: var(--gold-amber); font-size: 0.85rem; font-weight: 900; border: 2px solid var(--gold-amber); border-radius: 15px; z-index: 2; white-space: nowrap; }
+        .health-grid { display: flex; flex-direction: column; gap: 30px; align-items: center; }
+        
+        /* الذيل (الروحي) */
+        .tail-header { text-align: center; margin-bottom: 10px; color: var(--text-white); font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .tail-header i { color: var(--primary-orange); }
+        .tail-wrapper { width: 100%; max-width: 500px; }
+        /* بطاقة الذيل (الاطار الأصفر) */
+        .tail-card { 
+            width: 100%; max-width: 450px; 
+            border: 2px solid var(--gold-amber); /* الإطار الأصفر للتميز */
+            transform: scale(1.05); 
+            box-shadow: 0 0 30px rgba(255, 191, 0, 0.15); 
+        }
+
+        /* النفسي والجسدي */
+        .body-mind-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
+        .wing-section-header { text-align: center; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .wing-section-header span { font-size: 0.85rem; color: var(--text-white); letter-spacing: 1px; font-family: 'Cairo', sans-serif; margin-top: 5px; display: block; font-weight: 900; }
+        .wing-section-header i.orange-wing { color: var(--primary-orange); }
+
+        /* المحركات الفرعية */
+        .engines-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
+        .engine-group { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
+        .engine-group.right { border-right: 4px solid var(--gold-amber); }
+        .engine-group.left { border-left: 4px solid var(--primary-orange); }
+        .group-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
+        .group-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; white-space: nowrap; }
+        .group-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
+        .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
+
+        /* البطاقات */
+        .engine-card { background: var(--card-bg); border: 1px solid #333; border-radius: 15px; padding: 20px; cursor: pointer; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 160px; width: 100%; }
         .engine-card:hover { border-color: var(--gold-amber); transform: translateY(-5px); background: #161616; }
         .engine-card.active { border-color: var(--gold-amber); box-shadow: 0 0 20px rgba(255, 191, 0, 0.1); }
         .progress-track { width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden; margin-top: 10px; }
@@ -158,28 +170,6 @@
         .gender-btn:hover { border-color: var(--primary-orange); }
         .gender-btn.selected { background: rgba(232, 66, 34, 0.2); border-color: var(--primary-orange); color: var(--gold-amber); box-shadow: 0 0 15px rgba(232, 66, 34, 0.2); }
 
-        .health-master-section { text-align: center; margin-bottom: 10px; }
-        .health-main-title { color: var(--gold-amber); font-weight: 900; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255, 191, 0, 0.3); }
-        .health-main-subtitle { display: block; font-size: 1rem; color: var(--text-white); font-weight: normal; font-family: sans-serif; letter-spacing: 1px; margin-top: -10px; margin-bottom: 25px; }
-        .master-card-container { max-width: 500px; margin: 0 auto 30px; }
-        .health-trinity-frame { border: 2px solid var(--primary-orange); border-radius: 25px; padding: 40px 30px; background: rgba(232, 66, 34, 0.02); position: relative; }
-        .frame-tag { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--deep-black); padding: 2px 25px; color: var(--gold-amber); font-size: 0.85rem; font-weight: 900; border: 2px solid var(--gold-amber); border-radius: 15px; z-index: 2; white-space: nowrap; }
-        .health-grid { display: flex; flex-direction: column; gap: 30px; align-items: center; }
-        .tail-header { text-align: center; margin-bottom: 10px; color: var(--text-white); font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .tail-header i { color: var(--primary-orange); }
-        .tail-wrapper { width: 100%; max-width: 500px; }
-        .body-mind-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
-        .wing-section-header { text-align: center; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .wing-section-header span { font-size: 0.85rem; color: var(--text-white); letter-spacing: 1px; font-family: 'Cairo', sans-serif; margin-top: 5px; display: block; font-weight: 900; }
-        .wing-section-header i.orange-wing { color: var(--primary-orange); }
-        .engines-wrapper { display: flex; gap: 40px; flex-wrap: wrap; align-items: stretch; }
-        .engine-group { flex: 1; background: var(--wing-bg); border: 1px solid #222; border-radius: 20px; padding: 25px; min-width: 320px; display: flex; flex-direction: column; }
-        .engine-group.right { border-right: 4px solid var(--gold-amber); }
-        .engine-group.left { border-left: 4px solid var(--primary-orange); }
-        .group-header { text-align: center; margin-bottom: 30px; padding-bottom: 15px; border-bottom: 1px solid #333; height: 80px; display: flex; flex-direction: column; justify-content: center; }
-        .group-header h2 { font-size: 1.3rem; color: var(--text-white); margin-bottom: 5px; font-weight: 800; white-space: nowrap; }
-        .group-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
-
         @media (max-width: 768px) {
             .line-break { display: block; height: 0; } 
             .titles-container { grid-template-columns: 1fr 1fr; gap: 12px; padding: 0 12%; margin-bottom: 25px; }
@@ -193,7 +183,7 @@
             .glowing-logo { width: 85px; margin-bottom: 20px; }
             #registration-screen h1 { font-size: 1.1rem !important; }
             
-            /* شريط العنوان للهاتف: عمودي */
+            /* شريط العنوان للهاتف: عمودي متمركز */
             .top-nav { flex-direction: column; gap: 8px; text-align: center; padding: 15px; }
             
             .engines-wrapper { flex-direction: column; gap: 30px; }
@@ -205,6 +195,9 @@
             .health-trinity-frame { padding: 30px 15px; }
             .body-mind-grid { grid-template-columns: 1fr; }
             .soul-break { display: block; height: 0; }
+            
+            .total-health-title-row { flex-direction: column; align-items: center; text-align: center; }
+            .total-health-ar, .total-health-en { display: block; margin-bottom: 3px; }
         }
     </style>
 </head>
@@ -262,7 +255,7 @@
 
     <!-- لوحة التحكم -->
     <main id="app-container">
-        <!-- الشريط العلوي (معكوس للحاسوب) -->
+        <!-- الشريط العلوي: تم عكس الاتجاه للحاسوب (لوغو يسار، بطل يمين) -->
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
@@ -282,13 +275,20 @@
             <div class="health-master-section">
                 <h2 class="health-main-title">1. الاستقرار الصحي</h2>
                 <span class="health-main-subtitle" style="color: var(--text-white);">Health Stability</span>
+                
                 <div class="master-card-container">
                     <div class="engine-card active" style="min-height: 120px; border-left: 4px solid var(--gold-amber); background: rgba(255, 191, 0, 0.05);">
-                        <div style="display:flex;justify-content:space-between;align-items:flex-start;">
-                            <span style="font-size:0.85rem; font-weight:900; color:white;">المؤشر الصحي الشامل | TOTAL HEALTH INDEX</span>
-                            <i data-lucide="activity" style="color:var(--gold-amber)"></i>
+                        <!-- تعديل العنوان للهاتف: سطرين -->
+                        <div class="total-health-title-row">
+                            <span class="total-health-ar" style="font-size:0.85rem; font-weight:900; color:white;">المؤشر الصحي الشامل</span>
+                            <span class="total-health-en" style="font-size:0.75rem; color:#888; font-family:sans-serif;">TOTAL HEALTH INDEX</span>
                         </div>
-                        <h3 style="color:var(--gold-amber); margin:15px 0 5px; font-weight:900;">نتيجة الاستقرار الصحي</h3>
+                        
+                        <div style="display:flex; justify-content: space-between; align-items:center; margin-top:10px;">
+                             <h3 style="color:var(--gold-amber); margin:0; font-weight:900;">نتيجة الاستقرار</h3>
+                             <i data-lucide="activity" style="color:var(--gold-amber)"></i>
+                        </div>
+                        
                         <div class="progress-track"><div id="health-master-bar" style="width: 30%;" class="progress-fill"></div></div>
                         <div style="text-align:left; margin-top:5px; color:var(--gold-amber); font-weight:bold; font-size:0.9rem;"><span id="health-master-percent">30</span>%</div>
                     </div>
@@ -298,15 +298,23 @@
             <div class="health-trinity-frame">
                 <div class="frame-tag">أجنحة الطائرة | PLANE WINGS</div>
                 <div class="health-grid">
+                    
+                    <!-- الذيل / البوصلة -->
                     <div class="tail-wrapper">
                         <div class="tail-header">
                             <i data-lucide="compass" style="color:var(--primary-orange)"></i>
                             <span>الذيل / البوصلة <br> TAIL / COMPASS</span>
                         </div>
+                        <!-- بطاقة الاستقرار الروحي (تم تعديل التصميم ليتطابق مع النفسي والجسدي) -->
                         <div class="engine-card tail-card active" onclick="openSoul()">
-                            <div style="display:flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
-                                <h3 style="color:white; margin:0; font-size:1.1rem; font-weight:900;">🕊️ الاستقرار <span class="soul-break"></span> الروحي</h3>
-                                <span style="font-size:0.8rem; color:white; font-family:sans-serif;">Spiritual Stability</span>
+                            <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
+                                <div style="display:flex; justify-content: space-between; align-items: center;">
+                                    <div style="display:flex; align-items: center; gap: 8px;">
+                                        <i data-lucide="zap" style="color:white; width:18px;"></i>
+                                        <h3 style="color:white; font-size:1rem; margin:0; font-weight:900;">الاستقرار الروحي 🕊️</h3>
+                                    </div>
+                                    <span style="font-size:0.75rem; color:white; font-family:sans-serif;">Spiritual Stability</span>
+                                </div>
                             </div>
                             <div class="progress-track"><div id="main-soul-bar" class="progress-fill"></div></div>
                             <div style="text-align:left; margin-top:5px; color:var(--gold-amber); font-weight:bold;"><span id="main-soul-percent">0</span>%</div>
