@@ -57,12 +57,24 @@
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
             pointer-events: none;
         }
+
         .title-block { display: flex; flex-direction: column; }
         .title-block.ar { text-align: left; padding-left: 20px; } 
         .title-block.en { text-align: right; direction: ltr; padding-right: 20px; }
-        .main-title { color: var(--gold-amber); font-weight: 900; font-size: clamp(0.9rem, 2.5vw, 1.7rem); text-transform: uppercase; line-height: 1.2; margin-bottom: 8px; }
-        .sub-title { color: var(--primary-orange); font-size: clamp(0.7rem, 2vw, 1.1rem); font-weight: 700; font-family: sans-serif; display: block; line-height: 1.2; }
+
+        .main-title { 
+            color: var(--gold-amber); font-weight: 900; 
+            font-size: clamp(0.9rem, 2.5vw, 1.7rem); 
+            text-transform: uppercase; line-height: 1.2; margin-bottom: 8px;
+        }
+        
+        .sub-title { 
+            color: var(--primary-orange); 
+            font-size: clamp(0.7rem, 2vw, 1.1rem); 
+            font-weight: 700; font-family: sans-serif; display: block; line-height: 1.2;
+        }
         .ar-font { font-family: 'Cairo', sans-serif; }
+
         .line-break { display: none; }
 
         /* --- العداد --- */
@@ -82,7 +94,7 @@
         #app-container { width: 100%; height: 100%; display: flex; flex-direction: column; opacity: 0; transition: opacity 0.5s; overflow-y: auto; }
         .curtain-open #app-container { opacity: 1; }
         
-        /* الشريط العلوي (تعديل: اللوغو يسار، البطل يمين في الحاسوب RTL) */
+        /* الشريط العلوي (الحاسوب: اللوغو يسار، البطل يمين) */
         .top-nav { 
             padding: 15px 25px; 
             display: flex; 
@@ -91,7 +103,7 @@
             background: rgba(0,0,0,0.95); 
             border-bottom: 1px solid #222; 
             position: sticky; top: 0; z-index: 100;
-            flex-direction: row-reverse; /* عكس الاتجاه للحاسوب */
+            flex-direction: row-reverse; /* عكس الاتجاه للحاسوب ليكون اللوغو يساراً */
         }
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--text-white); }
         .brand span { color: var(--primary-orange); }
@@ -102,25 +114,26 @@
         /* --- شبكة الطائرة --- */
         .plane-layout { padding: 30px; max-width: 1400px; margin: 0 auto; display: flex; flex-direction: column; gap: 60px; }
         
-        /* الاستقرار الصحي العام */
         .health-master-section { text-align: center; margin-bottom: 10px; }
         .health-main-title { color: var(--gold-amber); font-weight: 900; font-size: 1.6rem; text-transform: uppercase; margin-bottom: 15px; text-shadow: 0 0 10px rgba(255, 191, 0, 0.3); }
         .health-main-subtitle { display: block; font-size: 1rem; color: var(--text-white); font-weight: normal; font-family: sans-serif; letter-spacing: 1px; margin-top: -10px; margin-bottom: 25px; }
         .master-card-container { max-width: 500px; margin: 0 auto 30px; }
 
-        /* عنوان المؤشر الصحي (متجاوب) */
+        /* عنوان المؤشر الصحي */
         .total-health-title-row { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; }
+        .total-health-ar { font-size: 0.85rem; font-weight: 900; color: white; }
+        .total-health-en { font-size: 0.75rem; font-weight: 700; color: #ccc; font-family: sans-serif; letter-spacing: 0.5px; }
 
         /* إطار أجنحة الطائرة */
         .health-trinity-frame { border: 2px solid var(--primary-orange); border-radius: 25px; padding: 40px 30px; background: rgba(232, 66, 34, 0.02); position: relative; }
         .frame-tag { position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background: var(--deep-black); padding: 2px 25px; color: var(--gold-amber); font-size: 0.85rem; font-weight: 900; border: 2px solid var(--gold-amber); border-radius: 15px; z-index: 2; white-space: nowrap; }
         .health-grid { display: flex; flex-direction: column; gap: 30px; align-items: center; }
         
-        /* الذيل (الروحي) */
         .tail-header { text-align: center; margin-bottom: 10px; color: var(--text-white); font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .tail-header i { color: var(--primary-orange); }
         .tail-wrapper { width: 100%; max-width: 500px; }
-        /* بطاقة الذيل (الاطار الأصفر) */
+        
+        /* بطاقة الذيل (الإطار الأصفر) */
         .tail-card { 
             width: 100%; max-width: 450px; 
             border: 2px solid var(--gold-amber); /* الإطار الأصفر للتميز */
@@ -128,7 +141,6 @@
             box-shadow: 0 0 30px rgba(255, 191, 0, 0.15); 
         }
 
-        /* النفسي والجسدي */
         .body-mind-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; width: 100%; }
         .wing-section-header { text-align: center; margin-bottom: 10px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; }
         .wing-section-header span { font-size: 0.85rem; color: var(--text-white); letter-spacing: 1px; font-family: 'Cairo', sans-serif; margin-top: 5px; display: block; font-weight: 900; }
@@ -182,10 +194,7 @@
             .timer-label { font-size: 0.45rem; }
             .glowing-logo { width: 85px; margin-bottom: 20px; }
             #registration-screen h1 { font-size: 1.1rem !important; }
-            
-            /* شريط العنوان للهاتف: عمودي متمركز */
             .top-nav { flex-direction: column; gap: 8px; text-align: center; padding: 15px; }
-            
             .engines-wrapper { flex-direction: column; gap: 30px; }
             .engine-group { border: none; border-bottom: 3px solid #333; min-width: auto; padding: 15px; }
             .engine-group.right { border-right: none; border-bottom-color: var(--gold-amber); }
@@ -194,7 +203,6 @@
             .click-hint-container { gap: 10px; margin-top: 30px; font-size: 0.7rem; }
             .health-trinity-frame { padding: 30px 15px; }
             .body-mind-grid { grid-template-columns: 1fr; }
-            .soul-break { display: block; height: 0; }
             
             .total-health-title-row { flex-direction: column; align-items: center; text-align: center; }
             .total-health-ar, .total-health-en { display: block; margin-bottom: 3px; }
@@ -255,7 +263,6 @@
 
     <!-- لوحة التحكم -->
     <main id="app-container">
-        <!-- الشريط العلوي: تم عكس الاتجاه للحاسوب (لوغو يسار، بطل يمين) -->
         <nav class="top-nav">
             <div class="brand">MY MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
@@ -263,7 +270,7 @@
 
         <div class="sniper-banner main-banner">
             <p style="font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: white; line-height: 1.6;">
-                هناك <strong>7 استقرارات</strong> لضمان توازن رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
+                هناك <strong>7 استقرارات</strong> لضمان توازن طائرة ✈️رحلة البطل، ويبقى <strong>الاستقرار الصحي</strong> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
             </p>
             <p style="font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-grey); margin-top: 10px; line-height: 1.5;">
                 There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual + Psychological + Physical) is the foundation for the flight's balance and continuity
@@ -305,14 +312,13 @@
                             <i data-lucide="compass" style="color:var(--primary-orange)"></i>
                             <span>الذيل / البوصلة <br> TAIL / COMPASS</span>
                         </div>
-                        <!-- بطاقة الاستقرار الروحي (تم تعديل التصميم ليتطابق مع النفسي والجسدي) -->
+                        <!-- بطاقة الاستقرار الروحي (تم تعديل التصميم: حمامة بعد النص، وسطرين) -->
                         <div class="engine-card tail-card active" onclick="openSoul()">
                             <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
                                 <div style="display:flex; justify-content: space-between; align-items: center;">
-                                    <div style="display:flex; align-items: center; gap: 8px;">
-                                        <i data-lucide="zap" style="color:white; width:18px;"></i>
-                                        <h3 style="color:white; font-size:1rem; margin:0; font-weight:900;">الاستقرار الروحي 🕊️</h3>
-                                    </div>
+                                    <h3 style="color:white; margin:0; font-size:1.1rem; font-weight:900; line-height: 1.4;">
+                                        الاستقرار <br> الروحي 🕊️
+                                    </h3>
                                     <span style="font-size:0.75rem; color:white; font-family:sans-serif;">Spiritual Stability</span>
                                 </div>
                             </div>
