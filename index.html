@@ -117,7 +117,7 @@
             position: sticky; top: 0; z-index: 100;
             flex-direction: row-reverse; 
         }
-        /* تعديل لون "MY MOVIE" للأصفر */
+        /* الشعار: M برتقالي، Y MOVIE أصفر، LIVE برتقالي */
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--gold-amber); }
         .brand span { color: var(--primary-orange); }
 
@@ -248,7 +248,6 @@
 </head>
 <body>
 
-    <!-- ستارة البداية -->
     <div id="curtain-wrapper">
         <div class="curtain left"></div>
         <div class="curtain right"></div>
@@ -260,6 +259,7 @@
                     <path d="M100 100 V 190" stroke="#FFBF00" stroke-width="15" stroke-linecap="round" fill="none"/>
                 </svg>
             </div>
+            
             <div class="titles-container">
                 <div class="title-block ar">
                     <span class="main-title ar-font">افتتاح العام الهجري <span class="line-break"></span> الجديد 1448 هـ</span>
@@ -270,12 +270,14 @@
                     <span class="sub-title">Tuesday, June 16, <span class="line-break"></span> 2026 | AD</span>
                 </div>
             </div>
+
             <div class="timer-grid">
                 <div class="timer-unit"><span id="days" class="timer-val">00</span><span class="timer-label">أيام | Days</span></div>
                 <div class="timer-unit"><span id="hours" class="timer-val">00</span><span class="timer-label">ساعة | Hours</span></div>
                 <div class="timer-unit"><span id="minutes" class="timer-val">00</span><span class="timer-label">دقيقة | Mins</span></div>
                 <div class="timer-unit"><span id="seconds" class="timer-val">00</span><span class="timer-label">ثانية | Secs</span></div>
             </div>
+            
             <div class="click-hint-container">
                 <div class="hint-side ar">اضغط على الشعار</div>
                 <div class="hint-sep">|</div>
@@ -284,7 +286,6 @@
         </div>
     </div>
 
-    <!-- التسجيل -->
     <section id="registration-screen">
         <h1 style="color: var(--gold-amber); font-weight: 900; font-size: clamp(1.4rem, 4vw, 2.2rem); margin-bottom: 10px; line-height: 1.5;">علاقتك بالله، بوالديك وبصحتك<br>هي بندقية ︻╦╤─ 🎯 <br> <span class="highlight">قنصك في الحياة</span></h1>
         <p style="color: #ccc; letter-spacing: 1px; line-height: 1.4;">Faith, Parents & Health <br> is your Sniper Rifle</p>
@@ -298,17 +299,17 @@
         </div>
     </section>
 
-    <!-- لوحة التحكم -->
     <main id="app-container">
-        <!-- الشريط العلوي -->
+        <!-- الشريط العلوي (تم عكسه للحاسوب بـ flex-direction) -->
         <nav class="top-nav">
-            <div class="brand">MY MOVIE <span>LIVE</span></div>
+            <!-- الشعار المعدل: M بالبرتقالي، والباقي بالأصفر -->
+            <div class="brand"><span>M</span>Y MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
         <div class="sniper-banner main-banner">
             <p style="font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: white; line-height: 1.6;">
-                هناك <span class="highlight">7 استقرارات</span> لضمان توازن طائرة ✈️رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
+                هناك <strong>7 استقرارات</strong> لضمان توازن طائرة ✈️رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
             </p>
             <p style="font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-grey); margin-top: 10px; line-height: 1.5;">
                 There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual + Psychological + Physical) is the foundation for the flight's balance and continuity
@@ -346,7 +347,7 @@
                     <div class="tail-wrapper">
                         <div class="tail-header">
                             <i data-lucide="compass" style="color:var(--primary-orange)"></i>
-                            <span>الذيل / البوصلة | TAIL / COMPASS</span>
+                            <span>الذيل / البوصلة <br> TAIL / COMPASS</span>
                         </div>
                         <div class="engine-card tail-card active" onclick="openSoul()">
                             <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
