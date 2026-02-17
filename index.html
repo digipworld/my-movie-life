@@ -51,7 +51,7 @@
         .glowing-logo:hover { transform: scale(1.05); }
         .glowing-logo svg { pointer-events: none; }
 
-        /* --- العناوين المتناظرة (Desktop) --- */
+        /* --- العناوين المتناظرة --- */
         .titles-container {
             display: grid; grid-template-columns: 1fr 1fr; gap: 40px; width: 100%;
             max-width: 1400px; align-items: flex-start; margin-bottom: 30px;
@@ -117,9 +117,9 @@
             position: sticky; top: 0; z-index: 100;
             flex-direction: row-reverse; /* اللوغو يسار، البطل يمين للحاسوب */
         }
-        /* الشعار: M برتقالي، Y MOVIE أصفر، LIVE برتقالي */
         .brand { font-weight: 900; font-size: 1.4rem; color: var(--gold-amber); }
         .brand span { color: var(--primary-orange); }
+        .brand span.first-letter { color: var(--primary-orange); }
 
         .sniper-banner { background: linear-gradient(180deg, #1a0500 0%, #000 100%); padding: 30px 25px; text-align: center; border-bottom: 2px solid var(--primary-orange); }
         .highlight { color: var(--gold-amber); font-weight: bold; }
@@ -209,13 +209,19 @@
         .group-header span { font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px; font-family: sans-serif; }
         .cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; flex-grow: 1; }
 
-        .card-ar-title { color:white; margin:0; font-size:1.1rem; font-weight:900; white-space: nowrap; }
+        /* تعديل حجم الخط للعناوين العربية في البطاقات */
+        .card-ar-title { 
+            color: white; 
+            margin: 0; 
+            font-size: 1rem; /* تم التصغير قليلاً لمنع التلامس */
+            font-weight: 900; 
+            white-space: nowrap; 
+        }
+        
         .card-en-text { font-size:0.75rem; color:white; font-family:sans-serif; display: inline-block; }
 
         .total-health-title-row { display: flex; justify-content: space-between; align-items: flex-start; width: 100%; }
-        /* تم تعديل وزن الخط العربي */
         .total-health-ar { font-size: 0.85rem; font-weight: 900; color: white; }
-        /* تم تعديل وزن الخط الإنجليزي */
         .total-health-en { font-size: 0.75rem; font-weight: normal; color: #ccc; font-family: sans-serif; letter-spacing: 0.5px; }
 
         @media (max-width: 768px) {
@@ -306,13 +312,13 @@
         <!-- الشريط العلوي -->
         <nav class="top-nav">
             <!-- الشعار المعدل -->
-            <div class="brand"><span>M</span>Y MOVIE <span>LIVE</span></div>
+            <div class="brand"><span class="first-letter">M</span>Y MOVIE <span>LIVE</span></div>
             <div id="display-hero-name" style="color: var(--gold-amber); font-weight: 800; font-size: 0.9rem;">👤 البطل</div>
         </nav>
 
         <div class="sniper-banner main-banner">
             <p style="font-size: clamp(0.9rem, 2.5vw, 1.2rem); color: white; line-height: 1.6;">
-                هناك <strong style="color:var(--gold-amber);">7 استقرارات</strong> لضمان توازن طائرة ✈️رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
+                هناك <strong>7 استقرارات</strong> لضمان توازن طائرة ✈️رحلة البطل، ويبقى <span class="highlight">الاستقرار الصحي</span> (الروحي+ النفسي + الجسدي) هو الأساس لتوازن الرحلة واستمرارها
             </p>
             <p style="font-size: clamp(0.75rem, 2vw, 0.9rem); color: var(--text-grey); margin-top: 10px; line-height: 1.5;">
                 There are 7 Stabilities to ensure the Hero's journey balance, but Health Stability (Spiritual + Psychological + Physical) is the foundation for the flight's balance and continuity
@@ -327,7 +333,6 @@
                 
                 <div class="master-card-container">
                     <div class="engine-card active" style="min-height: 120px; border-left: 4px solid var(--gold-amber); background: rgba(255, 191, 0, 0.05);">
-                        <!-- العنوان للمؤشر الشامل (معدل: العربي غليظ، الإنجليزي عادي) -->
                         <div class="total-health-title-row">
                             <span class="total-health-ar">المؤشر الصحي الشامل</span>
                             <span class="total-health-en">TOTAL HEALTH INDEX</span>
@@ -346,10 +351,8 @@
 
             <div class="health-trinity-frame">
                 <div class="frame-tag">أجنحة الطائرة | PLANE WINGS</div>
-                
                 <div class="health-grid">
                     
-                    <!-- الذيل / البوصلة -->
                     <div class="tail-wrapper">
                         <div class="tail-header">
                             <i data-lucide="compass" style="color:var(--primary-orange)"></i>
@@ -357,7 +360,7 @@
                         </div>
                         <div class="engine-card tail-card active" onclick="openSoul()">
                             <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
-                                <div style="display:flex; justify-content: space-between; align-items: center;">
+                                <div style="display:flex; justify-content: space-between; align-items: center; gap: 5px;">
                                     <div style="display:flex; align-items: center; gap: 8px;">
                                         <i data-lucide="zap" style="color:var(--gold-amber); width:18px;"></i>
                                         <h3 class="card-ar-title">الاستقرار <span class="soul-break"></span> الروحي 🕊️</h3>
@@ -381,10 +384,11 @@
                             </div>
                             <div class="engine-card">
                                 <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
-                                    <div style="display:flex; justify-content: space-between; align-items: center;">
+                                    <!-- تم إضافة gap: 5px للفصل بين العناصر -->
+                                    <div style="display:flex; justify-content: space-between; align-items: center; gap: 5px;">
                                         <div style="display:flex; align-items: center; gap: 8px;">
                                             <i data-lucide="brain-circuit" style="color:white; width:18px;"></i>
-                                            <h3 class="card-ar-title">الاستقرار <span class="soul-break"></span> النفسي</h3>
+                                            <h3 class="card-ar-title">الاستقرار النفسي</h3>
                                         </div>
                                         <div style="text-align: left; direction: ltr;">
                                             <span class="card-en-text">Psychological</span>
@@ -402,10 +406,10 @@
                             </div>
                             <div class="engine-card">
                                 <div style="border-bottom: 1px solid #333; padding-bottom: 5px; margin-bottom: 10px;">
-                                    <div style="display:flex; justify-content: space-between; align-items: center;">
+                                    <div style="display:flex; justify-content: space-between; align-items: center; gap: 5px;">
                                         <div style="display:flex; align-items: center; gap: 8px;">
                                             <i data-lucide="dumbbell" style="color:white; width:18px;"></i>
-                                            <h3 class="card-ar-title">الاستقرار <span class="soul-break"></span> الجسدي</h3>
+                                            <h3 class="card-ar-title">الاستقرار الجسدي</h3>
                                         </div>
                                         <div style="text-align: left; direction: ltr;">
                                             <span class="card-en-text">Physical</span>
@@ -424,17 +428,17 @@
                 <div class="engine-group right">
                     <div class="group-header"><h2>محركات الجناح الأيمن</h2><span>Right Wing Engines</span></div>
                     <div class="cards-grid">
-                        <div class="engine-card"><i data-lucide="book-open" style="color:white;"></i><h3 style="color:white; font-size:1rem;">2. الاستقرار الفكري</h3><p style="font-size:0.7rem;color:#888;">Intellectual Stability</p><div class="progress-track"><div class="progress-fill" style="width:20%"></div></div></div>
-                        <div class="engine-card"><i data-lucide="graduation-cap" style="color:white;"></i><h3 style="color:white; font-size:1rem;">3. الاستقرار الأكاديمي</h3><p style="font-size:0.7rem;color:#888;">Academic Stability</p><div class="progress-track"><div class="progress-fill" style="width:45%"></div></div></div>
-                        <div class="engine-card"><i data-lucide="users" style="color:white;"></i><h3 style="color:white; font-size:1rem;">4. الاستقرار الاجتماعي</h3><p style="font-size:0.7rem;color:#888;">Social Stability</p><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="book-open" style="color:white;"></i><h3 class="card-ar-title">2. الاستقرار الفكري</h3><p style="font-size:0.7rem;color:#888;">Intellectual Stability</p><div class="progress-track"><div class="progress-fill" style="width:20%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="graduation-cap" style="color:white;"></i><h3 class="card-ar-title">3. الاستقرار الأكاديمي</h3><p style="font-size:0.7rem;color:#888;">Academic Stability</p><div class="progress-track"><div class="progress-fill" style="width:45%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="users" style="color:white;"></i><h3 class="card-ar-title">4. الاستقرار الاجتماعي</h3><p style="font-size:0.7rem;color:#888;">Social Stability</p><div class="progress-track"><div class="progress-fill" style="width:80%"></div></div></div>
                     </div>
                 </div>
                 <div class="engine-group left">
                     <div class="group-header"><h2>محركات الجناح الأيسر</h2><span>Left Wing Engines</span></div>
                     <div class="cards-grid">
-                        <div class="engine-card"><i data-lucide="wrench" style="color:white;"></i><h3 style="color:white; font-size:1rem;">5. الاستقرار المهاراتي</h3><p style="font-size:0.7rem;color:#888;">Skills Stability</p><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div>
-                        <div class="engine-card"><i data-lucide="briefcase" style="color:white;"></i><h3 style="color:white; font-size:1rem;">6. الاستقرار المهني</h3><p style="font-size:0.7rem;color:#888;">Professional Stability</p><div class="progress-track"><div class="progress-fill" style="width:50%"></div></div></div>
-                        <div class="engine-card"><i data-lucide="coins" style="color:white;"></i><h3 style="color:white; font-size:1rem;">7. الاستقرار المالي</h3><p style="font-size:0.7rem;color:#888;">Financial Stability</p><div class="progress-track"><div class="progress-fill" style="width:25%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="wrench" style="color:white;"></i><h3 class="card-ar-title">5. الاستقرار المهاراتي</h3><p style="font-size:0.7rem;color:#888;">Skills Stability</p><div class="progress-track"><div class="progress-fill" style="width:30%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="briefcase" style="color:white;"></i><h3 class="card-ar-title">6. الاستقرار المهني</h3><p style="font-size:0.7rem;color:#888;">Professional Stability</p><div class="progress-track"><div class="progress-fill" style="width:50%"></div></div></div>
+                        <div class="engine-card"><i data-lucide="coins" style="color:white;"></i><h3 class="card-ar-title">7. الاستقرار المالي</h3><p style="font-size:0.7rem;color:#888;">Financial Stability</p><div class="progress-track"><div class="progress-fill" style="width:25%"></div></div></div>
                     </div>
                 </div>
             </div>
